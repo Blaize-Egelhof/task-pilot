@@ -79,22 +79,34 @@ Please also find a full list of the Epics, User stories, & story points typed up
 
 ##### Home Page - Desktop: 
 
-![Desktop Home](src/assets/images-readme/readme-wireframe-home.png)
+![Desktop Home](src/assets/images-readme/defaultview.PNG)
 
-##### Home Page - Mobile: 
+##### Inbox Page:
 
-![Desktop Mobile](src/assets/images-readme/readme-wireframe-mobile.png)
+![Inbox Page](src/assets/images-readme/inboxview.PNG)
 
-##### Form Page:
+##### Create Task:
 
-![Form Page](src/assets/images-readme/readme-wireframe-form.png)
+![Task Creation](src/assets/images-readme/taskcreate.PNG)
 
-##### Site Navigation:
+##### View Task:
 
-![Site Navigation](src/assets/images-readme/readme-wireframe-sitenav.png)
+![Task View](src/assets/images-readme/Taskview.PNG)
+
+##### Edit Task:
+
+![Edit Task](src/assets/images-readme/edittask.PNG)
+
+##### SignUp:
+
+![SignUp](src/assets/images-readme/signup.PNG)
+
+##### Login:
+
+![Login](src/assets/images-readme/login.PNG)
 
 ### Database Schema:
-This has been uploaded to the Backend README, which can be found [HERE](https://github.com/CluelessBiker/project5-drf-api).
+This has been uploaded to the Backend README, which can be found [HERE](https://github.com/Blaize-Egelhof/task-pilot-api).
 
 ### Colour Scheme:
 
@@ -109,9 +121,7 @@ In order from left to right :
 #678c89
 
 ### Typography:
-All fonts were obtained from the Google Fonts library. I chose the following fonts for the page:
-1. Zilla Slab Highlight : Site header
-2. Nixie One : Site content
+Insert HERE
 
 ## Features
 
@@ -119,39 +129,39 @@ All fonts were obtained from the Google Fonts library. I chose the following fon
 
 #### Header:
 
-![Header](src/assets/images-readme/readme-header.png)
+![Header]()
 
 ##### Navigation - Desktop:
 
-![Navbar desktop](src/assets/images-readme/readme-navigation-desktop.png)
+![Navbar desktop]()
 
 ##### Navigation - Mobile:
 
-![Navbar mobile](src/assets/images-readme/readme-navigation-tablet-mobile.png)
+![Navbar mobile]()
 
 #### About Page:
 
-![About Page](src/assets/images-readme/readme-about.png)
+![About Page]()
 
 #### Articles Page:
 
-![Articles Page](src/assets/images-readme/readme-articles.png)
+![Articles Page]()
 
 #### Submission Form:
 
-![Submission Form](src/assets/images-readme/readme-forms.png)
+![Submission Form]()
 
 #### 404 Page Not Found:
 
-![404 Page Not Found](src/assets/images-readme/readme-notfound.png)
+![404 Page Not Found]()
 
 #### Popular Profiles:
 
-![Popular Profiles](src/assets/images-readme/readme-populareprofiles.png)
+![Popular Profiles]()
 
 #### Social Links:
 
-![Social Links](src/assets/images-readme/readme-sociallinks.png)
+![Social Links]()
 
 #### Log in, Log out & Sign up:
 
@@ -168,32 +178,18 @@ All fonts were obtained from the Google Fonts library. I chose the following fon
 ![Sign-up](src/assets/images-readme/readme-signup.png)
 
 ### Features Left to Implement:
-- The ability to like articles & events.
-- The ability to leave comments on articles & events
-- Notifications when a user receives a new follower, comment, or like.
-- Email notification when a new Article has been published to the site.
-- Private messaging between users.
-- Group messaging between users.
-- Restrict profile & posts views to only an approved list of users, should a user wish.
-- A contact form so that users can provide feedback.
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 
 ## Testing
 
 ### Manual Testing:
-1. SignUpForm gives 400 error:
- - Resolved by changing `password` to `password1` in form fields & variable keys.
-2. 500 server error:
- - Resolved with the aid of tutor support. All database migrations for both the Django project & apps needed to be cleared & remigrated. The precise steps for this have been documented in the README for the deployed backend API.
-3. CRUD functionality has been tested for each of the following: Posts | Articles | Events | Comments | Likes | Follow | Profile
- - Likes & Follow may only be created & deleted
- - Profile may only be updated
-4. All nav links open to the correct page.
-5. All external links open to a new browser window.
-6. Pages intended for logged-in users only will redirect logged-out users back to the home page.
-7. Users attempting to edit content that they did not publish are redirected back to the home page.
-8. Users are able to create a new account.
-9. Users with an existing account are able to log in.
-10. Each user has the ability to log out.
 
 ### Validator Testing
 1. CSS files pass through the [Jigsaw validator](https://jigsaw.w3.org/css-validator/) with no issues found.
@@ -228,14 +224,13 @@ All fonts were obtained from the Google Fonts library. I chose the following fon
 
 3. The page has an excellent Accessibility rating in Lighthouse:
 
-![Accessibility score](src/assets/images-readme/readme-lighthouse.png)
+![Accessibility score]()
 
 4. Tested the site opens in Brave, Chrome, Safari & on a mobile device without issues.
 
 5. All social links open to external pages as intended.
 
 ### Unfixed Bugs
-Whilst it is not technically a bug, I would like to add that I am not entirely satisfied with the header of the site on mobile devices. Increasing the font size to make it stand out, causes the burger icon to shift onto a new line, which takes up too much real estate on the screen. I had attempted early on to separate out the components & have them be independent of each-other, however this then presented a new issue. When shrinking the size of the burger icon, this also shrank the expanding window, which cut off the navigation items. I was unable to ascertain how to target the exact style rule imposed by React-Bootstrap to over ride this and expand the display window, and instead compromised by implementing a smaller font-size into my heading.
 
 ## Technologies Used
 ### Main Languages Used
@@ -259,15 +254,6 @@ Whilst it is not technically a bug, I would like to add that I am not entirely s
 - ReactJS : To build the components that would collectively form the front-end application.
 
 ## Components
-Several components have been implemented within this project that have been reused throughout the project:
-1. axiosDefault.js : for ease of communication with the backend API.
-2. Asset.js : to supply the loading spinner & user avatar throughout the site.
-3. DropdownMenu.js : to allow users to edit/delete their Articles, Events & Posts.
-4. CurrentUserContext.js : confirm users logged-in status to determine what functionality is available to that user.
-5. ProfileDataContext.js : provide un/follow ability to other users across PopProf & ProfPage components.
-6. ToggleCollapse.js : whilst this component has only been applied to the NavBarMini, it could in theory be applied to additional dropdown menus installed into the site in the future to allow for the automatic collapse of an element upon mouse click.
-7. useRedirect.js : redirects a user to another page if they are not authorised to be on the page they are trying to access.
-8. utils.js : supplies functionality to all of the components that utilise the Infinite Scroll.
 
 ## Deployment
 The site was deployed to Heroku. The steps to deploy are as follows:
