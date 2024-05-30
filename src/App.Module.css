@@ -1,4 +1,8 @@
-body {
-    font-family: 'Open Sans', 'sans-serif';
-    color:white;
-  }
+.Main {
+  padding-top:81px;
+}
+
+.App{
+  color:black;
+  font-family: 'Open Sans', 'sans-serif';
+}

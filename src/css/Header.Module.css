@@ -69,6 +69,14 @@ body {
     object-fit: cover;
   }
 
+  .Active Button{
+    background:lightgrey;
+  }
+
+  .NavLink{
+    padding:5px;
+  }
+
   @media (max-width: 768px) {
     .sidebar {
       display: flex;
@@ -91,10 +99,8 @@ body {
     }
   
     .signOutButtonPositioning {
-      margin-top:0!important;
+      margin-top:5px!important;
       margin-bottom:auto!important;
     }
   }
   
-   
-    
