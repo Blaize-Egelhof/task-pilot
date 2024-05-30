@@ -10,25 +10,91 @@ body {
   
   .sidebar {
     position: fixed;
-    top: 0;
+    top: 1rem;
     left: 0;
     width: auto;
     height: 100%;
     background-color: #343a40;
-    padding-top: 5rem; 
-  }
-  
-  .sidebar .nav {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 5rem;
+  }
+
+  .fullheight{
+    height:100%;
   }
   
   .main-content {
-    margin-left: 1px; 
+    margin-left: 1px;
     padding-top: 1px;
   }
+  
   .signOutButton {
-    color:red;
-    margin-top:20rem;
+    color: red;
   }
+  .whiteText {
+    color: white;
+  }
+  
+  .signOutButtonPositioning {
+    margin-top:auto;
+    margin-bottom: 5rem !important;
+  }
+  
+  .headerSize{
+    font-size:2rem;
+  }
+
+  .navStyling{
+    height:100%;
+    flex-direction:column;
+  }
+
+  .circularButton {
+    width: 3rem; 
+    height: 3rem; 
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white; 
+    border: 2px solid #ccc; 
+  }
+  
+  .circularButtonImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center; 
+      padding-top: auto;
+      position: static;
+      width: 100%;
+      height: auto;
+      background-color: #343a40;
+      border-top: 1px solid #ccc;
+    }
+  
+    .navStyling {
+      display: flex; 
+      flex-direction: row; 
+      align-items: center; 
+      height: auto; 
+    }
+  
+    .signOutButtonPositioning {
+      margin-top:0!important;
+      margin-bottom:auto!important;
+    }
+  }
+  
+   
+    
