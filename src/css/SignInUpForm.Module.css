@@ -1,0 +1,49 @@
+.Input { 
+    text-align:center;
+    padding-left:auto;
+    padding-right:auto;
+    font-weight:bolder;
+
+}
+
+.Button{
+    width:100%;
+    padding-left:auto;
+    padding-right:auto;
+}
+
+.Button:hover{
+    color:grey;
+}
+
+.Button:active{
+    color:black;
+}
+
+.Header { 
+    text-align:center;
+    padding-bottom:1rem;
+    color:#0071a6;
+    font-weight:bolder;
+    text-decoration:solid;
+}
+
+.Text{
+    color:black;
+    text-decoration:none;
+    pointer-events:none;
+}
+
+.Link {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+
+@media(min-width:770px){
+    .Row{
+        margin-left:2rem !important;
+    }
+}
+
