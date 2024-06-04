@@ -47,3 +47,10 @@
     }
 }
 
+@media(min-width:768px){
+    .Row{
+        margin-left:2rem !important;
+        margin-top:5rem !important;
+    }
+}
+
