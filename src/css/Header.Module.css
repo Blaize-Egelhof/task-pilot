@@ -6,6 +6,7 @@ body {
   .headerHorizontal {
     width:100%;
     margin-top:0;
+    background-color:dodgerblue;
   }
   
   .sidebar {

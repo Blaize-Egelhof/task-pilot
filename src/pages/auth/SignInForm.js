@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useContext, useState} from "react";
 
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -10,8 +10,11 @@ import Container from "react-bootstrap/Container";
 import styles from "../../css/SignInUpForm.Module.css"
 import axios from 'axios'
 import { Link, useHistory } from "react-router-dom";
+import { SetCurrentUserContext } from "../../App";
 
 function SignInForm() {
+
+  const setCurrentUser = useContext(SetCurrentUserContext)
 
   const [signInData,setSignInData] = useState({
     username:'',
@@ -34,7 +37,8 @@ function SignInForm() {
     event.preventDefault();
     console.log(signInData)
     try{
-      await axios.post('/dj-rest-auth/login/', signInData)
+      const {data} = await axios.post('/dj-rest-auth/login/', signInData)
+      setCurrentUser(data.user)
       history.push('/home-page')
     }
     catch(err){
