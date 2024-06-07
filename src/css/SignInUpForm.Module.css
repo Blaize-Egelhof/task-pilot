@@ -12,6 +12,12 @@
     padding-right:auto;
 }
 
+.AutoButton{
+    width:auto;
+    padding-left:auto;
+    padding-right:auto;
+}
+
 .Button:hover{
     color:grey;
 }
@@ -31,7 +37,7 @@
 .Text{
     color:black;
     text-decoration:none;
-    pointer-events:none;
+    pointer-events:none !important;
 }
 
 .Link {
@@ -39,7 +45,17 @@
     text-align: center;
     display: block;
     margin: auto;
+    color:blue;
   }
+.Four0FourImage{
+    margin:0 auto ;
+    height:fit-content;
+}
+
+.Four0FourContainer{
+    max-height:50%;
+    max-width:50%;
+}
 
 @media(min-width:770px){
     .Row{
