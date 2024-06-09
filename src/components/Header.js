@@ -32,8 +32,8 @@ export default function Header() {
           <NavLink to={`/related-tasks/${currentUser?.id}`} className={styles.NavLink} activeClassName={styles.Active}>
             <Button variant="outline-light" className="mb-2 ms-1 me-1">Home</Button>
           </NavLink>
-          <NavLink to={`/inbox/${currentUser?.id}`} className={styles.NavLink} activeClassName={styles.Active}>
-            <Button variant="outline-light" className="mb-2 ms-1 me-1">Inbox</Button>
+          <NavLink to={`/create-task/`} className={styles.NavLink} activeClassName={styles.Active}>
+            <Button variant="outline-light" className="mb-2 ms-1 me-1">Create</Button>
           </NavLink>
           <Button
             variant="outline-light"
