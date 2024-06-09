@@ -8,6 +8,7 @@ import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import Four0Four from './components/Four0Four';
 import { useCurrentUser } from './contexts/CurrentUserContext';
+import HomePage from './components/HomePage';
 
 function App() {
   const currentUser = useCurrentUser();
@@ -22,7 +23,9 @@ function App() {
           <Route exact path="/sign-up" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignUpForm />
           )} />
-          <Route exact path="/home-page" render={() => <p>Home Page</p>} />
+          <Route exact path="/home-page" render={() => (
+            currentUser ? <HomePage /> : <Redirect to="/sign-in" />
+          )} />
           <Route render={() => <Four0Four />} />
         </Switch>
       </Container>
