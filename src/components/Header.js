@@ -29,7 +29,7 @@ export default function Header() {
     <>
       <div className={styles.sidebar}>
         <Nav className={styles.navStyling}>
-          <NavLink to={`/related-tasks/${currentUser?.id}`} className={styles.NavLink} activeClassName={styles.Active}>
+          <NavLink to={'/home-page'} className={styles.NavLink} activeClassName={styles.Active}>
             <Button variant="outline-light" className="mb-2 ms-1 me-1">Home</Button>
           </NavLink>
           <NavLink to={`/create-task/`} className={styles.NavLink} activeClassName={styles.Active}>
@@ -50,9 +50,9 @@ export default function Header() {
   const userIconLoggedIn = (
     <>
       <Nav>
-        <NavLink to={`/user-profile/${currentUser?.id}`} className="nav-link">
+        <NavLink to={`/user-profile/${currentUser?.pk}`} className="nav-link">
           <div className={`me-2 ${styles.circularButton}`}>
-            <img className={styles.circularButtonImg} src={profilepic} alt="User Profile Pic" />
+            <img className={styles.circularButtonImg} src={currentUser?.profile_image} alt="User Profile Pic" />
           </div>
         </NavLink>
       </Nav>

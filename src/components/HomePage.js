@@ -45,12 +45,7 @@ function HomePage() {
           </Col>
         </Row>
       </Container>
-
-      <Container className={`${styles.CreateSpace} ${styles.LeftAlign} ${styles.Container}`}>
-        <Row xs={2} md={2} lg={3} xl={4} className="g-4 justify-content-center ms-50px" >
-            <TaskList valuefromhomepage={value} />
-        </Row>
-      </Container>
+      <TaskList valuefromhomepage={value} />
     </>
   )
 }

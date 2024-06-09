@@ -2,13 +2,8 @@
     padding-top:1rem;
 }
 
-.LeftAlign{
-    background-color:grey;
-}
-
 @media (max-width: 1512px) {
     .LeftAlign {
-        background-color: red!important;
         margin-left:3rem;
         width:auto;
     }
@@ -16,14 +11,12 @@
 
 @media (max-width: 1222px) {
     .LeftAlign {
-        background-color: yellow!important;
         margin-left:5rem !important;
     }
 }
 
 @media (max-width: 767px) {
     .LeftAlign {
-        background-color: green!important;
         width:100% !important;
         margin-left:0px !important;
     }
