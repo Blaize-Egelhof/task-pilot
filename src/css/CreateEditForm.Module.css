@@ -1,0 +1,63 @@
+.Input { 
+    text-align:center;
+    padding-left:auto;
+    padding-right:auto;
+    font-weight:bolder;
+    width:100%;
+    padding-top:1rem;
+
+}
+
+.InputLabel {
+    font-size:1rem;
+    text-decoration: underline;
+}
+
+.InputBorder{
+    border: 0.1cm solid grey;
+}
+
+.Button{
+    width:100%;
+    padding-left:auto;
+    padding-right:auto;
+}
+
+.ButtonSpacing{
+    margin-top:1rem;
+}
+
+.AutoButton{
+    width:auto;
+    padding-left:auto;
+    padding-right:auto;
+}
+
+.Button:hover{
+    color:grey;
+}
+
+.Button:active{
+    color:black;
+}
+
+.Header { 
+    text-align:center;
+    padding-bottom:1rem;
+    color:#0071a6;
+    font-weight:bolder;
+    text-decoration:solid;
+}
+
+@media(min-width:770px){
+    .Row{
+        margin-left:2rem !important;
+    }
+}
+
+/* @media(min-width:768px){
+    .Row{
+        margin-left:2rem !important;
+        margin-top:5rem !important;
+    }
+} */

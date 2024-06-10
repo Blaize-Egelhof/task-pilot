@@ -9,6 +9,7 @@ import SignInForm from './pages/auth/SignInForm';
 import Four0Four from './components/Four0Four';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import HomePage from './components/HomePage';
+import CreateTask from './components/CreateTask';
 
 function App() {
   const currentUser = useCurrentUser();
@@ -25,6 +26,9 @@ function App() {
           )} />
           <Route exact path="/home-page" render={() => (
             currentUser ? <HomePage /> : <Redirect to="/sign-in" />
+          )} />
+          <Route exact path="/create-task" render={() => (
+            currentUser ? <CreateTask /> : <Redirect to="/sign-in" />
           )} />
           <Route render={() => <Four0Four />} />
         </Switch>
