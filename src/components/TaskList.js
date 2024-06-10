@@ -25,32 +25,51 @@ function TaskList({ valuefromhomepage }) {
   }, [currentUser?.pk, valuefromhomepage]);
 
   const filterTasks = () => {
-    console.log(tasks)
+    console.log(tasks);
     switch (valuefromhomepage) {
-      case 2:
-      let ownerTasks = tasks.filter(task => task.owner);
-
-      let importantTasks = ownerTasks.filter(task => task.priority === 'High' && task.state === 'open');
-      let nonImportantTasks = ownerTasks.filter(task => task.priority !== 'High' || task.state !== 'open');
-
-      importantTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
-
-      ownerTasks = importantTasks.concat(nonImportantTasks);
-
-      return ownerTasks;
-      
-      case 3:
-        return tasks.filter(task => task.assigned_users)
-      case 1:
+      case 2: // Owned tasks
+        let ownerTasks = tasks.filter(task => task.owner);
+  
+        let importantOwnerTasks = ownerTasks.filter(task => task.priority === 'High' && task.state === 'open');
+        let nonImportantOwnerTasks = ownerTasks.filter(task => task.priority !== 'High' || task.state !== 'open');
+  
+        importantOwnerTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+  
+        ownerTasks = importantOwnerTasks.concat(nonImportantOwnerTasks);
+  
+        return ownerTasks;
+  
+      case 3: // Assigned tasks
+        let assignedTasks = tasks.filter(task => task.assigned_users.length > 0);
+  
+        let importantAssignedTasks = assignedTasks.filter(task => task.priority === 'High' && task.state === 'open');
+        let nonImportantAssignedTasks = assignedTasks.filter(task => task.priority !== 'High' || task.state !== 'open');
+  
+        importantAssignedTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+  
+        assignedTasks = importantAssignedTasks.concat(nonImportantAssignedTasks);
+  
+        return assignedTasks;
+  
+      case 1: // All tasks
       default:
-        return tasks;
+        let allTasks = tasks.filter(task => task.assigned_users.length > 0 || task.owner);
+  
+        let importantAllTasks = allTasks.filter(task => task.priority === 'High' && task.state === 'open');
+        let nonImportantAllTasks = allTasks.filter(task => task.priority !== 'High' || task.state !== 'open');
+  
+        importantAllTasks.sort((a, b) => new Date(a.due_date) - new Date(b.due_date));
+  
+        allTasks = importantAllTasks.concat(nonImportantAllTasks);
+  
+        return allTasks;
     }
-  };
+  };  
 
   const filteredTasks = filterTasks();
 
   return (
-    <Container className={`${styles.CreateSpace} ${styles.LeftAlign} ${styles.LeftAlign}`}>
+    <Container className={`${styles.CreateSpace} ${styles.LeftAlign}`}>
       <Row xs={2} md={2} lg={3} xl={4} className="g-4 justify-content-center ms-50px" >
         {filteredTasks.map(task => (
           <Col key={task.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
