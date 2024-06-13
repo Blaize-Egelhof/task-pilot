@@ -17,7 +17,7 @@ export default function Header() {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-      history.push("/");
+      history.push("/sign-in");
     } catch (err) {
       console.error("Axios error: ", err.response?.data);
       setErrors(err.response?.data);
