@@ -76,6 +76,20 @@ function EditTask() {
     setAssignedUsers(selectedUserIds);
   };
 
+  const handleDelete = async () =>{
+    //Insert pop up asking if user wants to delete here assign to variable , if variable true , continue
+    setIsLoading(true);
+    try{
+        await axios.delete(`delete-task/${id}`)
+        history.push('/home-page')
+        //Render notification to user that task is deleted 
+    }catch(err){
+      setErrors(err.response?.data || ['An error occurred while Deleting the task, are you the task owner?']);
+      setIsLoading(false);
+      console.error('Error updating task:', err);
+    }
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -210,6 +224,7 @@ function EditTask() {
               <Button className={styles.Button} variant="primary" type="submit">
                 Update
               </Button>
+                <Button onClick={handleDelete} variant="danger" className={`${styles.Button} ${styles.ButtonSpacing}`}>Delete</Button>
               <NavLink to={'/home-page'}>
                 <Button variant="secondary" className={`${styles.Button} ${styles.ButtonSpacing}`}>Cancel</Button>
               </NavLink>
