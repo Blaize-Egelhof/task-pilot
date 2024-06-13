@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card, Col, Row, ListGroup, Container } from 'react-bootstrap';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/Home-Page.Module.css';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function TaskList({ valuefromhomepage }) {
   const currentUser = useCurrentUser();
@@ -28,7 +29,7 @@ function TaskList({ valuefromhomepage }) {
 
     fetchTasks();
 
-    // Cleanup function to cancel or tasks
+    // Cleanup function to cancel tasks
     return () => {
       isMounted = false; // Set flag to false on unmount to prevent state updates
     };
@@ -92,10 +93,16 @@ function TaskList({ valuefromhomepage }) {
                   Members: {Array.isArray(task.assigned_users) ? task.assigned_users.length : 0} | Contributions: {Array.isArray(task.task_messages) ? task.task_messages.length : 0}
                 </ListGroup.Item>
               </ListGroup>
-              <Card.Body>
-                <Card.Link href="#">View</Card.Link>
-                {task.is_owner && <Card.Link href="#">Edit</Card.Link>}
-              </Card.Body>
+              <Card.Body >
+                {task.is_owner ? (
+                  <>
+                    <NavLink style={{ marginRight: '10px' }} to={`task-view/${task.id}`}>View</NavLink>
+                    <NavLink to={`task-edit/${task.id}`}>Edit</NavLink>
+                  </>
+                ) : (
+                  <NavLink to={`task-view/${task.id}`}>View</NavLink>
+                )}
+            </Card.Body>
             </Card>
           </Col>
         ))}
