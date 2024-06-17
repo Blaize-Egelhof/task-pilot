@@ -11,6 +11,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import HomePage from './components/HomePage';
 import CreateTask from './components/CreateTask';
 import EditTask from './components/EditTask';
+import TaskView from './components/TaskView';
 
 function App() {
   const currentUser = useCurrentUser();
@@ -33,6 +34,9 @@ function App() {
           )} />
           <Route exact path="/task-edit/:id" render={() => (
             currentUser ? <EditTask /> : <Redirect to="/sign-in" />
+          )} />
+          <Route exact path="/task-view/:id" render={() => (
+            currentUser ? <TaskView /> : <Redirect to="/sign-in" />
           )} />
           <Route render={() => <Four0Four />} />
         </Switch>

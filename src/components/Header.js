@@ -52,7 +52,11 @@ export default function Header() {
       <Nav>
         <NavLink to={`/user-profile/${currentUser?.pk}`} className="nav-link">
           <div className={`me-2 ${styles.circularButton}`}>
-            <img className={styles.circularButtonImg} src={currentUser?.image} alt="User Profile Pic" />
+          <img 
+              className={styles.circularButtonImg} 
+              src={currentUser?.profile_image || profilepic} 
+              alt="User Profile Pic" 
+            />
           </div>
         </NavLink>
       </Nav>

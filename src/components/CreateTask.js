@@ -50,14 +50,14 @@ function CreateTask() {
       <Row className={styles.Row}>
         <Col>
           <Container className={`p-4`}>
-            <h2 className={styles.Header}>Create A Ticket</h2>
+            <h2 className={styles.Header}>Create A Task</h2>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="title">
                 <Form.Label className={`${styles.Input} ${styles.InputLabel}`}>Ticket Title</Form.Label>
                 <Form.Control
                   name="title"
                   type="text"
-                  placeholder="Enter Ticket Title"
+                  placeholder="Enter Task Title"
                   className={`${styles.Input} ${styles.InputBorder}`}
                   value={title}
                   required
