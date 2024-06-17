@@ -55,6 +55,20 @@ function TaskList({ valuefromhomepage }) {
     return sortedTasks;
   };
 
+  const sortByDateAndPriority = (tasks) => {
+    return tasks.sort((a, b) => {
+      const dateA = new Date(a.due_date);
+      const dateB = new Date(b.due_date);
+
+      if (dateA > dateB) return -1;
+      if (dateA < dateB) return 1;
+
+      // If dates are equal, sort by priority
+      const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+  };
+
   const filterTasks = () => {
     switch (valuefromhomepage) {
       case 2: // Owned tasks, organized by state and priority
@@ -62,6 +76,9 @@ function TaskList({ valuefromhomepage }) {
 
       case 3: // Assigned tasks, organized by state and priority
         return sortByStateAndPriority(tasks.filter(task => task.assigned_users.some(user => user.id === currentUser.id) && !task.owner));
+      
+      case 4: // Changed: Completed tasks, organized by date and priority
+        return sortByDateAndPriority(tasks.filter(task => task.state === 'Done'));
 
       case 1: // All tasks, organized by state and priority
       default:
@@ -93,7 +110,7 @@ function TaskList({ valuefromhomepage }) {
                   Members: {Array.isArray(task.assigned_users) ? task.assigned_users.length : 0} | Contributions: {Array.isArray(task.task_messages) ? task.task_messages.length : 0}
                 </ListGroup.Item>
               </ListGroup>
-              <Card.Body >
+              <Card.Body>
                 {task.is_owner ? (
                   <>
                     <NavLink style={{ marginRight: '10px' }} to={`task-view/${task.id}`}>View</NavLink>
@@ -102,7 +119,7 @@ function TaskList({ valuefromhomepage }) {
                 ) : (
                   <NavLink to={`task-view/${task.id}`}>View</NavLink>
                 )}
-            </Card.Body>
+              </Card.Body>
             </Card>
           </Col>
         ))}

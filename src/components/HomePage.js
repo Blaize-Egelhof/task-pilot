@@ -41,6 +41,9 @@ function HomePage() {
               <ToggleButton id="tbg-btn-3" value={3}>
                 Joined Tasks
               </ToggleButton>
+              <ToggleButton id="tbg-btn-4" value={4}>
+                Closed Tasks
+              </ToggleButton>
             </ToggleButtonGroup>
           </Col>
         </Row>

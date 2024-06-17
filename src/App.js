@@ -23,6 +23,9 @@ function App() {
           <Route exact path="/sign-in" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignInForm />
           )} />
+          <Route exact path="/" render={() => (
+            currentUser ? <Redirect to="/home-page" /> : <SignInForm />
+          )} />
           <Route exact path="/sign-up" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignUpForm />
           )} />
