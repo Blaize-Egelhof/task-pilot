@@ -34,10 +34,12 @@ function TaskView() {
   }
 
   const isWorthyUser = currentUser && (currentUser.username === ticketData.owner || ticketData.assigned_users.includes(currentUser.username));
-  const isPriorityHigh = ticketData.priority === 'High';
+  const isPriorityHigh = ticketData?.priority === 'High';
   const currentDate = new Date();
-  const dueDate = new Date(ticketData.due_date);
-  const isDueDatePast = dueDate < currentDate;
+  // const dueDate = new Date(ticketData.due_date);
+  // const isDueDatePast = dueDate < currentDate;
+  const dueDate = ticketData ? new Date(ticketData.due_date) : null;
+  const isDueDatePast = dueDate ? dueDate < currentDate : false; 
 
   return (
     <Container>
@@ -45,17 +47,17 @@ function TaskView() {
         <Col md={12}>
           <Card className="mb-4">
             <Card.Header className='text-center'>
-              <h2>{ticketData.title}</h2>
+              <h2>{ticketData?.title}</h2>
             </Card.Header>
             <Card.Body>
-              <p><strong>Description:</strong> {ticketData.description}</p>
-              <p><strong>Category:</strong> {ticketData.category}</p>
-              <p><strong>Priority:</strong> <span style={{ color: isPriorityHigh ? 'red' : 'black' }}>{ticketData.priority}</span></p>
-              <p><strong>State:</strong> {ticketData.state}</p>
-              <p><strong>Due Date:</strong> <span style={{ color: isDueDatePast ? 'red' : 'inherit' }}>{ticketData.due_date}</span></p>
-              <p><strong>Created At:</strong> {ticketData.created_at}</p>
-              <p><strong>Owner:</strong> {ticketData.owner}</p>
-              <p><strong>Assigned Users:</strong> {ticketData.assigned_users.length > 0 ? ticketData.assigned_users.join(', ') : 'None'}</p>
+              <p><strong>Description:</strong> {ticketData?.description}</p>
+              <p><strong>Category:</strong> {ticketData?.category}</p>
+              <p><strong>Priority:</strong> <span style={{ color: isPriorityHigh ? 'red' : 'black' }}>{ticketData?.priority}</span></p>
+              <p><strong>State:</strong> {ticketData?.state}</p>
+              <p><strong>Due Date:</strong> <span style={{ color: isDueDatePast ? 'red' : 'inherit' }}>{ticketData?.due_date}</span></p>
+              <p><strong>Created At:</strong> {ticketData?.created_at}</p>
+              <p><strong>Owner:</strong> {ticketData?.owner}</p>
+              <p><strong>Assigned Users:</strong> {ticketData?.assigned_users.length > 0 ? ticketData.assigned_users.join(', ') : 'None'}</p>
             </Card.Body>
           </Card>
           {errors && <p className="text-danger">Error: {errors}</p>}

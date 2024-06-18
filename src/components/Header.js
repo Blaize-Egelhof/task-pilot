@@ -30,14 +30,14 @@ export default function Header() {
       <div className={styles.sidebar}>
         <Nav className={styles.navStyling}>
           <NavLink to={'/home-page'} className={styles.NavLink} activeClassName={styles.Active}>
-            <Button variant="outline-light" className="mb-2 ms-1 me-1">Home</Button>
+            <Button variant="dark" className="mb-2 ms-1 me-1">Home</Button>
           </NavLink>
           <NavLink to={`/create-task/`} className={styles.NavLink} activeClassName={styles.Active}>
-            <Button variant="outline-light" className="mb-2 ms-1 me-1">Create</Button>
+            <Button variant="dark" className="mb-2 ms-1 me-1">Create</Button>
           </NavLink>
           <Button
-            variant="outline-light"
-            className={`mb-2 ms-1 me-1 ${styles.signOutButton} ${styles.signOutButtonPositioning}`}
+            variant="dark"
+            className={`mb-2 ms-1 me-1 ${styles.signOutButtonPositioning}`}
             onClick={handleSignOut}
           >
             Sign Out
@@ -54,10 +54,11 @@ export default function Header() {
           <div className={`me-2 ${styles.circularButton}`}>
           <img 
               className={styles.circularButtonImg} 
-              src={currentUser?.profile_image || profilepic} 
+              src={currentUser?.profile_image}
               alt="User Profile Pic" 
             />
           </div>
+          {console.log(currentUser?.profile_image)}
         </NavLink>
       </Nav>
     </>

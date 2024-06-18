@@ -6,7 +6,7 @@ body {
   .headerHorizontal {
     width:100%;
     margin-top:0;
-    background-color:dodgerblue;
+    background-color:#343a40;
   }
   
   .sidebar {
@@ -31,9 +31,6 @@ body {
     padding-top: 1px;
   }
   
-  .signOutButton {
-    color: red;
-  }
   .whiteText {
     color: white;
   }
@@ -72,7 +69,7 @@ body {
   }
 
   .Active Button{
-    background:lightgrey;
+    text-decoration: underline;
   }
 
   .NavLink{
@@ -89,15 +86,19 @@ body {
       position: static;
       width: 100%;
       height: auto;
-      background-color: #343a40;
-      border-top: 1px solid #ccc;
+    }
+
+    .headerHorizontal{
+      border-bottom: lightblue 0.1cm solid;
     }
   
     .navStyling {
       display: flex; 
       flex-direction: row; 
       align-items: center; 
-      height: auto; 
+      height: auto;
+      margin-top:0.2cm;
+      margin-bottom:0.1cm;
     }
   
     .signOutButtonPositioning {

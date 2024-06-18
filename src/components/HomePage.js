@@ -14,6 +14,8 @@ function HomePage() {
       newHeaderText = 'Owned Tasks'
     } else if (val === 3) {
       newHeaderText = 'Joined Tasks'
+    } else if (val === 4) {
+      newHeaderText = 'Closed Tasks'
     }
     setHeaderText(newHeaderText)
   }
