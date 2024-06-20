@@ -13,6 +13,7 @@ import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser(); 
+  // useRedirect('loggedIn')
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -38,7 +39,7 @@ function SignInForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       console.log("Login response data: ", data);
       setCurrentUser(data.user);
-      history.push("/home-page");
+      // history.goBack();
     } catch (err) {
       console.error("Axios error: ", err.response?.data);
       setErrors(err.response?.data);

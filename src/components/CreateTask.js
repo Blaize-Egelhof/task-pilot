@@ -9,8 +9,10 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { Alert } from "react-bootstrap";
+import { useRedirect } from "../hooks/useRedirect";
 
 function CreateTask() {
+  useRedirect('loggedOut')
   const currentUser = useCurrentUser();
   const [createTicketData , setCreateTicketData] = useState(
     {

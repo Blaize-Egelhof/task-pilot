@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import styles from '../css/Header.Module.css';
-import profilepic from '../assets/defaultprofilepic/p5-default-profile-pic.jpg';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';
@@ -15,16 +14,22 @@ export default function Header() {
   const handleSignOut = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/logout/");
-      setCurrentUser(null);
-      history.push("/sign-in");
+      const {data} = await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null); // Update state to null
+      console.log(currentUser)
+      // history.push("/sign-in");
     } catch (err) {
       console.error("Axios error: ", err.response?.data);
       setErrors(err.response?.data);
+      console.log(errors)
     }
   };
 
-  const loggedOutIcons = ('');
+  // useEffect(() => {
+  //   console.log("Current User after setting to null:", currentUser);
+  // }, [currentUser]);  // useEffect with dependency on currentUser
+
+  const loggedOutIcons = (''); // Placeholder for logged out icons
   const loggedInIcons = (
     <>
       <div className={styles.sidebar}>
@@ -52,19 +57,18 @@ export default function Header() {
       <Nav>
         <NavLink to={`/user-profile/${currentUser?.pk}`} className="nav-link">
           <div className={`me-2 ${styles.circularButton}`}>
-          <img 
+            <img 
               className={styles.circularButtonImg} 
               src={currentUser?.profile_image}
               alt="User Profile Pic" 
             />
           </div>
-          {console.log(currentUser?.profile_image)}
         </NavLink>
       </Nav>
     </>
   );
 
-  const userIconLoggedOut = ('');
+  const userIconLoggedOut = (''); // Placeholder for logged out user icon
 
   return (
     <>
