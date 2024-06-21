@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Col, Row, ListGroup, Container } from 'react-bootstrap';
+import { Card, Col, Row, ListGroup, Container, Badge } from 'react-bootstrap';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/Home-Page.Module.css';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -94,8 +94,11 @@ function TaskList({ valuefromhomepage }) {
         {filteredTasks.map(task => (
           <Col key={task.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
             <Card style={{ width: 'auto' }}>
-              <Card.Body>
-                {task.is_owner ? <p>Owner</p> : <p>Member</p>}
+            <Card.Body>
+                {task.is_owner ? 
+                  <Badge pill bg="primary" text="dark">Owner</Badge> : 
+                  <Badge pill bg="secondary" text="dark">Member</Badge>
+                }
                 <Card.Title>{task.title}</Card.Title>
               </Card.Body>
               <ListGroup className="list-group-flush">

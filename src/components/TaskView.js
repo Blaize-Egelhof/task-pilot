@@ -30,6 +30,7 @@ function TaskView() {
       try {
         const response = await axios.get(`/task-messages-view/${id}`);
         const data = response.data;
+        console.log(data)
         setTicketMessageData(data);
       } catch (err) {
         console.error('Error fetching task messages:', err);
@@ -47,6 +48,17 @@ function TaskView() {
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleDelete= async(messageId)=>{
+    console.log('paramater to handleDelete', messageId)
+    try{
+      await axios.post(`task-messages-delete/${messageId}`);
+      setTicketMessageData(ticketMessageData.filter(msg => msg.id !== messageId));
+    }catch(err){
+      console.error('Error deleting Message:', err);
+      setErrors({ ...errors, delete: err.message });
+    }
+  }
 
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
@@ -73,6 +85,8 @@ function TaskView() {
   const currentDate = new Date();
   const dueDate = ticketData ? new Date(ticketData.due_date) : null;
   const isDueDatePast = dueDate ? dueDate < currentDate : false;
+
+  console.log('ticketMessageData', ticketMessageData,'!')
 
   return (
     <Container>
@@ -115,7 +129,7 @@ function TaskView() {
                               <Badge className='text-dark' bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge> 
                             </div>
                             {currentUser && (currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
-                              <Button variant="danger" size="sm">Delete</Button>
+                              <Button variant="danger" onClick={()=>handleDelete(msg.id)} size="sm">Delete</Button>
                             )}
                           </div>
                           <h6>{msg.title}</h6>
@@ -137,7 +151,7 @@ function TaskView() {
                     </Form.Group>
                     <Button type="submit" className="mt-2">Submit</Button>
                   </Form>
-                  {errors.submit && <p className="text-danger mt-2">Error: {errors.submit}</p>}
+                  {errors.submit && <p className="text-danger mt-2">Error Your message sent is too long , please shorten</p>}
                 </>
               ) : (
                 <p>You do not have permission to view this Task's chat history.</p>
