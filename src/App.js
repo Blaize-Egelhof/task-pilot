@@ -12,6 +12,8 @@ import HomePage from './components/HomePage';
 import CreateTask from './components/CreateTask';
 import EditTask from './components/EditTask';
 import TaskView from './components/TaskView';
+import ProfileView from './components/ProfileView';
+import EditProfile from './components/EditProfile'
 
 function App() {
   const currentUser = useCurrentUser();
@@ -25,6 +27,12 @@ function App() {
           )} />
           <Route exact path="/" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignInForm />
+          )} />
+          <Route exact path="/user-profile/:id" render={() => (
+            currentUser ? <ProfileView /> : <SignInForm />
+          )} />
+          <Route exact path="/edit-profile/:id" render={() => (
+            currentUser ? <EditProfile /> : <SignInForm />
           )} />
           <Route exact path="/sign-up" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignUpForm />

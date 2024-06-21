@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { Spinner, Container, Row, Col, Card, Form, Button, Image, Badge } from 'react-bootstrap';
 import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function TaskView() {
   const currentUser = useCurrentUser();
@@ -13,6 +14,7 @@ function TaskView() {
     context: '',
   });
   const { id } = useParams();
+  const history = useHistory()
 
   useEffect(() => {
     const getTicketView = async () => {
@@ -58,6 +60,9 @@ function TaskView() {
       console.error('Error deleting Message:', err);
       setErrors({ ...errors, delete: err.message });
     }
+  }
+  const handleProfileClick = (msgId) => {
+    history.push(`/user-profile/${msgId}`)
   }
 
   const handleSubmitMessage = async (e) => {
@@ -121,11 +126,11 @@ function TaskView() {
                   {ticketMessageData.map((msg, index) => (
                     <Card key={index} className="mb-2">
                       <Card.Body className="d-flex align-items-center">
-                        <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} className="me-3" />
+                        <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} className="me-3" onClick={() => handleProfileClick(msg.id)} />
                         <div className="flex-grow-1">
                           <div className="d-flex justify-content-between align-items-center">
                             <div>
-                              <h5>{msg.sender_username}</h5>
+                              <h5 onClick={() => handleProfileClick(msg.id)}>{msg.sender_username}</h5>
                               <Badge className='text-dark' bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge> 
                             </div>
                             {currentUser && (currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
