@@ -31,9 +31,11 @@ function App() {
           <Route exact path="/user-profile/:id" render={() => (
             currentUser ? <ProfileView /> : <SignInForm />
           )} />
-          <Route exact path="/edit-profile/:id" render={() => (
-            currentUser ? <EditProfile /> : <SignInForm />
-          )} />
+<Route exact path="/edit-profile/:id" render={() => {
+  console.log('currentUser:', currentUser);
+  return currentUser ? <EditProfile /> : <SignInForm />;
+}} />
+
           <Route exact path="/sign-up" render={() => (
             currentUser ? <Redirect to="/home-page" /> : <SignUpForm />
           )} />

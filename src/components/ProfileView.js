@@ -46,7 +46,7 @@ function ProfileView() {
     return(<>
         <Container fluid className='align-items-right'>
         
-        {currentUser.owner === profileData.owner && (
+        {is_owner === true && (
                     <Col lg={2} className="text-right">
                         <Button onClick={()=>{handleEditprofile()}} variant="primary">Edit</Button>
                     </Col>
