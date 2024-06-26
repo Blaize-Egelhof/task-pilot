@@ -6,6 +6,11 @@
 
 }
 
+.CustomBackGround{
+    background-color:#B2BEB5;
+    border:0.1cm solid grey;
+}
+
 .Button{
     width:100%;
     padding-left:auto;
@@ -28,7 +33,7 @@
 
 .Header { 
     text-align:center;
-    padding-bottom:1rem;
+    padding-bottom:2rem;
     color:#0071a6;
     font-weight:bolder;
     text-decoration:solid;
@@ -52,21 +57,22 @@
     height:fit-content;
 }
 
+.ImageFluid {
+    width: 100%; 
+    height: auto; 
+    display: block;
+  }
+
 .Four0FourContainer{
     max-height:50%;
     max-width:50%;
 }
 
-@media(min-width:770px){
+@media(min-width:320px){
     .Row{
-        margin-left:2rem !important;
-    }
-}
-
-@media(min-width:768px){
-    .Row{
-        margin-left:2rem !important;
         margin-top:5rem !important;
+        margin-right:1rem !important;
+        margin-left:1rem !important;
     }
 }
 

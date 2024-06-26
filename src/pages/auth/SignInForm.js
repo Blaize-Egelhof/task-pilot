@@ -8,46 +8,44 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import styles from "../../css/SignInUpForm.Module.css";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function SignInForm() {
+  // Custom hook to set the current user in context
   const setCurrentUser = useSetCurrentUser(); 
-  // useRedirect('loggedIn')
-
+  // State to manage form input data and errors
   const [signInData, setSignInData] = useState({
     username: "",
     password: "",
   });
-
+  // State to store validation errors
   const [errors, setErrors] = useState({});
-
-  const history = useHistory();
-
+  // Destructured signInData to variables in order to update using Onchange function 
   const { username, password } = signInData;
-
+   // Function to handle input changes in the form fields
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
       [event.target.name]: event.target.value,
     });
   };
-
+  // Function to handle form submission
   const formSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send POST request to login endpoint
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      console.log("Login response data: ", data);
+      // Set current user in context after successful login
       setCurrentUser(data.user);
-      // history.goBack();
     } catch (err) {
-      console.error("Axios error: ", err.response?.data);
+      // Set errors from server response if any
       setErrors(err.response?.data);
     }
   };
 
   return (
-    <Row className={styles.Row}>
+    <Row className={`${styles.Row} ${styles.CustomBackGround}`}>
       <Col className="my-auto p-0 p-md-2" md={6}>
         <Container className={`p-4`}>
           <h1 className={styles.Header}>SIGN IN</h1>
@@ -63,9 +61,9 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
-
+            {/* Display username errors if any */}
             {errors.username?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+              <Alert key={idx} className='text-center mt-2' variant="warning">
                 {message}
               </Alert>
             ))}
@@ -81,9 +79,9 @@ function SignInForm() {
                 onChange={handleChange}
               />
             </Form.Group>
-
+            {/* Display password errors if any */}
             {errors.password?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+              <Alert className='text-center mt-2' key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
@@ -91,8 +89,9 @@ function SignInForm() {
             <Button className={styles.Button} variant="primary" type="submit">
               Sign In
             </Button>
+            {/* Display none field errors if any */}
             {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" className="mt-3">
+              <Alert key={idx} variant="warning mt-2" className='text-center'>
                 {message}
               </Alert>
             ))}
@@ -105,16 +104,17 @@ function SignInForm() {
           </Link>
         </Container>
       </Col>
+      {/* Column for the image (hidden on smaller screens) */}
       <Col md={6} className={`my-auto d-none d-md-block p-2 ${styles.ImageStyling}`}>
         <Image
-          className="img-fluid"
+          className={`${styles.ImageFluid}`}
           src={
-            "https://res.cloudinary.com/drdelhvyt/image/upload/v1717518621/ywnnicskunb2ddlciwui.webp"
+            "https://res.cloudinary.com/drdelhvyt/image/upload/v1719412330/testthisnow_aqzf8n.webp"
           }
         />
       </Col>
     </Row>
-  );
+  )
 }
 
 export default SignInForm;
