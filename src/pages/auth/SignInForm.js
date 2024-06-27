@@ -46,7 +46,7 @@ function SignInForm() {
 
   return (
     <Row className={`${styles.Row} ${styles.CustomBackGround}`}>
-      <Col className="my-auto p-0 p-md-2" md={6}>
+      <Col className=" p-0 p-md-2" md={6}>
         <Container className={`p-4`}>
           <h1 className={styles.Header}>SIGN IN</h1>
           <Form onSubmit={formSubmit}>
@@ -56,7 +56,7 @@ function SignInForm() {
                 className={styles.Input}
                 name="username"
                 type="text"
-                placeholder="Enter Username"
+                placeholder="Username"
                 value={username}
                 onChange={handleChange}
               />

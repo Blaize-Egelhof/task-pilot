@@ -39,6 +39,10 @@
     text-decoration:solid;
 }
 
+.HeaderForSignUp{
+    padding-top:2rem;
+}
+
 .Text{
     color:black;
     text-decoration:none;
@@ -68,9 +72,9 @@
     max-width:50%;
 }
 
-@media(min-width:320px){
+@media(min-width:200px){
     .Row{
-        margin-top:5rem !important;
+        margin-top:8rem !important;
         margin-right:1rem !important;
         margin-left:1rem !important;
     }

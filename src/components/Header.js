@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Navbar, Nav, Button, Modal } from 'react-bootstrap';
 import styles from '../css/Header.Module.css';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';
 
 export default function Header() {
+  // state to manage errors
   const [errors, setErrors] = useState({});
-  const history = useHistory();
+  const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+  // variable to hold currently signed in user data
   const currentUser = useCurrentUser();
+  // variable to modify currentUser variable if a logout succeeds
   const setCurrentUser = useSetCurrentUser();
-
-  const handleSignOut = async (event) => {
-    event.preventDefault();
+  // function to handle signing out 
+  const handleSignOut = async () => {
     try {
-      const {data} = await axios.post("dj-rest-auth/logout/");
-      setCurrentUser(null); // Update state to null
-      console.log(currentUser)
-      // history.push("/sign-in");
+      await axios.post("dj-rest-auth/logout/");
+      // set currentUser variable to null if sign out works
+      setCurrentUser(null);
     } catch (err) {
-      console.error("Axios error: ", err.response?.data);
+      // set errors if found 
       setErrors(err.response?.data);
-      console.log(errors)
     }
+    setShowModal(false); // Close the modal after sign-out
   };
 
-  // useEffect(() => {
-  //   console.log("Current User after setting to null:", currentUser);
-  // }, [currentUser]);  // useEffect with dependency on currentUser
+  const handleShowModal = () => setShowModal(true); // Show the modal
+  const handleCloseModal = () => setShowModal(false); // Close the modal
 
   const loggedOutIcons = (''); // Placeholder for logged out icons
+  //variable to hold icons if a user signs in
   const loggedInIcons = (
     <>
       <div className={styles.sidebar}>
@@ -42,8 +43,8 @@ export default function Header() {
           </NavLink>
           <Button
             variant="dark"
-            className={`mb-2 ms-1 me-1 ${styles.signOutButtonPositioning}`}
-            onClick={handleSignOut}
+            className={`${styles.signOutButtonPositioning}`}
+            onClick={handleShowModal} // Show modal on click
           >
             Sign Out
           </Button>
@@ -51,7 +52,7 @@ export default function Header() {
       </div>
     </>
   );
-
+  // variable to hold logged in users profile icon as well as direct to users profile if icon is clicked
   const userIconLoggedIn = (
     <>
       <Nav>
@@ -69,16 +70,32 @@ export default function Header() {
   );
 
   const userIconLoggedOut = (''); // Placeholder for logged out user icon
-
+  // return statement to coniditonally render the header depending on users sign in status
   return (
     <>
       <Navbar fixed="top" className={styles.headerHorizontal}>
-        <div className="me-auto">
+        <div className={`${currentUser ? 'me-auto' : 'mx-auto'} text-center`}>
           <p className={`${styles.whiteText} ${styles.headerSize} me-2`}>Task Pilot</p>
         </div>
         {currentUser ? userIconLoggedIn : userIconLoggedOut}
       </Navbar>
       {currentUser ? loggedInIcons : loggedOutIcons}
+
+      {/* Bootstrap Modal for logout confirmation */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header>
+          <Modal.Title>Confirm Logout</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to log out?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleSignOut}>
+            Yes, Log Out
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

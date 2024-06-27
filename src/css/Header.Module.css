@@ -105,5 +105,15 @@ body {
       margin-top:5px!important;
       margin-bottom:auto!important;
     }
+
+    @media(max-width:348px) {
+      .NavLink{
+        padding:0px;
+      }
+      .signOutButtonPositioning {
+        margin-top:2px !important;
+        margin-bottom:9px !important;
+      }
+    }
   }
   

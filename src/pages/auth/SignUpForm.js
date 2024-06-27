@@ -39,17 +39,17 @@ const SignUpForm = () => {
   };
 
   return (
-    <Row className={`${styles.Row} mt-auto mb-auto`}>
+    <Row className={`${styles.Row} mt-auto mb-auto ${styles.CustomBackGround}`}>
       <Col className={styles.FormStyling}>
         <Container className={`p-4`}>
-          <h1 className={styles.Header}>SIGN UP</h1>
+          <h1 className={`${styles.Header} ${styles.HeaderForSignUp}`}>SIGN UP</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="username">
               <Form.Label className='d-none'>Username</Form.Label>
               <Form.Control
                 className={styles.Input}
                 type="text"
-                placeholder="Enter Username"
+                placeholder="Username"
                 name="username"
                 value={username}
                 onChange={handleChange}
@@ -114,7 +114,7 @@ const SignUpForm = () => {
       >
         <Image
           className="img-fluid"
-          src="https://res.cloudinary.com/drdelhvyt/image/upload/v1717505097/r6s38lpbdoo8hepa9nen.webp"
+          src="https://res.cloudinary.com/drdelhvyt/image/upload/v1719479514/e29new6zjeuxhheml4po.png"
         />
       </Col>
     </Row>
