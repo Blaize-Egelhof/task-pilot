@@ -2,28 +2,98 @@
     padding-top:1rem;
 }
 
-@media (max-width: 1512px) {
-    .LeftAlign {
-        margin-left:3rem;
-        width:auto;
+.CenterAlign {
+    display: flex;
+    justify-content: space-between;
+}
+
+.CardTitleTruncate{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.CardBodyGrey {
+    background-color: #e0e0e0;
+}
+
+.HeaderSpacing{
+    padding-top:0.3cm;
+    padding-bottom:0.3cm;
+}
+
+.CustomDoneBadge {
+    background-color: green ;
+    color: white !important;
+}
+
+.MainContainer{
+    margin-top:5rem !important;
+}
+
+.CustomOwnerBadge {
+    background-color: lightgray !important; 
+    color: green !important;
+    margin-top:0;
+  }
+  
+  .CustomMemberBadge {
+    background-color: lightgray  !important; 
+    color: blue !important; 
+  }
+  .CustomOverdueBadge {
+    background-color: red !important;
+    color: white !important;
+  }
+
+  @media (max-width: 400px) {
+    .WrapButtons {
+        flex-wrap: wrap !important;
+        flex: 1 1 100%;
+    }
+
+    .custom-toggle-button {
+        border-radius: 0 !important;
+    }
+
+    .custom-toggle-button.active,
+    .custom-toggle-button:active {
+        border-radius: 0 !important;
     }
 }
 
-@media (max-width: 1222px) {
-    .LeftAlign {
-        margin-left:5rem !important;
+@media (min-width: 719px) and (max-width: 960px) {
+    .ContainerStyling {
+        padding-left: 3.5rem;
     }
 }
 
-@media (max-width: 767px) {
-    .LeftAlign {
-        width:100% !important;
-        margin-left:0px !important;
-    }
-
-    .Container {
-        width:100% !important;
+@media (min-width: 961px) and (max-width: 1100px) {
+    .ContainerStyling {
+        padding-left: 4rem;
     }
 }
 
+@media (min-width: 1101px) and (max-width: 1150px) {
+    .ContainerStyling {
+        padding-left: 4rem;
+    }
+}
+
+@media (min-width: 1151px) and (max-width: 1333px) {
+    .ContainerStyling {
+        padding-left: 5rem;
+    }
+}
+
+@media (min-width: 1334px) and (max-width: 1365px) {
+    .ContainerStyling {
+        padding-left: 3rem;
+    }
+}
+
+@media (min-width: 1366px) and (max-width: 1608px) {
+    .ContainerStyling {
+        padding-left: 4rem;
+    }
+}
 

@@ -87,7 +87,9 @@ body {
       width: 100%;
       height: auto;
     }
-
+    .FontSize{
+      font-size:15px !important;
+    } 
     .headerHorizontal{
       border-bottom: lightblue 0.1cm solid;
     }
@@ -106,9 +108,19 @@ body {
       margin-bottom:auto!important;
     }
 
-    @media(max-width:348px) {
+    @media(max-width:300px) {
       .NavLink{
-        padding:0px;
+        padding:0px !important;
+        font-size:10px !important;
+      }
+      button[type="button"]:not(:disabled),
+      button[type="reset"]:not(:disabled),
+      button[type="submit"]:not(:disabled),
+      button:not(:disabled) {
+      cursor: pointer;
+      font-size: 16px; 
+      line-height: 16px; 
+      padding: 5px 10px; 
       }
       .signOutButtonPositioning {
         margin-top:2px !important;

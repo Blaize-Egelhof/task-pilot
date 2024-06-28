@@ -34,9 +34,9 @@ export default function Header() {
   const loggedInIcons = (
     <>
       <div className={styles.sidebar}>
-        <Nav className={styles.navStyling}>
+        <Nav className={`${styles.navStyling}`}>
           <NavLink to={'/home-page'} className={styles.NavLink} activeClassName={styles.Active}>
-            <Button variant="dark" className="mb-2 ms-1 me-1">Home</Button>
+            <Button variant="dark" className={`mb-2 ms-1 me-1`}>Home</Button>
           </NavLink>
           <NavLink to={`/create-task/`} className={styles.NavLink} activeClassName={styles.Active}>
             <Button variant="dark" className="mb-2 ms-1 me-1">Create</Button>
