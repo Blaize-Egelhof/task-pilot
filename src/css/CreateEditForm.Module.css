@@ -56,12 +56,57 @@
     text-decoration: underline;
 }
 
+.HeaderV1 {
+    text-align: center;
+    padding-bottom: 1rem;
+    color: #0071a6;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+
 .row{
     max-width:960px;
 }
 
-@media(min-width:760px) and (max-width:1400px){
-    .CustomContainer{
-        margin-left:4rem;
+.profileRow{
+    width:100%;
+}
+
+.profileBackGround{
+    background-color:#ccd3cd;
+    border:0.1cm solid grey;
+}
+
+@media (max-width: 700px) {
+    .profileRow {
+        margin-left: 0;
+    }
+
+    .text-right {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+/* Just check CustomContainer , could mess up other styling */
+@media (min-width: 701px) and (max-width: 1460px) {
+    .CustomContainer {
+        margin-left: 4rem;
+
+    }
+
+    .profileRow {
+        margin-top: 6rem;
+        margin-left: 3rem;
+        margin-right: 2rem;
+    }
+}
+
+@media (min-width: 1401px) {
+    .profileRow {
+        margin-left: 2rem;
+        margin-top: 8rem;
+        width: 100%;
     }
 }
