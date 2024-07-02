@@ -78,6 +78,10 @@
     border:0.1cm solid grey;
 }
 
+.ProfileEditContainer{
+    margin-top:6rem;
+}
+
 @media (max-width: 700px) {
     .profileRow {
         margin-left: 0;
