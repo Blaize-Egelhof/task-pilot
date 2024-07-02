@@ -7,12 +7,10 @@ import Container from "react-bootstrap/Container";
 import styles from "../css/CreateEditForm.Module.css";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import { useCurrentUser } from '../contexts/CurrentUserContext';
 import { Alert } from "react-bootstrap";
-import { useRedirect } from "../hooks/useRedirect";
 
 function CreateTask() {
-  const currentUser = useCurrentUser();
+  // Using state to save all fields I want my user to be able to update
   const [createTicketData , setCreateTicketData] = useState(
     {
       title:'',
@@ -22,32 +20,34 @@ function CreateTask() {
       category:'',
     }
   )
-
+  //State to hold errors
   const [errors,setErrors] = useState('')
+  // History hook used to direct users to home page on succesful creation
   const history = useHistory()
-
+  // Destructured ticket data in order to manipulate in handleChange function
   const {title,description,due_date,priority,category} = createTicketData;
-
+  // Update above mentioned variables when a user inputs anything into the form
   const handleChange = (event) => {
     setCreateTicketData({
       ...createTicketData,
       [event.target.name]: event.target.value,
     });
   };
-
+  //handle submission of ticket data
   const handleSubmit = async(event)=>{
     event.preventDefault();
     console.log(createTicketData)
     try{
       await axios.post("/create-task/", createTicketData);
       history.push("/home-page");
+      //catch any errors to display to users for better UX
     }catch(err){
       setErrors(err.response?.data);
     }
   }
 
     return (
-      <Row className={styles.Row}>
+      <Row className={`${styles.Row} ${styles.CustomContainer}`}>
         <Col>
           <Container className={`p-4`}>
             <h2 className={styles.Header}>Create A Task</h2>
@@ -64,8 +64,9 @@ function CreateTask() {
                   onChange={handleChange}
                 />
               </Form.Group>
-  
+              
               {errors.title?.map((message, idx) => (
+                //Display any alerts relating to title API gives
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>
@@ -86,6 +87,7 @@ function CreateTask() {
               </Form.Group>
 
               {errors.description?.map((message, idx) => (
+                //Display any alerts relating to description if API gives
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>
@@ -103,8 +105,9 @@ function CreateTask() {
                   onChange={handleChange}
                 />
               </Form.Group>
-
+              
               {errors.due_date?.map((message, idx) => (
+                 //Display any alerts relating to due_date if API gives
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>
@@ -129,6 +132,7 @@ function CreateTask() {
               </Form.Group>
 
               {errors.priority?.map((message, idx) => (
+                //Display any alerts relating to priority if API gives
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>
@@ -154,6 +158,7 @@ function CreateTask() {
               </Form.Group>
               
               {errors.category?.map((message, idx) => (
+               //Display any alerts relating to category if API gives
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>
@@ -163,9 +168,13 @@ function CreateTask() {
                 Create
               </Button>
               <Link to="/home-page" >
-                <Button variant="secondary" className={`${styles.Button} ${styles.ButtonSpacing}`}>Cancel</Button>
+                <Button variant="secondary" 
+                className={`${styles.Button} ${styles.ButtonSpacing}`}
+                 //Display forces user to home page if cancel button is selected
+                >Cancel</Button>
               </Link>
               {errors.non_field_errors?.map((message, idx) => (
+                //Display any alerts relating to none_description errors if API gives
                 <Alert key={idx} variant="warning" className="mt-3">
                   {message}
                 </Alert>
