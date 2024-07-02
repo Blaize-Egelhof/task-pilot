@@ -43,7 +43,6 @@ function CreateTask() {
       history.push("/home-page");
     }catch(err){
       setErrors(err.response?.data);
-      console.log(errors)
     }
   }
 
