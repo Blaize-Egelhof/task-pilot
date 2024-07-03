@@ -57,8 +57,7 @@ function TaskView() {
   const handleLeaveGroup = async () => {
     try {
       await axios.put(`leave-task/${id}`);
-      // Redirect or update state as needed
-      history.push('/some-other-page'); // Redirect to another page
+      history.push('/some-other-page'); 
     } catch (err) {
       setErrors(err);
     }
