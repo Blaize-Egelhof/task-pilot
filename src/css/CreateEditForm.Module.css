@@ -1,7 +1,5 @@
 .Input { 
     text-align:center;
-    padding-left:auto;
-    padding-right:auto;
     font-weight:bolder;
     width:100%;
     padding-top:1rem;
@@ -23,8 +21,6 @@
 
 .Button{
     width:100%;
-    padding-left:auto;
-    padding-right:auto;
 }
 
 .ButtonSpacing{
@@ -33,8 +29,6 @@
 
 .AutoButton{
     width:auto;
-    padding-left:auto;
-    padding-right:auto;
 }
 
 .Button:hover{
@@ -92,7 +86,6 @@
     }
 }
 
-/* Just check CustomContainer , could mess up other styling */
 @media (min-width: 701px) and (max-width: 1460px) {
     .CustomContainer {
         margin-left: 4rem;

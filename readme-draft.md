@@ -1,15 +1,15 @@
 # Task Pilot
 Task Pilot is a Ticket orientated application build for small to medium size business departments for managing responsibilities as a team. 
 
-- The repository for the Task-Pilot-APi associated with this project is available [HERE](https://github.com/Blaize-Egelhof/task-pilot-api). The installation, set up, and deployment steps for this section of the project have also been included in the README linked to the DRF-API. 
+- The repository for the Task-Pilot-API associated with this project is available [HERE](https://github.com/Blaize-Egelhof/task-pilot-api). The installation, set up, and deployment steps for this section of the project have also been included in the README linked to the DRF-API. 
 
 #### DEPLOYED BACKEND API RENDER [LINK](https://task-pilot-api-323c9bc2bc87.herokuapp.com/)
-#### DEPLOYED FRONTEND RENDER [LINK - LIVE SITE]() INSERT HERE WHEN POSSIBLE
+#### DEPLOYED FRONTEND RENDER [LINK - LIVE SITE](https://task-pilot-e84398da7501.herokuapp.com/)
 #### DEPLOYED BACKEND GITHUB [REPOSITORY](https://github.com/Blaize-Egelhof/task-pilot-api?tab=readme-ov-file)
 
-![Site view across devices](src/assets/images-readme/readme-amiresponsive.png) INSERT HERE WHEN POSSIBLE
+![Site view across devices](src/assets/images-readme/amiresponsive-p5.PNG)
 
-The live link for "Task Pilot" can be found [HERE]() INSERT HERE WHEN POSSIBLE
+The live link for "Task Pilot" can be found [HERE](https://task-pilot-e84398da7501.herokuapp.com/)
 
 ## Table of Contents
 + [UX](#ux "UX")
@@ -81,6 +81,10 @@ Please also find a full list of the Epics, User stories, & story points typed up
 
 ![Desktop Home](src/assets/images-readme/defaultview.PNG)
 
+##### Home Page - Mobile: 
+
+![Mobile Home](src/assets/images-readme/home-page-mobile.PNG)
+
 ##### Inbox Page:
 
 ![Inbox Page](src/assets/images-readme/inboxview.PNG)
@@ -110,82 +114,129 @@ This has been uploaded to the Backend README, which can be found [HERE](https://
 
 ### Colour Scheme:
 
-![Colour Palette](src/assets/images-readme/readme-colorkit.png)
+![Colour Palette](src/assets/images-readme/colorkit.PNG)
 
 In order from left to right : 
 
-#bfd9d6 
-#a9c5c3
-#93b2af
-#7d9f9c
-#678c89
+#343a40 (Dark Gray): A strong, modern dark gray that provides a solid foundation and excellent contrast.
+
+#0071a6 (Blue): A vibrant blue that adds a pop of color and liveliness, creating a focal point in the design.
+
+#ccd3cd (Light Gray): A subtle, light gray that offers a gentle contrast and balances the darker tones.
+
+#808080 (Gray): A neutral gray that serves as a versatile background, ensuring readability and a clean look.
 
 ### Typography:
-Insert HERE
+I've chosen this color palette because the colors complement each other while providing subtle contrast when used in the correct order. The theme aims to be modern yet easy on the eyes, ensuring an aesthetically pleasing and user-friendly experience.
 
 ## Features
 
 ### Existing Features:
 
-#### Header:
+#### Header/Navigation - Desktop:
 
-![Header]()
+![Header](src/assets/images-readme/header.PNG)
 
-##### Navigation - Desktop:
+#### Header/Navigation - Mobile:
 
-![Navbar desktop]()
+![Header](src/assets/images-readme/header-mobile.PNG)
 
-##### Navigation - Mobile:
+#### Home Page Navigation - Desktop:
 
-![Navbar mobile]()
+![Home Page](src/assets/images-readme/navigation.PNG)
 
-#### About Page:
+#### Home Page Navigation -Mobile:
 
-![About Page]()
+![Home Page](src/assets/images-readme/navigation-mobile.PNG)
 
-#### Articles Page:
+#### Task View - Desktop:
 
-![Articles Page]()
+![Task View](src/assets/images-readme/task-view.PNG)
 
-#### Submission Form:
+#### Task View - Mobile:
 
-![Submission Form]()
+![Task View](src/assets/images-readme/taskview-mobile.PNG)
 
-#### 404 Page Not Found:
+#### Edit Task - Desktop:
 
-![404 Page Not Found]()
+![Edit Task](src/assets/images-readme/edittask-desktop.PNG)
 
-#### Popular Profiles:
+#### Edit Task - Mobile:
 
-![Popular Profiles]()
+![Edit Task](src/assets/images-readme/edittask-mobile.PNG)
 
-#### Social Links:
+#### Create Task - Desktop:
 
-![Social Links]()
+![Create Task](src/assets/images-readme/createtask.PNG)
+
+#### Create Task - Mobile:
+
+![Create Task](src/assets/images-readme/createtask-mobile.PNG)
+
+#### Create Message Send - Desktop:
+
+![Create Message](src/assets/images-readme/sendmessages.PNG)
+
+#### Create Message Send - Mobile:
+
+![Create Message](src/assets/images-readme/sendmessages-mobile.PNG)
+
+#### Profile View - Desktop:
+
+![Profile View](src/assets/images-readme/viewprofile.PNG)
+
+#### Profile View - Mobile:
+
+![Profile View](src/assets/images-readme/profileview-mobile.PNG)
+
+#### Profile Edit - Desktop:
+
+![Profile Edit](src/assets/images-readme/editprofile.PNG)
+
+#### Profile Edit - Mobile:
+
+![Profile Edit](src/assets/images-readme/editprofile-mobile.PNG)
+
+#### 404 - Desktop:
+
+![404](src/assets/images-readme/404page.PNG)
+
+#### 404 - Mobile:
+
+![404](src/assets/images-readme/404mobile.PNG)
 
 #### Log in, Log out & Sign up:
 
-##### Login:
+##### Login - Desktop:
 
-![Login](src/assets/images-readme/readme-login.png)
+![Login](src/assets/images-readme/signinform.PNG)
 
-##### Logout:
+##### Login - Mobile:
 
-![Logout](src/assets/images-readme/readme-logout.png)
+![Login](src/assets/images-readme/signinform-mobile.PNG)
 
-##### Sign-up:
+##### Logout - Desktop:
 
-![Sign-up](src/assets/images-readme/readme-signup.png)
+![Logout](src/assets/images-readme/logout.PNG)
+
+##### Logout - Mobile:
+
+![Logout](src/assets/images-readme/logout-mobile.PNG)
+
+##### Sign-up - Desktop:
+
+![Sign-up](src/assets/images-readme/signup-desktop.PNG)
+
+##### Sign-up - Mobile:
+
+![Sign-up](src/assets/images-readme/signup-mobile.PNG)
 
 ### Features Left to Implement:
-- 
-- 
-- 
-- 
-- 
-- 
-- 
-- 
+- Inbox for each user to be able to recieve task invitations to accept or decline and also for notifications regarding a Task being marked as completed.
+- Ability to display all public tasks created and joined via a list when viewing a profile.
+- Infinite scroll for Task Messages.
+- A more indepth search option to search for tasks by any criteria 
+- Ability for Task admin's to pin a users comment which has solved the task's topic.
 
 ## Testing
 
@@ -194,7 +245,7 @@ Insert HERE
 ### Validator Testing
 1. CSS files pass through the [Jigsaw validator](https://jigsaw.w3.org/css-validator/) with no issues found.
 
-![Jigsaw validator message](src/assets/images-readme/readme-w3c.png)
+![Jigsaw validator message](src/assets/images-readme/jigsawvalidator.PNG)
 
 2. a. Javascript files pass through [ESLint](https://eslint.org/). The following issues were raised, and have been intentionally ignored as they are in relation to code that was provided in the Moments Walkthrough project:
  - Props spreading is forbidden
@@ -224,13 +275,13 @@ Insert HERE
 
 3. The page has an excellent Accessibility rating in Lighthouse:
 
-![Accessibility score]()
+![Accessibility score](src/assets/images-readme/lighthouse.PNG)
 
 4. Tested the site opens in Brave, Chrome, Safari & on a mobile device without issues.
 
-5. All social links open to external pages as intended.
-
 ### Unfixed Bugs
+
+- None Found
 
 ## Technologies Used
 ### Main Languages Used
@@ -242,15 +293,12 @@ Insert HERE
 
 ### Frameworks, Libraries & Programs Used
 - Google Fonts : For the site fonts.
-- Font Awesome : To add icons to the social links in the footer & navigation sections.
 - GitPod : To build the project & create the JSX & CSS files before pushing the project to Github.
 - GitHub : To store my repository for submission.
 - Balsamiq : Was used to create mockups of the project prior to starting.
 - Am I Responsive? : To ensure the project looked good across all devices.
-- Favicon : To provide the code & image for the icon in the tab bar.
 - Django : Used to build the backend database that serves as an API for the front-end project.
 - React-Bootstrap : The styling library that has aided to the layout of the site, and which was introduced to us during the course of the program.
-- DrawSQL : An interactive tool that allows for the creation of Database mock-ups so that we can visualise the relationships between models.
 - ReactJS : To build the components that would collectively form the front-end application.
 
 ## Components
@@ -296,17 +344,13 @@ web: serve -s build
 4. Deploy the project via the deploy button on Heroku.
 
 ### Deploy to Render & ElephantSQL:
-* Due to Heroku revoking their frie tier access, the project has been redeployed using (Render)[https://render.com/] & (ElephantSQL)[https://www.elephantsql.com/] using the following [instructions](https://code-institute-students.github.io/deployment-docs/41-pp5-adv-fe/pp5-adv-fe-drf-01-create-a-database)
+*(ElephantSQL)[https://www.elephantsql.com/] was used as a backend database provider using the following [instructions](https://code-institute-students.github.io/deployment-docs/41-pp5-adv-fe/pp5-adv-fe-drf-01-create-a-database) , (Heroku)[https://www.heroku.com/] was used to host both backend and frontend components of this project.
 
 ## Credits
 
 ### Content
 - Code Institute: The creation of the project came to life by utilising the Moments walkthrough step-by-step as a base foundation, and then building upon it to make the project my own. This is evident from the numerous docstrings within my files crediting the walkthrough.
-- [Mats Simonsson](https://github.com/Pelikantapeten): A fellow student & friend who consistently helps me to troubleshoot when needed, supports me constantly, and is my rubber duck.
-- [Martina Terlevic](https://github.com/SephTheOverwitch): A constant support system, providing reassurance, and the ability to calm me down.
-- [BobbyHadz](https://bobbyhadz.com/blog/react-you-are-importing-createroot-from-react-dom#:~:text=The%20error%20%22You%20are%20importing,js%20.): provided the answer on how to resolve a console error indicating that the createRoot render was not compatible with the current version of ReactJS.
-- Two events have been added to the site. The content for these was taken from the [Stavros Niarchos Foundation](https://www.snfcc.org/en/events), and the [Meet Market](https://www.themeetmarket.gr/en/). Each event has also been credited within the content body.
+- [Lauren-Nicole](https://github.com/CluelessBiker): My mentor who helped me during the development of this project , THANK YOU FOR EVERYTHING! 
 
 ### Media
-- 404 Error Graphic from [PNG Tree](https://pngtree.com/freepng/404-error-interface-art-word-design_4043816.html)
-- Images for the Articles, Events & Posts made on the site have been accumulated from numerous sources on Twitter & Instagram. I do not have the information of the original content creator for these memes.
+- All media was taken and used from [clean-png](https://www.cleanpng.com/)

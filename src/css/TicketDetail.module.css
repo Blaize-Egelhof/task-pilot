@@ -13,7 +13,6 @@
 }
 
 .ContainText{
-  overflow: wrap;
   overflow-wrap: break-word;
   width:70%
 }

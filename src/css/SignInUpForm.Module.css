@@ -1,7 +1,5 @@
 .Input { 
     text-align:center;
-    padding-left:auto;
-    padding-right:auto;
     font-weight:bolder;
 
 }
@@ -13,14 +11,10 @@
 
 .Button{
     width:100%;
-    padding-left:auto;
-    padding-right:auto;
 }
 
 .AutoButton{
     width:auto;
-    padding-left:auto;
-    padding-right:auto;
 }
 
 .Button:hover{
