@@ -7,14 +7,21 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../css/TicketDetail.module.css';
 
 function TaskView() {
+  // Getting the current user from context
   const currentUser = useCurrentUser();
+  //state to hold ticket data
   const [ticketData, setTicketData] = useState(null);
+  //state to hold ticket messages in array format
   const [ticketMessageData, setTicketMessageData] = useState([]);
+  // state to catch any errors
   const [errors, setErrors] = useState({});
+  // state to hold any new messages being posted
   const [newMessageData, setNewMessageData] = useState({
     context: '',
   });
+  //Grab task ID in url for post chat URL submission 
   const { id } = useParams();
+  //Histroy to direct users to home page if they choose to leave task
   const history = useHistory();
 
   // State for modals
@@ -23,6 +30,7 @@ function TaskView() {
   const [messageToDelete, setMessageToDelete] = useState(null);
 
   useEffect(() => {
+    //Grab task data
     const getTicketView = async () => {
       try {
         const response = await axios.get(`/task-view/${id}`);
@@ -32,7 +40,7 @@ function TaskView() {
         setErrors({ ...errors, fetch: err.message });
       }
     };
-
+    //Grab task messages
     const getTicketMessages = async () => {
       try {
         const response = await axios.get(`/task-messages-view/${id}`);
@@ -47,22 +55,23 @@ function TaskView() {
     getTicketMessages();
   }, [id,errors]);
 
+  //Function to handle user inputs
   const handleChange = (event) => {
     setNewMessageData({
       ...newMessageData,
       [event.target.name]: event.target.value,
     });
   };
-
+  //Function for assigned users to leave the task if needed
   const handleLeaveGroup = async () => {
     try {
       await axios.put(`leave-task/${id}`);
-      history.push('/some-other-page'); 
+      history.push('/home-page'); 
     } catch (err) {
       setErrors(err);
     }
   };
-
+  // Function for Task Owners and task message owners to delete their messages if needed
   const handleDelete = async () => {
     try {
       await axios.post(`task-messages-delete/${messageToDelete}`);
@@ -73,11 +82,11 @@ function TaskView() {
       setErrors({ ...errors, delete: err.message });
     }
   };
-
+  // function to direct to a users profile if their profile image is clicked
   const handleProfileClick = (msgId) => {
     history.push(`/user-profile/${msgId}`);
   };
-
+  // function to submit a task message
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
     try {
@@ -89,7 +98,7 @@ function TaskView() {
       setErrors({ ...errors, submit: err.message });
     }
   };
-
+  // display loader if taskdata and errors isnt set yet
   if (!ticketData && !errors.fetch) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -97,11 +106,15 @@ function TaskView() {
       </div>
     );
   }
-
-  const isWorthyUser = currentUser && (currentUser.username === ticketData?.owner || ticketData?.assigned_users.includes(currentUser));
+  // variable to check if the current user is the owner of the task OR a member of the task
+  const isWorthyUser = currentUser && (currentUser.username === ticketData?.owner || ticketData?.assigned_users.includes(currentUser.pk));
+  // variable which checks is ticket priority is set to high
   const isPriorityHigh = ticketData?.priority === 'High';
+  // variable to store the current date
   const currentDate = new Date();
+  // Variable to hold task date
   const dueDate = ticketData ? new Date(ticketData.due_date) : null;
+    // variable to check if the due date of the task has passed the current date
   const isDueDatePast = dueDate ? dueDate < currentDate : false;
 
   return (
@@ -113,6 +126,7 @@ function TaskView() {
               <h2 className={`${styles.InputLabel}`}>{ticketData?.title}</h2>
             </Card.Header>
             <Card.Body className={`${styles.CustomBackGround}`}>
+              {/* display a leave task button to task memebers if they want to leave */}
               {isWorthyUser && ticketData?.assigned_users.includes(currentUser.id) && (
                 <div>
                   <Button variant="danger" onClick={() => setShowLeaveModal(true)}>Leave Task</Button>
@@ -134,27 +148,32 @@ function TaskView() {
         <Col md={12}>
           <Card className="mb-4">
             <Card.Header className={`text-center ${styles.InputBorder}`}>
-              <h2>{isWorthyUser === false ? <p className={styles.InputLabel}>User Messages</p> : "You do not have permission to view this Task's chat history"}</h2>
+              {/* display task messages header if the currentuser if isWorthyUser is true otherwise deny view */}
+              <h2>{isWorthyUser ? <p className={styles.InputLabel}>User Messages</p> : "You do not have permission to view this Task's chat history"}</h2>
             </Card.Header>
             <Card.Body className={styles.CustomBackGround}>
+              {/* display task messages if the currentuser if isWorthyUser is true otherwise deny view */}
               {isWorthyUser ? (
                 <>
                   {ticketMessageData.map((msg, index) => (
-                    <Card key={index} className={`{mb-2} ${styles.CustomUserBackground}`}>
-                      <Card.Body className="d-flex align-items-center">
-                        <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} className="me-3" onClick={() => handleProfileClick(msg.id)} />
-                        <div className="flex-grow-1">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h5 onClick={() => handleProfileClick(msg.id)}>{msg.sender_username}</h5>
-                              <Badge className='text-dark' bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge>
-                            </div>
-                            {currentUser && (currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
-                              <Button variant="danger" onClick={() => { setMessageToDelete(msg.id); setShowDeleteModal(true); }} size="sm">Delete</Button>
-                            )}
+                    <Card key={index} className={`mb-2 mt-2 ${styles.CustomUserBackground}`}>
+                      <Card.Body className={`${styles.CustomMessage}`}>
+                        <div className={`d-flex align-items-start align-items-sm-center ${styles.CustomMessageLayout}`}>
+                          <div className={`me-3 mb-3 mb-sm-0`}>
+                            <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} onClick={() => handleProfileClick(msg.id)} />
                           </div>
-                          <h6>{msg.title}</h6>
-                          <p>{msg.context}</p>
+                          <div className={`flex-grow-1 mw-100`}>
+                            <div className={`d-flex justify-content-start align-items-center  ${styles.CustomRemoveButton}`}>
+                              <div>
+                                <h5 onClick={() => handleProfileClick(msg.id)}>{msg.sender_username}</h5>
+                                <Badge className={`text-dark  ${styles.hideText}`} bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge>
+                              </div>
+                              {currentUser && (currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
+                                <Button variant="danger" onClick={() => { setMessageToDelete(msg.id); setShowDeleteModal(true); }} size="sm">Delete</Button>
+                              )}
+                            </div>
+                              <p className={`${styles.ContainText}`}>{msg.context}</p>
+                          </div>
                         </div>
                       </Card.Body>
                     </Card>
@@ -173,7 +192,7 @@ function TaskView() {
                     </Form.Group>
                     <Button type="submit" className="mt-2">Submit</Button>
                   </Form>
-                  {errors.submit && <p className="text-danger mt-2">Error Your message sent is too long , please shorten</p>}
+                  {errors.submit && <p className="text-danger mt-2">Error: Your message is too long, please shorten it.</p>}
                 </>
               ) : (
                 <p>You do not have permission to view this Task's chat history.</p>

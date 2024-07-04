@@ -1,5 +1,5 @@
 # Task Pilot
-Insert Short Intro as to what TaskPilot does
+Task Pilot is a Ticket orientated application build for small to medium size business departments for managing responsibilities as a team. 
 
 - The repository for the Task-Pilot-APi associated with this project is available [HERE](https://github.com/Blaize-Egelhof/task-pilot-api). The installation, set up, and deployment steps for this section of the project have also been included in the README linked to the DRF-API. 
 
@@ -64,7 +64,7 @@ To keep users utlizing my site in order to attain further answers to Tasks or re
 To engage the user in a meaningful way, and encourage them to contribute to Tasks.
 
 ### Future Goals:
-- Ability to search for different Tasks according to categories in order to attain answers to other Tasks site users have previously solved.
+- Ability to search for different Tasks according to state and ownership in order to attain answers to other Tasks site users have previously solved.
 - Provide the ability for users to send private messages to either another user, or a group of users.
 - Ability to verify users qualifications and contributions in order to verify weither a specific user can be marked as 'TrustWorthy' for specific Task category contributions
 

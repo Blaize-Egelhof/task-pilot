@@ -80,7 +80,7 @@ function TaskList({ valuefromhomepage }) {
   const filterTasks = () => {
     switch (valuefromhomepage) {
       case 2: // Owned tasks, organized by state and priority
-        return sortByStateAndPriority(tasks.filter(task => task.owner && task.owner.id === currentUser.id));
+        return sortByStateAndPriority(tasks.filter(task => task.owner && task.owner === currentUser.username));
 
       case 3: // Assigned tasks, organized by state and priority
         return sortByStateAndPriority(tasks.filter(task => task.assigned_users.some(user => user.id === currentUser.id) && !task.owner));

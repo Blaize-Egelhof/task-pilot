@@ -32,6 +32,7 @@ function EditTask() {
     assigned_users: [],
     // Custom field which can render user NAMES based of ID's 
     assigned_usernames: [], 
+    state:"",
   });
   const [errors, setErrors] = useState([]); //Set errors
   const [removeUsers, setRemoveUsers] = useState([]); //array which holds the currently assigned userID's which belong to this ticket
@@ -54,6 +55,7 @@ function EditTask() {
           category: taskData.category,
           owner: taskData.owner,
           assigned_usernames: taskData.assigned_usernames || [],
+          state:taskData.state,
         });
         setAssignedUsers(taskData.assigned_users || []); // assigned_users is set or default to empty array
       } catch (err) {
@@ -93,7 +95,7 @@ function EditTask() {
   }, [id]); // Dependency array ensures useEffect runs when id changes
 
   // Destructure editTicketData for easier access and manipulation
-  const { title, description, due_date, priority, category, assigned_usernames } = editTicketData;
+  const { title, description, due_date, priority, category, assigned_usernames,state } = editTicketData;
   //Update the events values on each update
   const handleChange = (event) => {
     setEditTicketData({
@@ -269,6 +271,30 @@ function EditTask() {
                 </Form.Group>
 
                 {errors.priority?.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+                ))}
+
+                <Form.Group className="mb-3" controlId="state">
+                  <Form.Label className={`${styles.Input} ${styles.InputLabel}`}>
+                    State
+                  </Form.Label>
+                  <Form.Control
+                    className={`${styles.Input} ${styles.InputBorder}`}
+                    name="state"
+                    as="select"
+                    placeholder="Select State"
+                    required
+                    value={priority}
+                    onChange={handleChange}
+                  >
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+                  </Form.Control>
+                </Form.Group>
+
+                {errors.state?.map((message, idx) => (
                 <Alert key={idx} variant="warning">
                   {message}
                 </Alert>

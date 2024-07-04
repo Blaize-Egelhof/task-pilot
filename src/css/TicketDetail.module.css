@@ -1,6 +1,6 @@
 .CustomContainer{
     margin-top:6rem;
-    margin-left:1rem;
+    margin-left:3rem;
 }
 
 .InputLabel {
@@ -10,6 +10,16 @@
     color: #0071a6;
     font-weight: bolder;
     text-decoration: solid;
+}
+
+.ContainText{
+  overflow: wrap;
+  overflow-wrap: break-word;
+  width:70%
+}
+
+.ContainerMaxWidth{
+  max-width:100%;
 }
 
 .InputBorder{
@@ -29,6 +39,54 @@
     margin-left:5px;
 }
 
+.CustomMessage{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
 .CustomUserBackground{
     border:0.5px solid grey;
+}
+
+@media(max-width: 500px){
+  .ContainText{
+    margin-left:-2rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .InputLabel {
+    font-size:2.1rem;
+  }
+  .CustomContainer{
+    margin-top:3rem;
+    margin-left:0rem;
+  }
+  /* .CustomMessageLayout {
+    display: none;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* Updated to align-items instead of align-content */
+    /* flex-wrap: wrap !important;
+  } */ 
+  }
+
+@media (max-width:420px){
+  .CustomRemoveButton{
+    display:block !important;
+    max-width:75%
+  }
+
+  .removeMargin{
+    margin-right:0;
+  }
+  .hideText{
+    display:none;
+  }
+}
+
+@media (max-width: 768px) {
+  .CustomContainer{
+    margin-top:3rem;
+    margin-left:0rem;
+  }
 }
