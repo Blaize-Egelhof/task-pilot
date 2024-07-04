@@ -153,6 +153,7 @@ function EditTask() {
         priority,
         category,
         assigned_users: updatedAssignedUserIds,
+        state,
       };
 
       // Send request to API update the task
@@ -174,9 +175,9 @@ function EditTask() {
           <Container className={`p-4`}>
             <h2 className={styles.Header}>Edit Task</h2>
             {isLoading ? (
-              <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
+            <div className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+              <Spinner animation="border" variant="primary" />
+            </div>
             ) : (
               <Form onSubmit={handleSubmit}>
                 {errors.length > 0 && (
@@ -286,7 +287,7 @@ function EditTask() {
                     as="select"
                     placeholder="Select State"
                     required
-                    value={priority}
+                    value={state}
                     onChange={handleChange}
                   >
                     <option value="In Progress">In Progress</option>

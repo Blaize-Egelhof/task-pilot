@@ -62,13 +62,7 @@
     margin-top:3rem;
     margin-left:0rem;
   }
-  /* .CustomMessageLayout {
-    display: none;
-    flex-direction: column !important;
-    align-items: flex-start !important; /* Updated to align-items instead of align-content */
-    /* flex-wrap: wrap !important;
-  } */ 
-  }
+}
 
 @media (max-width:420px){
   .CustomRemoveButton{

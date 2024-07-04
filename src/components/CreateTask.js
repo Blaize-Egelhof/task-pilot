@@ -36,7 +36,6 @@ function CreateTask() {
   //handle submission of ticket data
   const handleSubmit = async(event)=>{
     event.preventDefault();
-    console.log(createTicketData)
     try{
       await axios.post("/create-task/", createTicketData);
       history.push("/home-page");
