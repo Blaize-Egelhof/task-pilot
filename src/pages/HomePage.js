@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
 import styles from '../css/Home-Page.Module.css';
-import TaskList from './TaskList';
+import TaskList from '../components/TaskList';
 
 function HomePage() {
   const [value, setValue] = useState(1); // State to manage the selected toggle button value

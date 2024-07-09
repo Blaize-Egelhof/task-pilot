@@ -35,10 +35,6 @@ function Four0Four() {
         </Col>
       </Container>
     </Row>
-    <Row>
-      <Col>
-      </Col>
-    </Row>
     </>
   )
 }

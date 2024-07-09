@@ -1,19 +1,18 @@
-import styles from './App.Module.css';
+import styles from './App.module.css';
 import Header from '../src/components/Header'
 import './index.css';
 import Container from 'react-bootstrap/Container'
 import {Route,Switch,Redirect} from 'react-router-dom'
-import '../src/api/axiosDefaults'
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
-import Four0Four from './components/Four0Four';
+import Four0Four from '../src/pages/Four0Four';
 import { useCurrentUser } from './contexts/CurrentUserContext';
-import HomePage from './components/HomePage';
-import CreateTask from './components/CreateTask';
-import EditTask from './components/EditTask';
-import TaskView from './components/TaskView';
-import ProfileView from './components/ProfileView';
-import EditProfile from './components/EditProfile'
+import HomePage from '../src/pages/HomePage';
+import CreateTask from '../src/pages/CreateTask';
+import EditTask from '../src/pages/EditTask';
+import TaskView from '../src/pages/TaskView';
+import ProfileView from '../src/pages/ProfileView';
+import EditProfile from '../src/pages/EditProfile';
 
 function App() {
   const currentUser = useCurrentUser();
