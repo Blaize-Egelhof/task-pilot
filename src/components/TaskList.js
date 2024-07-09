@@ -20,6 +20,7 @@ function TaskList({ valuefromhomepage }) {
       try {
         // Fetch tasks related to the current user using their id
         const response = await axios.get(`related-tasks/${currentUser.pk}`);
+        console.log(response.data)
         if (isMounted) {
           setTasks(response.data); // Set fetched tasks into state if component is still mounted
         }
@@ -62,40 +63,69 @@ function TaskList({ valuefromhomepage }) {
     return sortedTasks;
   };
 
-  // Function to sort tasks by due date and priority
-  const sortByDateAndPriority = (tasks) => {
-    return tasks.sort((a, b) => {
-      const dateA = new Date(a.due_date);
-      const dateB = new Date(b.due_date);
+// Function to sort tasks by state, priority, and due date
+const sortByStatePriorityAndDate = (tasks) => {
+  return tasks.sort((a, b) => {
+    // Check if tasks are overdue
+    const isOverdueA = new Date(a.due_date) < new Date();
+    const isOverdueB = new Date(b.due_date) < new Date();
 
-      if (dateA > dateB) return -1;
-      if (dateA < dateB) return 1;
+    // Prioritize overdue tasks first
+    if (isOverdueA !== isOverdueB) {
+      return isOverdueA ? -1 : 1;
+    }
 
-      // If dates are equal, sort by priority
+    // Sort by state ("In Progress" first, then "Done")
+    if (a.state !== b.state) {
+      return a.state === 'In Progress' ? -1 : 1;
+    }
+
+    // Sort by priority ("High" first, then "Medium", then "Low")
+    if (a.priority !== b.priority) {
       const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
-    });
-  };
-
-  const filterTasks = () => {
-    switch (valuefromhomepage) {
-      case 2: // Owned tasks, organized by state and priority
-        return sortByStateAndPriority(tasks.filter(task => task.owner && task.owner === currentUser.username));
-
-      case 3: // Assigned tasks, organized by state and priority
-        return sortByStateAndPriority(tasks.filter(task => task.assigned_users.some(user => user.id === currentUser.id) && !task.owner));
-      
-      case 4: // Completed tasks, organized by date and priority
-        return sortByDateAndPriority(tasks.filter(task => task.state === 'Done'));
-
-      case 1: // All tasks, organized by state and priority
-      default:
-        return sortByStateAndPriority(tasks);
     }
-  };
 
-  // Apply selected filters to tasks and store in filteredTasks
-  const filteredTasks = filterTasks();
+    // If states, priorities, and overdue status are the same, sort by due date descending
+    const dateA = new Date(a.due_date);
+    const dateB = new Date(b.due_date);
+
+    return dateB - dateA; // Sort in descending order (newest to oldest)
+  });
+};
+
+// Function to filter tasks and apply sorting
+const filterAndSortTasks = () => {
+  let filteredTasks = [];
+
+  switch (valuefromhomepage) {
+    case 2: // Owned tasks, organized by state and priority
+      filteredTasks = tasks.filter(task => task.owner && task.owner === currentUser.username && task.state !== 'Done');
+      break;
+
+    case 3: // Assigned tasks, organized by state and priority
+      filteredTasks = tasks.filter(task => task.assigned_users.includes(currentUser.pk) && task.state !== 'Done');
+      break;
+      
+    case 4: // Completed tasks, organized by date and priority
+      filteredTasks = tasks.filter(task => task.state === 'Done');
+      break;
+
+    case 1: // All tasks, organized by state and priority (excluding 'Done')
+      filteredTasks = tasks.filter(task => task.state !== 'Done');
+      break;
+
+    default:
+      filteredTasks = tasks;
+      break;
+  }
+
+  // Sort filtered tasks by state, priority, and due date
+  return sortByStatePriorityAndDate(filteredTasks);
+};
+
+// Apply selected filters and sorting to tasks
+const filteredTasks = filterAndSortTasks();
 
   return (
     <Container className={`${styles.CreateSpace} ${styles.ContainerStyling}`}>
