@@ -92,7 +92,7 @@ function EditTask() {
     };
 
     fetchAvailableUsers();
-  }, [id]); // Dependency array ensures useEffect runs when id changes
+  }, [id,assignedUsers,currentUser.username,editTicketData.owner]); // Dependency array ensures useEffect runs when id changes
 
   // Destructure editTicketData for easier access and manipulation
   const { title, description, due_date, priority, category, assigned_usernames,state } = editTicketData;

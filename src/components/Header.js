@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Button, Modal } from 'react-bootstrap';
+import { Navbar, Nav, Button, Modal, Alert } from 'react-bootstrap';
 import styles from '../css/Header.Module.css';
 import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';
 
 export default function Header() {
-  // state to manage errors
+  // State to manage errors (currently unused in this component)
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
   // variable to hold currently signed in user data
@@ -56,6 +56,11 @@ export default function Header() {
   const userIconLoggedIn = (
     <>
       <Nav>
+      {errors && (
+        <Alert className='d-none' variant="warning">
+          {errors.message}
+        </Alert>
+      )}
         <NavLink to={`/user-profile/${currentUser?.pk}`} className="nav-link">
           <div className={`me-2 ${styles.circularButton}`}>
             <img 

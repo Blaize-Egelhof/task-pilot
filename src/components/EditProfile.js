@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { Form, Button, Col, Row, Container, Spinner, Alert } from "react-bootstrap";
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/CreateEditForm.Module.css'
 
 function EditProfile() {
@@ -46,7 +46,7 @@ function EditProfile() {
         };
 
         fetchProfileDetails();
-    }, [id]);// Re-runs the effect if 'id' changes
+    }, [id,]);// Re-runs the effect if 'id' changes
 
     const handleChange = (event) => {
         setFormData({
