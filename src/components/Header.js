@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Button, Modal, Alert } from 'react-bootstrap';
-import styles from '../css/Header.Module.css';
+import styles from '../css/Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';

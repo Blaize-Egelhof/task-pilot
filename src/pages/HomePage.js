@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { Col, Container, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
-import styles from '../css/Home-Page.Module.css';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Col, Container, Row, ToggleButton, ToggleButtonGroup} from 'react-bootstrap';
+import styles from '../css/Home-Page.module.css';
 import TaskList from '../components/TaskList';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function HomePage() {
+  const location = useLocation();
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const successMessage = location.state?.successMessage;
+  const deleteMessage = location.state?.deleteMessage;
   const [value, setValue] = useState(1); // State to manage the selected toggle button value
   const [headerText, setHeaderText] = useState('All Tasks'); // State to manage the header text based on selected value from toggle button
   // Function to handle change to header depending on selected button as well as passing 'value' state to the tasklist component as a parameter value
@@ -19,6 +25,38 @@ function HomePage() {
       newHeaderText = 'Closed Tasks';
     }
     setHeaderText(newHeaderText);// Update the header text state
+  };
+  
+  useEffect(() => {
+    // If there's a success message, show the success alert
+    if (successMessage) {
+      setShowSuccessAlert(true);
+      // Automatically hide the success alert after 5 seconds
+      const successTimer = setTimeout(() => {
+        setShowSuccessAlert(false);
+      }, 5000);
+
+      // Clean up timer
+      return () => clearTimeout(successTimer);
+    }
+
+    // If there's a delete message, show the delete alert
+    if (deleteMessage) {
+      setShowDeleteAlert(true);
+      // Automatically hide the delete alert after 5 seconds
+      const deleteTimer = setTimeout(() => {
+        setShowDeleteAlert(false);
+      }, 5000);
+
+      // Clean up timer
+      return () => clearTimeout(deleteTimer);
+    }
+  }, [successMessage, deleteMessage]);
+
+  const handleDismiss = () => {
+    // Manually dismiss the alert
+    setShowSuccessAlert(false);
+    setShowDeleteAlert(false);
   };
 
   return (
@@ -55,6 +93,28 @@ function HomePage() {
         </Col>
       </Row>
     </Container>
+    {/* Display success message if there is one */}
+    {showSuccessAlert && (
+        <Alert className='mt-1 text-center' variant="success" onClose={handleDismiss}>
+          <p>{successMessage}</p>
+          <div className="d-flex justify-content-end">
+            <Button variant="outline-success" onClick={handleDismiss}>
+              Close
+            </Button>
+          </div>
+        </Alert>
+      )}
+      {/* Display delete message if there is one */}
+      {showDeleteAlert && (
+        <Alert className='mt-1 text-center' variant="danger" onClose={handleDismiss}>
+          <p>{deleteMessage}</p>
+          <div className="d-flex justify-content-end">
+            <Button variant="outline-danger" onClick={handleDismiss}>
+              Close
+            </Button>
+          </div>
+        </Alert>
+      )}
     {/* TaskList component to display tasks based on selected category , parameter value is passed from onChange function*/}
       <TaskList valuefromhomepage={value} />
     </Container>

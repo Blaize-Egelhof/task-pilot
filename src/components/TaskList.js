@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Row, ListGroup, Container, Badge, Spinner } from 'react-bootstrap';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
-import styles from '../css/Home-Page.Module.css';
+import styles from '../css/Home-Page.module.css';
 import { NavLink } from 'react-router-dom';
 
 function TaskList({ valuefromhomepage }) {

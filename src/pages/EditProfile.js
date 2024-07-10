@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { Form, Button, Col, Row, Container, Spinner, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from '../contexts/CurrentUserContext';
-import styles from '../css/CreateEditForm.Module.css'
+import styles from '../css/CreateEditForm.module.css'
 
 function EditProfile() {
     // Extracts the 'id' from the URL
@@ -95,7 +95,7 @@ function EditProfile() {
                 profile_image: data.image,
             }));
             //redirect to profile page to see changes in action
-            history.push(`/user-profile/${id}`);
+            history.push(`/user-profile/${id}`, {successMessage:"Profile Updated Succesfully!"});
         } catch (err) {
             // Catch any errors to present to users for better UX
             console.error('Error updating profile:', err);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -6,14 +6,22 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
-import styles from "../../css/SignInUpForm.Module.css";
+import styles from "../../css/SignInUpForm.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import {useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignInForm() {
+
+  const location = useLocation();
+  const [showAlert, setShowAlert] = useState(false);
+  const successMessage = location.state?.successMessage;
   // Custom hook to set the current user in context
-  const setCurrentUser = useSetCurrentUser(); 
+  const setCurrentUser = useSetCurrentUser();
+  // History hook to redirect users to home page upon succesful sign In
+  const history = useHistory();
   // State to manage form input data and errors
   const [signInData, setSignInData] = useState({
     username: "",
@@ -38,15 +46,45 @@ function SignInForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", signInData);
       // Set current user in context after successful login
       setCurrentUser(data.user);
+      history.push("/home-page", {successMessage: `Logged In Succesfully ! , Welcome ${data.user.username}`})
     } catch (err) {
       // Set errors from server response if any
       setErrors(err.response?.data);
     }
   };
 
+  useEffect(() => {
+    // If there's a success message, show the alert
+    if (successMessage) {
+      setShowAlert(true);
+      // Automatically hide the alert after 5 seconds
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+
+      // Clean up timer
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  const handleDismiss = () => {
+    // Manually dismiss the alert
+    setShowAlert(false);
+  };
+
   return (
     <Row className={`${styles.Row} ${styles.CustomBackGround}`}>
       <Col className=" p-0 p-md-2" md={6}>
+      {showAlert && (
+      <Alert className='mt-1' variant="success">
+        <p>{successMessage}</p>
+        <div className="d-flex justify-content-end">
+        <Button onClose={handleDismiss} variant="outline-success">
+          Close me
+        </Button>
+        </div>
+      </Alert>
+    )}
         <Container className={`p-4`}>
           <h1 className={styles.Header}>SIGN IN</h1>
           <Form onSubmit={formSubmit}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "../../css/SignInUpForm.Module.css";
-import appStyles from "../../App.Module.css";
+import styles from "../../css/SignInUpForm.module.css";
+import appStyles from "../../App.module.css";
 import axios from 'axios';
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -32,7 +32,7 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("dj-rest-auth/registration/", signUpData);
-      history.push("/home-page");
+      history.push("/sign-in" , {successMessage: "Account Created Successfully"});
     } catch (err) {
       setErrors(err.response?.data); 
     }

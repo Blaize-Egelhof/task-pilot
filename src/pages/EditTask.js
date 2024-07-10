@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { Alert, Spinner } from "react-bootstrap";
-import styles from "../css/CreateEditForm.Module.css";
+import styles from "../css/CreateEditForm.module.css";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 /**
@@ -122,7 +122,7 @@ function EditTask() {
   const handleDelete = async () => {
     try {
       await axios.delete(`/delete-task/${id}`);
-      history.push("/home-page");
+      history.push("/home-page",{deleteMessage:`Task ${title} has been deleted`});
     } catch (err) {
       setErrors([
         err.response?.data ||
@@ -158,7 +158,7 @@ function EditTask() {
 
       // Send request to API update the task
       await axios.put(`/update-task/${id}`, updatedTaskData);
-      history.push("/home-page");
+      history.push("/home-page" , {successMessage:`Task ${title} updated succesfully!`});
     } catch (err) {
       console.error("Error updating task:", err);
       //Setting errors in order to provide direct feedback to users if a field controlID specific error is given
@@ -251,6 +251,34 @@ function EditTask() {
                 </Alert>
                 ))}
 
+                <Form.Group className="mb-3" controlId="category">
+                  <Form.Label className={`${styles.Input} ${styles.InputLabel}`}>
+                    Category
+                  </Form.Label>
+                  <Form.Control
+                    className={`${styles.Input} ${styles.InputBorder}`}
+                    name="category"
+                    as="select"
+                    type="date"
+                    placeholder="Enter a due date"
+                    required
+                    value={category}
+                    onChange={handleChange}
+                    >
+                    <option value={`${category}`}>{`${category}`}</option>
+                    <option value='Work'>Work</option>
+                    <option value='Personal'>Personal</option>
+                    <option value='Study'>Study</option>
+                    <option value='Other'>Other</option>
+                  </Form.Control>
+                </Form.Group>
+
+                {errors.category?.map((message, idx) => (
+                <Alert key={idx} variant="warning">
+                  {message}
+                </Alert>
+                ))}
+
                 <Form.Group className="mb-3" controlId="priority">
                   <Form.Label className={`${styles.Input} ${styles.InputLabel}`}>
                     Priority
@@ -264,7 +292,7 @@ function EditTask() {
                     value={priority}
                     onChange={handleChange}
                   >
-                    <option value="Medium">Select Priority</option>
+                    <option value={`${priority}`}>{`${priority}`}</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
@@ -397,7 +425,7 @@ function EditTask() {
       </Row>
 
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this task?</Modal.Body>

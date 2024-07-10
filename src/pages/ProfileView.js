@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import styles from '../css/CreateEditForm.Module.css'
+import { Alert, Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
+import { useHistory, useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import styles from '../css/CreateEditForm.module.css'
 
 function ProfileView() {
+    const location = useLocation();
+    const successMessage = location.state?.successMessage;
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     // State to store profile data
     const [profileData,setProfileData] = useState('');
     // State to store any errors
@@ -26,9 +29,25 @@ function ProfileView() {
             }
         }
         // Call the function to fetch profile details
-        fetchProfileDetails(); 
+        fetchProfileDetails();
+        // If there's a success message, show the success alert
+        if (successMessage) {
+            setShowSuccessAlert(true);
+            // Automatically hide the success alert after 5 seconds
+            const successTimer = setTimeout(() => {
+            setShowSuccessAlert(false);
+            }, 5000);
+    
+            // Clean up timer
+            return () => clearTimeout(successTimer);
+        }
 
-    }, [id]);
+    }, [id,successMessage]);
+
+    const handleDismiss = () => {
+        // Manually dismiss the alert
+        setShowSuccessAlert(false);
+    };
     // Handler for editing the profile
     const handleEditprofile = ()=>{
         // Navigate to the edit profile page
@@ -54,6 +73,17 @@ function ProfileView() {
                 
         </Container>
         <Container fluid>
+        {/* Display success message if there is one */}
+        {showSuccessAlert && (
+        <Alert className='mt-1 text-center' variant="success" onClose={handleDismiss}>
+            <p>{successMessage}</p>
+            <div className="d-flex justify-content-end">
+            <Button variant="outline-success" onClick={handleDismiss}>
+                Close
+            </Button>
+            </div>
+        </Alert>
+        )}
             <Row className="align-items-center">
                 {/* Renders the user profile pic in circle format */}
                 <Col lg={4} className="text-center">

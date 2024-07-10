@@ -66,7 +66,7 @@ function TaskView() {
   const handleLeaveGroup = async () => {
     try {
       await axios.put(`leave-task/${id}`);
-      history.push('/home-page'); 
+      history.push('/home-page', {deleteMessage:`Left Task:${ticketData.title} successfully.`}); 
     } catch (err) {
       setErrors(err);
     }
@@ -108,6 +108,7 @@ function TaskView() {
   }
   // variable to check if the current user is the owner of the task OR a member of the task
   const isWorthyUser = currentUser && (currentUser.username === ticketData?.owner || ticketData?.assigned_users.includes(currentUser.pk));
+  const isWorthyMember = currentUser && (ticketData?.assigned_users.includes(currentUser.pk));
   // variable which checks is ticket priority is set to high
   const isPriorityHigh = ticketData?.priority === 'High';
   // variable to store the current date
@@ -127,7 +128,7 @@ function TaskView() {
             </Card.Header>
             <Card.Body className={`${styles.CustomBackGround}`}>
               {/* display a leave task button to task memebers if they want to leave */}
-              {isWorthyUser && ticketData?.assigned_users.includes(currentUser.id) && (
+              {isWorthyMember === true && (
                 <div>
                   <Button variant="danger" onClick={() => setShowLeaveModal(true)}>Leave Task</Button>
                 </div>

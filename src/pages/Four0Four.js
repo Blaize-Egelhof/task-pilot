@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
-import styles from '../css/SignInUpForm.Module.css'
+import styles from '../css/SignInUpForm.module.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom'
 
 function Four0Four() {

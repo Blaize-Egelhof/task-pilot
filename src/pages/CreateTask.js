@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import styles from "../css/CreateEditForm.Module.css";
+import styles from "../css/CreateEditForm.module.css";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
@@ -38,7 +38,7 @@ function CreateTask() {
     event.preventDefault();
     try{
       await axios.post("/create-task/", createTicketData);
-      history.push("/home-page");
+      history.push("/home-page",{ successMessage: `Task ${description} created successfully!`});
       //catch any errors to display to users for better UX
     }catch(err){
       setErrors(err.response?.data);
