@@ -130,7 +130,7 @@ function EditProfile() {
                             <Form.Label className='fw-bold fs-5'>Profile Image</Form.Label>
                             <div className="mb-3">
                                 {formData.image && (
-                                    <img src={profileData.image} alt="Profile Preview" width={200} height={200} className="rounded-circle" />
+                                    <img src={profileData.image} alt="Profile Preview" width={180} height={180} className="rounded-circle" />
                                 )}
                             </div>
                             <Form.Control
