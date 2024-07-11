@@ -1,3 +1,6 @@
+/* 
+Generic class used in Input fields on forms to ensure consistant styling
+*/
 .Input { 
     text-align:center;
     font-weight:bolder;
@@ -5,6 +8,10 @@
     padding-top:1rem;
     font-size:1rem;
 }
+
+/* 
+Generic class used in Input Labels used on forms to ensure consistant styling
+*/
 
 .InputLabel {
     font-size:1rem;
@@ -15,29 +22,57 @@
     text-decoration: solid;
 }
 
+/* 
+Input field additonal class used to apply background colors to input fields that require more contrast
+*/
+
 .InputBorder{
     background-color:#ccd3cd;
 }
+
+/* 
+Genetic button class used to ensure buttons use 100% of their parent container
+*/
 
 .Button{
     width:100%;
 }
 
+/* 
+Genetic button class used to ensure buttons have spacing when stacked in column format
+*/
+
 .ButtonSpacing{
     margin-top:1rem;
 }
+
+/* 
+Genetic button class used to ensure buttons size in their containers , while keeping margins
+*/
 
 .AutoButton{
     width:auto;
 }
 
+/* 
+Genetic button class used to change the color of a button once hovered over
+*/
+
 .Button:hover{
     color:grey;
 }
 
+/* 
+Genetic button class used to change the color of a button once selected(used in Header component)
+*/
+
 .Button:active{
     color:black;
 }
+
+/* 
+Custom class used for all headers in component pages 
+*/
 
 .Header {
     text-align: center;
@@ -49,6 +84,10 @@
     text-decoration: underline;
 }
 
+/* 
+Custom class used for all sub headers in component pages
+*/
+
 .HeaderV1 {
     text-align: center;
     padding-bottom: 1rem;
@@ -58,51 +97,75 @@
     text-decoration: underline;
 }
 
+/* 
+Custom class to limit size of rows
+*/
+
 .row{
     max-width:960px;
 }
 
+/* 
+Custom class to ensure profile rows use 100% of their container
+*/
+
 .profileRow{
     width:100%;
 }
+
+/* 
+Custom class to ensure profile background colors strongly contrast with surrounding elements
+*/
 
 .profileBackGround{
     background-color:#ccd3cd;
     border:0.1cm solid grey;
 }
 
+/* 
+Custom container used in ProfileEdit component
+*/
+
 .ProfileEditContainer{
     margin-top:6rem;
 }
 
+
+/* Media query for screens up to 700px wide */
 @media (max-width: 700px) {
+    /* Adjusting styles for elements with class .profileRow */
     .profileRow {
-        margin-left: 0;
+        margin-left: 0; /* Resetting left margin */
     }
 
+    /* Adjusting styles for elements with class .text-right */
     .text-right {
-        text-align: center;
-        margin-top: 1rem;
+        text-align: center; /* Center-aligning text */
+        margin-top: 1rem; /* Adding top margin */
     }
 }
 
+/* Media query for screens between 701px and 1460px wide */
 @media (min-width: 701px) and (max-width: 1460px) {
+    /* Adjusting styles for elements with class .CustomContainer */
     .CustomContainer {
-        margin-left: 4rem;
-
+        margin-left: 4rem; /* Setting left margin */
     }
 
+    /* Adjusting styles for elements with class .profileRow */
     .profileRow {
-        margin-top: 6rem;
-        margin-left: 3rem;
-        margin-right: 2rem;
+        margin-top: 6rem; /* Adding top margin */
+        margin-left: 3rem; /* Setting left margin */
+        margin-right: 2rem; /* Setting right margin */
     }
 }
 
+/* Media query for screens wider than 1400px */
 @media (min-width: 1401px) {
+    /* Adjusting styles for elements with class .profileRow */
     .profileRow {
-        margin-left: 2rem;
-        margin-top: 8rem;
-        width: 100%;
+        margin-left: 2rem; /* Setting left margin */
+        margin-top: 8rem; /* Adding top margin */
+        width: 100%; /* Making element full width */
     }
 }

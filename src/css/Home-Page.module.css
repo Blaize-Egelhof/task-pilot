@@ -1,66 +1,83 @@
-.CreateSpace{
-    padding-top:1rem;
+/* Adding padding to the top of elements with class .CreateSpace */
+.CreateSpace {
+    padding-top: 1rem;
 }
 
+/* Centering elements horizontally */
 .CenterAlign {
     display: flex;
     justify-content: space-between;
 }
 
-.CardTitleTruncate{
+/* Truncating text with ellipsis if it overflows */
+.CardTitleTruncate {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* Applying a gray background color to elements */
 .CardBodyGrey {
     background-color: #e0e0e0;
 }
 
-.HeaderSpacing{
-    padding-top:0.3cm;
-    padding-bottom:0.3cm;
+/* Adding padding to the top and bottom of elements */
+.HeaderSpacing {
+    padding-top: 0.3cm;
+    padding-bottom: 0.3cm;
 }
 
+/* Styling for a badge with green background */
 .CustomDoneBadge {
-    background-color: green ;
+    background-color: green;
     color: white !important;
 }
 
-.MainContainer{
-    margin-top:5rem !important;
+/* Setting margin-top for elements with class .MainContainer */
+.MainContainer {
+    margin-top: 5rem !important;
 }
 
+/* Styling for a badge with light gray background and green text */
 .CustomOwnerBadge {
-    background-color: lightgray !important; 
+    background-color: lightgray !important;
     color: green !important;
-    margin-top:0;
-  }
-  
-  .CustomMemberBadge {
-    background-color: lightgray  !important; 
-    color: blue !important; 
-  }
-  .CustomOverdueBadge {
+    margin-top: 0;
+}
+
+/* Styling for a badge with light gray background and blue text */
+.CustomMemberBadge {
+    background-color: lightgray !important;
+    color: blue !important;
+}
+
+/* Styling for a badge with red background and white text */
+.CustomOverdueBadge {
     background-color: red !important;
     color: white !important;
-  }
+}
 
-  @media (max-width: 400px) {
+/* Media query for screens up to 400px wide */
+@media (max-width: 400px) {
+    /* Wrapping buttons in a container */
     .WrapButtons {
         flex-wrap: wrap !important;
         flex: 1 1 100%;
     }
 
+    /* Adjusting border radius for toggle buttons */
     .custom-toggle-button {
         border-radius: 0 !important;
     }
 
+    /* Ensuring active state toggle buttons maintain border radius */
     .custom-toggle-button.active,
     .custom-toggle-button:active {
         border-radius: 0 !important;
     }
 }
 
+/* Media queries for specific ranges of screen widths */
 @media (min-width: 719px) and (max-width: 960px) {
     .ContainerStyling {
         padding-left: 3.5rem;
@@ -96,4 +113,3 @@
         padding-left: 4rem;
     }
 }
-

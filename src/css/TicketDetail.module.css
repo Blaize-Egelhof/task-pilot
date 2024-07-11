@@ -1,85 +1,102 @@
-.CustomContainer{
-    margin-top:6rem;
-    margin-left:3rem;
+/* Setting margins for elements with class .CustomContainer */
+.CustomContainer {
+  margin-top: 6rem;
+  margin-left: 3rem;
 }
 
+/* Styling for input labels with class .InputLabel */
 .InputLabel {
-    font-size:1rem;
-    text-decoration: underline;
-    font-size:2.5rem;
-    color: #0071a6;
-    font-weight: bolder;
-    text-decoration: solid;
+  font-size: 2.5rem;
+  color: #0071a6;
+  font-weight: bolder;
+  text-decoration: underline;
 }
 
-.ContainText{
+/* Controlling text wrapping and width for elements with class .ContainText */
+.ContainText {
   overflow-wrap: break-word;
-  width:70%
+  width: 70%;
 }
 
-.ContainerMaxWidth{
-  max-width:100%;
+/* Setting maximum width for elements with class .ContainerMaxWidth */
+.ContainerMaxWidth {
+  max-width: 100%;
 }
 
-.InputBorder{
-    border: 0.1cm solid grey;
-    background-color:#ccd3cd;
+/* Adding border and background color to elements with class .InputBorder */
+.InputBorder {
+  border: 0.1cm solid grey;
+  background-color: #ccd3cd;
 }
 
-.CustomBackGround{
-    background-color:#d8dcd9;
-    border: 0.1cm solid grey;
-    border-top:none;
+/* Adjusting background color and border for elements with class .CustomBackGround */
+.CustomBackGround {
+  background-color: #d8dcd9;
+  border: 0.1cm solid grey;
+  border-top: none;
 }
 
+/* Styling for overdue badges with class .CustomOverdueBadge */
 .CustomOverdueBadge {
-    background-color: red !important;
-    color: white !important;
-    margin-left:5px;
+  background-color: red !important;
+  color: white !important;
+  margin-left: 5px;
 }
 
-.CustomMessage{
+/* Adjusting text wrapping for elements with class .CustomMessage */
+.CustomMessage {
   word-wrap: break-word;
   white-space: pre-wrap;
 }
 
-.CustomUserBackground{
-    border:0.5px solid grey;
+/* Styling for user backgrounds with class .CustomUserBackground */
+.CustomUserBackground {
+  border: 0.5px solid grey;
 }
 
-@media(max-width: 500px){
-  .ContainText{
-    margin-left:-2rem;
+/* Media query for screens up to 500px wide */
+@media (max-width: 500px) {
+  /* Adjusting left margin for .ContainText */
+  .ContainText {
+      margin-left: -2rem;
   }
 }
 
+/* Media query for screens up to 460px wide */
 @media (max-width: 460px) {
+  /* Adjusting font size for .InputLabel */
   .InputLabel {
-    font-size:2.1rem;
+      font-size: 2.1rem;
   }
-  .CustomContainer{
-    margin-top:3rem;
-    margin-left:0rem;
-  }
-}
-
-@media (max-width:420px){
-  .CustomRemoveButton{
-    display:block !important;
-    max-width:75%
-  }
-
-  .removeMargin{
-    margin-right:0;
-  }
-  .hideText{
-    display:none;
+  /* Adjusting margins for .CustomContainer */
+  .CustomContainer {
+      margin-top: 3rem;
+      margin-left: 0rem;
   }
 }
 
+/* Media query for screens up to 420px wide */
+@media (max-width: 420px) {
+  /* Adjusting display and maximum width for .CustomRemoveButton */
+  .CustomRemoveButton {
+      display: block !important;
+      max-width: 75%;
+  }
+  /* Removing right margin for .removeMargin */
+  .removeMargin {
+      margin-right: 0;
+  }
+  /* Hiding text for .hideText */
+  .hideText {
+      display: none;
+  }
+}
+
+/* Media query for screens up to 768px wide */
 @media (max-width: 768px) {
-  .CustomContainer{
-    margin-top:3rem;
-    margin-left:0rem;
+  /* Adjusting margins for .CustomContainer */
+  .CustomContainer {
+      margin-top: 3rem;
+      margin-left: 0rem;
   }
 }

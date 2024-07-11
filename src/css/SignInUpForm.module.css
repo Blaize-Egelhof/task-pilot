@@ -1,76 +1,90 @@
-.Input { 
-    text-align:center;
-    font-weight:bolder;
-
+/* Centering text and setting bold font weight for elements with class .Input */
+.Input {
+    text-align: center;
+    font-weight: bolder;
 }
 
-.CustomBackGround{
-    background-color:#B2BEB5;
-    border:0.1cm solid grey;
+/* Applying a custom background color and border to elements */
+.CustomBackGround {
+    background-color: #B2BEB5;
+    border: 0.1cm solid grey;
 }
 
-.Button{
-    width:100%;
+/* Setting width to 100% for elements with class .Button */
+.Button {
+    width: 100%;
 }
 
-.AutoButton{
-    width:auto;
+/* Setting width to auto for elements with class .AutoButton */
+.AutoButton {
+    width: auto;
 }
 
-.Button:hover{
-    color:grey;
+/* Hover effect for elements with class .Button */
+.Button:hover {
+    color: grey;
 }
 
-.Button:active{
-    color:black;
+/* Active state style for elements with class .Button */
+.Button:active {
+    color: black;
 }
 
-.Header { 
-    text-align:center;
-    padding-bottom:2rem;
-    color:#0071a6;
-    font-weight:bolder;
-    text-decoration:solid;
+/* Centering text, setting color and padding for elements with class .Header */
+.Header {
+    text-align: center;
+    padding-bottom: 2rem;
+    color: #0071a6;
+    font-weight: bolder;
+    text-decoration: solid;
 }
 
-.HeaderForSignUp{
-    padding-top:2rem;
+/* Adding padding to the top for elements with class .HeaderForSignUp */
+.HeaderForSignUp {
+    padding-top: 2rem;
 }
 
-.Text{
-    color:black;
-    text-decoration:none;
-    pointer-events:none !important;
+/* Setting text color, removing pointer events for elements with class .Text */
+.Text {
+    color: black;
+    text-decoration: none;
+    pointer-events: none !important;
 }
 
+/* Styling for links with class .Link */
 .Link {
     text-decoration: none;
     text-align: center;
     display: block;
     margin: auto;
-    color:blue;
-  }
-.Four0FourImage{
-    margin:0 auto ;
-    height:fit-content;
+    color: blue;
 }
 
+/* Centering and adjusting margin for elements with class .Four0FourImage */
+.Four0FourImage {
+    margin: 0 auto;
+    height: fit-content;
+}
+
+/* Ensuring images are fluid and responsive */
 .ImageFluid {
-    width: 100%; 
-    height: auto; 
+    width: 100%;
+    height: auto;
     display: block;
-  }
-
-.Four0FourContainer{
-    max-height:50%;
-    max-width:50%;
 }
 
-@media(min-width:200px){
-    .Row{
-        margin-top:8rem !important;
-        margin-right:1rem !important;
-        margin-left:1rem !important;
+/* Setting maximum height and width for elements with class .Four0FourContainer */
+.Four0FourContainer {
+    max-height: 50%;
+    max-width: 50%;
+}
+
+/* Media query for screens wider than 200px */
+@media (min-width: 200px) {
+    /* Adjusting margins for elements with class .Row */
+    .Row {
+        margin-top: 8rem !important;
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
     }
 }
-

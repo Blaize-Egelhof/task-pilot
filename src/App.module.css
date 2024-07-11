@@ -1,7 +1,8 @@
+/* Adding padding to the top for elements with class .Main */
 .Main {
   padding-top:1rem;
 }
-
+/* Setting text color and font family for elements with class .App */
 .App{
   color:black;
   font-family: 'Open Sans', 'sans-serif';

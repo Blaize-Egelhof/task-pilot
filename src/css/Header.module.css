@@ -1,130 +1,149 @@
+/* Resetting default margins and padding for the body */
 body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .headerHorizontal {
-    width:100%;
-    margin-top:0;
-    background-color:#343a40;
-  }
-  
+  margin: 0;
+  padding: 0;
+}
+
+/* Styling for horizontal header */
+.headerHorizontal {
+  width: 100%;
+  margin-top: 0;
+  background-color: #343a40;
+}
+
+/* Sidebar styling for fixed positioning and layout */
+.sidebar {
+  position: fixed;
+  top: 1rem;
+  left: 0;
+  width: auto;
+  height: 100%;
+  background-color: #343a40;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 5rem;
+}
+
+/* Setting height to 100% for elements */
+.fullheight {
+  height: 100%;
+}
+
+/* Main content styling */
+.main-content {
+  margin-left: 1px;
+  padding-top: 1px;
+}
+
+/* Setting text color to white */
+.whiteText {
+  color: white;
+}
+
+/* Adjusting positioning for sign out button */
+.signOutButtonPositioning {
+  margin-top: auto;
+  margin-bottom: 5rem !important;
+}
+
+/* Setting font size and padding for header */
+.headerSize {
+  font-size: 2rem;
+  padding-left: 1rem;
+}
+
+/* Styling for navigation elements */
+.navStyling {
+  height: 100%;
+  flex-direction: column;
+}
+
+/* Circular button styling */
+.circularButton {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid #ccc;
+}
+
+/* Ensuring active buttons are underlined */
+.Active Button {
+  text-decoration: underline;
+}
+
+/* Styling for navigation links */
+.NavLink {
+  padding: 5px;
+}
+
+/* Media query for screens up to 768px wide */
+@media (max-width: 768px) {
+  /* Adjusting sidebar layout for smaller screens */
   .sidebar {
-    position: fixed;
-    top: 1rem;
-    left: 0;
-    width: auto;
-    height: 100%;
-    background-color: #343a40;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 5rem;
-  }
-
-  .fullheight{
-    height:100%;
-  }
-  
-  .main-content {
-    margin-left: 1px;
-    padding-top: 1px;
-  }
-  
-  .whiteText {
-    color: white;
-  }
-  
-  .signOutButtonPositioning {
-    margin-top:auto;
-    margin-bottom: 5rem !important;
-  }
-  
-  .headerSize{
-    font-size:2rem;
-    padding-left: 1rem;
-  }
-
-  .navStyling{
-    height:100%;
-    flex-direction:column;
-  }
-
-  .circularButton {
-    width: 3rem; 
-    height: 3rem; 
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white; 
-    border: 2px solid #ccc; 
-  }
-  
-  .circularButtonImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .Active Button{
-    text-decoration: underline;
-  }
-
-  .NavLink{
-    padding:5px;
-  }
-
-  @media (max-width: 768px) {
-    .sidebar {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-      align-items: center; 
+      align-items: center;
       position: static;
       width: 100%;
       height: auto;
-    }
-    .FontSize{
-      font-size:15px !important;
-    } 
-    .headerHorizontal{
-      border-bottom: lightblue 0.1cm solid;
-    }
-  
-    .navStyling {
-      display: flex; 
-      flex-direction: row; 
-      align-items: center; 
-      height: auto;
-      margin-top:0.2cm;
-      margin-bottom:0.1cm;
-    }
-  
-    .signOutButtonPositioning {
-      margin-top:5px!important;
-      margin-bottom:auto!important;
-    }
+  }
 
-    @media(max-width:300px) {
-      .NavLink{
-        padding:0px !important;
-        font-size:10px !important;
+  /* Adjusting font size for smaller screens */
+  .FontSize {
+      font-size: 15px !important;
+  }
+
+  /* Adding bottom border to horizontal header */
+  .headerHorizontal {
+      border-bottom: lightblue 0.1cm solid;
+  }
+
+  /* Adjusting navigation layout for smaller screens */
+  .navStyling {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: auto;
+      margin-top: 0.2cm;
+      margin-bottom: 0.1cm;
+  }
+
+  /* Adjusting sign out button positioning for smaller screens */
+  .signOutButtonPositioning {
+      margin-top: 5px !important;
+      margin-bottom: auto !important;
+  }
+
+  /* Media query for screens up to 300px wide */
+  @media (max-width: 300px) {
+      /* Adjusting navigation link padding and font size */
+      .NavLink {
+          padding: 0px !important;
+          font-size: 10px !important;
       }
+
+      /* Styling buttons for smaller screens */
       button[type="button"]:not(:disabled),
       button[type="reset"]:not(:disabled),
       button[type="submit"]:not(:disabled),
       button:not(:disabled) {
-      cursor: pointer;
-      font-size: 16px; 
-      line-height: 16px; 
-      padding: 5px 10px; 
+          cursor: pointer;
+          font-size: 16px;
+          line-height: 16px;
+          padding: 5px 10px;
       }
+
+      /* Adjusting sign out button positioning further for very small screens */
       .signOutButtonPositioning {
-        margin-top:2px !important;
-        margin-bottom:9px !important;
+          margin-top: 2px !important;
+          margin-bottom: 9px !important;
       }
-    }
   }
-  
+}
