@@ -72,6 +72,14 @@ body {
   border: 2px solid #ccc;
 }
 
+/* Circular Image styling */
+
+.circularButtonImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Ensuring active buttons are underlined */
 .Active Button {
   text-decoration: underline;

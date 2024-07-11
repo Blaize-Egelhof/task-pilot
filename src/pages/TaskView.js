@@ -7,22 +7,17 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../css/TicketDetail.module.css';
 
 function TaskView() {
-  // Getting the current user from context
   const currentUser = useCurrentUser();
-  //state to hold ticket data
+  const { id } = useParams();
+  const history = useHistory();
+
   const [ticketData, setTicketData] = useState(null);
-  //state to hold ticket messages in array format
   const [ticketMessageData, setTicketMessageData] = useState([]);
-  // state to catch any errors
   const [errors, setErrors] = useState({});
-  // state to hold any new messages being posted
   const [newMessageData, setNewMessageData] = useState({
     context: '',
+    important: false, // Initial important value set to false
   });
-  //Grab task ID in url for post chat URL submission 
-  const { id } = useParams();
-  //Histroy to direct users to home page if they choose to leave task
-  const history = useHistory();
 
   // State for modals
   const [showLeaveModal, setShowLeaveModal] = useState(false);
@@ -30,22 +25,19 @@ function TaskView() {
   const [messageToDelete, setMessageToDelete] = useState(null);
 
   useEffect(() => {
-    //Grab task data
     const getTicketView = async () => {
       try {
         const response = await axios.get(`/task-view/${id}`);
-        const data = response.data;
-        setTicketData(data);
+        setTicketData(response.data);
       } catch (err) {
         setErrors({ ...errors, fetch: err.message });
       }
     };
-    //Grab task messages
+
     const getTicketMessages = async () => {
       try {
         const response = await axios.get(`/task-messages-view/${id}`);
-        const data = response.data;
-        setTicketMessageData(data);
+        setTicketMessageData(response.data);
       } catch (err) {
         setErrors({ ...errors, fetch: err.message });
       }
@@ -53,25 +45,26 @@ function TaskView() {
 
     getTicketView();
     getTicketMessages();
-  }, [id,errors]);
+  }, [id, errors]);
 
-  //Function to handle user inputs
   const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const val = type === 'checkbox' ? checked : value;
     setNewMessageData({
       ...newMessageData,
-      [event.target.name]: event.target.value,
+      [name]: val,
     });
   };
-  //Function for assigned users to leave the task if needed
+
   const handleLeaveGroup = async () => {
     try {
       await axios.put(`leave-task/${id}`);
-      history.push('/home-page', {deleteMessage:`Left Task:${ticketData.title} successfully.`}); 
+      history.push('/home-page', { deleteMessage: `Left Task: ${ticketData.title} successfully.` }); 
     } catch (err) {
       setErrors(err);
     }
   };
-  // Function for Task Owners and task message owners to delete their messages if needed
+
   const handleDelete = async () => {
     try {
       await axios.post(`task-messages-delete/${messageToDelete}`);
@@ -82,23 +75,23 @@ function TaskView() {
       setErrors({ ...errors, delete: err.message });
     }
   };
-  // function to direct to a users profile if their profile image is clicked
+
   const handleProfileClick = (msgId) => {
     history.push(`/user-profile/${msgId}`);
   };
-  // function to submit a task message
+
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(`/task-messages-send/${id}`, newMessageData);
       setTicketMessageData([...ticketMessageData, response.data]);
-      setNewMessageData({ context: '' });
+      setNewMessageData({ context: '', important: false }); // Reset important status after submission
     } catch (err) {
       console.error('Error submitting message:', err);
       setErrors({ ...errors, submit: err.message });
     }
   };
-  // display loader if taskdata and errors isnt set yet
+
   if (!ticketData && !errors.fetch) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -106,16 +99,12 @@ function TaskView() {
       </div>
     );
   }
-  // variable to check if the current user is the owner of the task OR a member of the task
-  const isWorthyUser = currentUser && (currentUser.username === ticketData?.owner || ticketData?.assigned_users.includes(currentUser.pk));
-  const isWorthyMember = currentUser && (ticketData?.assigned_users.includes(currentUser.pk));
-  // variable which checks is ticket priority is set to high
+
+  const isOwner = currentUser && ticketData?.owner === currentUser.username;
+  const isWorthyUser = currentUser && (isOwner || ticketData?.assigned_users.includes(currentUser.pk));
   const isPriorityHigh = ticketData?.priority === 'High';
-  // variable to store the current date
   const currentDate = new Date();
-  // Variable to hold task date
   const dueDate = ticketData ? new Date(ticketData.due_date) : null;
-    // variable to check if the due date of the task has passed the current date
   const isDueDatePast = dueDate ? dueDate < currentDate : false;
 
   return (
@@ -127,10 +116,9 @@ function TaskView() {
               <h2 className={`${styles.InputLabel}`}>{ticketData?.title}</h2>
             </Card.Header>
             <Card.Body className={`${styles.CustomBackGround}`}>
-              {/* display a leave task button to task memebers if they want to leave */}
-              {isWorthyMember === true && (
+              {isWorthyUser && (
                 <div>
-                  <Button variant="danger" onClick={() => setShowLeaveModal(true)}>Leave Task</Button>
+                  <Button variant="danger" className="ms-1 mb-1" onClick={() => setShowLeaveModal(true)}>Leave Task</Button>
                 </div>
               )}
               <p><strong>Description:</strong> {ticketData?.description}</p>
@@ -149,11 +137,9 @@ function TaskView() {
         <Col md={12}>
           <Card className="mb-4">
             <Card.Header className={`text-center ${styles.InputBorder}`}>
-              {/* display task messages header if the currentuser if isWorthyUser is true otherwise deny view */}
               <h2>{isWorthyUser ? <p className={styles.InputLabel}>User Messages</p> : "You do not have permission to view this Task's chat history"}</h2>
             </Card.Header>
             <Card.Body className={styles.CustomBackGround}>
-              {/* display task messages if the currentuser if isWorthyUser is true otherwise deny view */}
               {isWorthyUser ? (
                 <>
                   {ticketMessageData.map((msg, index) => (
@@ -169,11 +155,12 @@ function TaskView() {
                                 <h5 onClick={() => handleProfileClick(msg.id)}>{msg.sender_username}</h5>
                                 <Badge className={`text-dark  ${styles.hideText}`} bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge>
                               </div>
-                              {currentUser && (currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
+                              {msg.important && <Badge className={`${styles.CustomOverdueBadge} me-2`} bg="warning">Important</Badge>}
+                              {(currentUser.username === msg.sender || currentUser.username === ticketData.owner) && (
                                 <Button variant="danger" onClick={() => { setMessageToDelete(msg.id); setShowDeleteModal(true); }} size="sm">Delete</Button>
                               )}
                             </div>
-                              <p className={`${styles.ContainText}`}>{msg.context}</p>
+                            <p className={`${styles.ContainText}`}>{msg.context}</p>
                           </div>
                         </div>
                       </Card.Body>
@@ -191,6 +178,18 @@ function TaskView() {
                         className={styles.CustomUserBackground}
                       />
                     </Form.Group>
+                    {isOwner && (
+                      <Form.Group controlId="important">
+                        <Form.Check
+                          type="checkbox"
+                          label="Mark Important"
+                          name="important"
+                          checked={newMessageData.important}
+                          onChange={handleChange}
+                          className="mb-3"
+                        />
+                      </Form.Group>
+                    )}
                     <Button type="submit" className="mt-2">Submit</Button>
                   </Form>
                   {errors.submit && <p className="text-danger mt-2">Error: Your message is too long, please shorten it.</p>}
