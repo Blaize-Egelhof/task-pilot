@@ -9,6 +9,10 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
+/**
+ * Component for rendering the Create Task form.
+ */
+
 function CreateTask() {
   // Using state to save all fields I want my user to be able to update
   const [createTicketData , setCreateTicketData] = useState(
@@ -26,14 +30,20 @@ function CreateTask() {
   const history = useHistory()
   // Destructured ticket data in order to manipulate in handleChange function
   const {title,description,due_date,priority,category} = createTicketData;
-  // Update above mentioned variables when a user inputs anything into the form
+    /**
+   * Handles changes in the form input fields.
+   * @param {Object} event - The event object containing the updated input value.
+   */
   const handleChange = (event) => {
     setCreateTicketData({
       ...createTicketData,
       [event.target.name]: event.target.value,
     });
   };
-  //handle submission of ticket data
+    /**
+   * Handles submission of the task creation form.
+   * @param {Object} event - The event object triggered on form submission.
+   */
   const handleSubmit = async(event)=>{
     event.preventDefault();
     try{

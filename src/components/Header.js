@@ -5,6 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';
 
+/**
+ * Header component for the application.
+ * 
+ * Renders navigation, user icons, and handles sign-out functionality.
+ */
+
 export default function Header() {
   // State to manage errors (currently unused in this component)
   const [errors, setErrors] = useState({});
@@ -13,7 +19,13 @@ export default function Header() {
   const currentUser = useCurrentUser();
   // variable to modify currentUser variable if a logout succeeds
   const setCurrentUser = useSetCurrentUser();
-  // function to handle signing out 
+    /**
+   * Handles the sign-out process.
+   * - Sends a POST request to log the user out.
+   * - Updates currentUser context to null upon successful sign-out.
+   * - Sets errors state if there's an error response.
+   * - Closes the modal after sign-out.
+   */ 
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -52,7 +64,9 @@ export default function Header() {
       </div>
     </>
   );
-  // variable to hold logged in users profile icon as well as direct to users profile if icon is clicked
+   /**
+   * JSX for user profile icon and link when user is logged in.
+   */
   const userIconLoggedIn = (
     <>
       <Nav>
@@ -75,7 +89,10 @@ export default function Header() {
   );
 
   const userIconLoggedOut = (''); // Placeholder for logged out user icon
-  // return statement to coniditonally render the header depending on users sign in status
+    /**
+   * Renders the header component.
+   * - Conditionally renders different sections based on user sign-in status.
+   */
   return (
     <>
       <Navbar fixed="top" className={styles.headerHorizontal}>

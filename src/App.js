@@ -14,6 +14,12 @@ import TaskView from '../src/pages/TaskView';
 import ProfileView from '../src/pages/ProfileView';
 import EditProfile from '../src/pages/EditProfile';
 
+/**
+ * Main component that handles routing and authentication logic for the application.
+ * Uses react-router-dom for routing and manages user authentication state.
+ * Renders different pages/components based on the current route and user authentication status.
+ */
+
 function App() {
   const currentUser = useCurrentUser();
   return (

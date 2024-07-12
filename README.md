@@ -1,5 +1,5 @@
 # Task Pilot
-Task Pilot is a Ticket orientated application build for small to medium size business departments for managing responsibilities as a team. 
+Task Pilot is a Ticket orientated application built for small to medium size business departments for managing responsibilities as a team. 
 
 - The repository for the Task-Pilot-API associated with this project is available [HERE](https://github.com/Blaize-Egelhof/task-pilot-api). The installation, set up, and deployment steps for this section of the project have also been included in the README linked to the DRF-API. 
 
@@ -20,9 +20,6 @@ The live link for "Task Pilot" can be found [HERE](https://task-pilot-e84398da75
   + [Current User Goals](#current-user-goals "Current User Goals")
   + [New User Goals](#new-user-goals "New User Goals")
 + [User Stories](#user-stories "User Stories")
-  + [Admin stories](#admin-stories "Admin stories")
-  + [Artist stories](#artist-stories "Artist stories")
-  + [Visitor stories](#visitor-stories "Visitor stories")
 + [Design](#design "Design")
   + [Colour Scheme](#colour-scheme "Colour Scheme")
   + [Typography](#typography "Typography")
@@ -36,7 +33,7 @@ The live link for "Task Pilot" can be found [HERE](https://task-pilot-e84398da75
 + [Technologies Used](#technologies-used "Technologies Used")
   + [Main Languages Used](#main-languages-used "Main Languages Used")
   + [Frameworks, Libraries & Programs Used](#frameworks-libraries-programs-used "Frameworks, Libraries & Programs Used")
-+ [Components](#oomponents "Components")
++ [Components](#components "Components")
 + [Deployment](#deployment "Deployment")
 + [Credits](#credits "Credits")
   + [Content](#content "Content")
@@ -118,7 +115,7 @@ This has been uploaded to the Backend README, which can be found [HERE](https://
 
 In order from left to right : 
 
-#343a40 (Dark Gray): A strong, modern dark gray that provides a solid foundation and excellent contrast.
+#343a40 (Dark Gray): A strong, modern dark gray that provides a solid foundation and contrast.
 
 #0071a6 (Blue): A vibrant blue that adds a pop of color and liveliness, creating a focal point in the design.
 
@@ -155,7 +152,7 @@ I've chosen this color palette because the colors complement each other while pr
 
 #### Task View - Mobile:
 
-![Task View](src/assets/images-readme/taskview-mobile.PNG)
+![Task View](src/assets/images-readme/task-view-mobile.PNG)
 
 #### Edit Task - Desktop:
 
@@ -237,51 +234,73 @@ I've chosen this color palette because the colors complement each other while pr
 - Infinite scroll for Task Messages.
 - A more indepth search option to search for tasks by any criteria 
 - Ability for Task admin's to pin a users comment which has solved the task's topic.
+- Ability to send private messages to users.
+- Ability to block users 
 
 ## Testing
 
 ### Manual Testing:
+| **ID** | **CATEGORY**      | **TEST**                                | **ACTION**                                               | **EXPECTATION**                                                        | **RESULT** |
+|--------|-------------------|-----------------------------------------|----------------------------------------------------------|------------------------------------------------------------------------|------------|
+| T1     | **Authentication**| Sign Up - Success                       | Sign up with valid credentials                           | User receives notification: "Account created successfully. Please sign in." and is redirected to sign in page                     | ✅         |
+| T2     | **Authentication**| Sign Up - Invalid Fields                | Sign up with invalid username or password                | User receives notification: "Invalid username or password fields."    | ✅         |
+| T3     | **Authentication**| Sign In - Success                       | Sign in with correct credentials                         | User is redirected to Home Page and welcomed                           | ✅         |
+| T4     | **Authentication**| Sign In - Invalid Credentials           | Sign in with incorrect username or password             | User receives notification: "Invalid Credentials provided."            | ✅         |
+| T5     | **Authentication**| Logout Confirmation                     | Click on logout button                                   | Modal pops up asking "Are you sure you want to sign out?"               | ✅         |
+| T6     | **Authentication**| Logout - Confirm Sign Out               | Click "Yes" in logout confirmation modal                 | User is signed out and redirected to the sign in page                  | ✅         |
+| T7     | **Accessibility** | Access Home Page after Logout           | Attempt to access home page after logging out            | User is redirected to the sign in page                                 | ✅         |
+| T8     | **Accessibility** | Access Protected Components             | Attempt to access any component without logging in       | User is redirected to the sign in page                                 | ✅         |
+| T9     | **Task Management**| Create Task - Success                   | Successfully create a task                               | User is redirected to Home Page and receives notification: "Task created successfully."                                              | ✅         |
+| T10    | **Task Management**| Create Task - Invalid Fields            | Submit create task form with invalid data                | User receives specific error message related to the invalid field      | ✅         |
+| T11    | **Task Filtering**| Filter Tasks - All                     | View all tasks owned or joined                           | All tasks owned or joined by the user are displayed                     | ✅         |
+| T12    | **Task Filtering**| Filter Tasks - Owned Tasks             | Select 'Owned Tasks' filter                              | Only tasks owned by the user are displayed                              | ✅         |
+| T13    | **Task Filtering**| Filter Tasks - Joined Tasks            | Select 'Joined Tasks' filter                             | Only tasks where the user is a member (but not owner) are displayed      | ✅         |
+| T14    | **Task Filtering**| Filter Tasks - Closed Tasks            | Select 'Closed Tasks' filter                             | Only tasks that are closed (completed or archived) are displayed          | ✅         |
+| T15    | **Task Badges**   | Display Ownership Badge               | View tasks on home page                                  | Tasks owned by the current user display 'Owned' badge                    | ✅         |
+| T16    | **Task Badges**   | Display Membership Badge              | View tasks on home page                                  | Tasks where the current user is a member display 'Member' badge           | ✅         |
+| T17    | **Task Badges**   | Display Overdue Badge                 | View tasks on home page                                  | Tasks overdue (due date exceeds current date) display 'Overdue' badge      | ✅         |
+| T18    | **Task Editing**  | Edit Task - Owned Task                 | View task owned by the current user                       | 'Edit' button is displayed, click redirects to pre-populated edit form    | ✅         |
+| T19    | **Task Editing**  | Edit Task - Non-Owned Task             | View task not owned by the current user                   | 'Edit' button is not displayed, attempting to access edit form redirects to home page | ✅         |
+| T20    | **Task Editing**  | Modify Task - Valid Fields             | Edit task with valid data                                | Task details are updated, user is redirected to home page with success message | ✅         |
+| T21    | **Task Editing**  | Modify Task - Invalid Fields           | Edit task with invalid data                              | Error message is displayed for specific field, prompting user to correct it  | ✅         |
+| T22    | **Task Editing**  | Delete Task Confirmation               | Click on 'Delete' button                                 | Modal pops up asking "Are you sure you want to delete this task?"          | ✅         |
+| T23    | **Task Editing**  | Delete Task - Confirm Delete           | Click "Yes" in delete confirmation modal                 | Task is deleted, user is redirected to home page with notification         | ✅         |
+| T24    | **Task Details**  | View Task Details - Owned Task         | View details of a task owned by the current user         | Task details and chat history are displayed, user can send messages        | ✅         |
+| T25    | **Task Details**  | View Task Details - Non-Owned Task     | View details of a task not owned by the current user     | Warning message displays "You don't have permission to view this chat history" | ✅         |
+| T26    | **Task Messages** | Send Task Message                     | Compose and send a message in task chat                  | Message with timestamp and username is displayed in chat history           | ✅         |
+| T27    | **Task Messages** | Mark Message as Important - Owner     | Owns task and marks message as important                 | Message displays 'IMPORTANT' badge next to it, indicating importance       | ✅         |
+| T28    | **Task Messages** | Delete Own Message - Owner            | Owns task and deletes own message                       | Modal pops up asking "Are you sure you want to delete this message?"       | ✅         |
+| T29    | **Task Messages** | Delete Member Message - Owner         | Owns task and deletes member's message                  | Modal pops up asking "Are you sure you want to delete this message?"       | ✅         |
+| T30    | **Task Messages** | Delete Own Message - Regular User     | Regular user and deletes own message                    | Modal pops up asking "Are you sure you want to delete this message?"       | ✅         |
+| T31    | **User Profile**  | View User Profile                     | Click on user's image to view profile                    | User's profile page is displayed                                          | ✅         |
+| T32    | **User Profile**  | View Own Profile                      | Click on own profile image icon                          | Profile view renders all user profile data                                | ✅         |
+| T33    | **User Profile**  | Edit Profile Form - Owner             | Owns profile and clicks 'Edit' button                    | Edit form for profile data renders, user can update avatar and bio         | ✅         |
+| T34    | **User Profile**  | Edit Profile - Valid Fields           | Edit profile with valid data                             | Profile is updated, user is redirected back to profile with success message | ✅         |
+| T35    | **User Profile**  | Edit Profile - Invalid Fields         | Edit profile with invalid data                           | Error message is displayed for specific field, prompting user to correct it  | ✅         |
+| T36    | **404 Page**      | Access Non-Existent Route             | Navigate to a non-existent route                         | 404 page is rendered with a button to redirect back to the home page       | ✅         |
+
 
 ### Validator Testing
 1. CSS files pass through the [Jigsaw validator](https://jigsaw.w3.org/css-validator/) with no issues found.
 
 ![Jigsaw validator message](src/assets/images-readme/jigsawvalidator.PNG)
 
-2. a. Javascript files pass through [ESLint](https://eslint.org/). The following issues were raised, and have been intentionally ignored as they are in relation to code that was provided in the Moments Walkthrough project:
- - Props spreading is forbidden
- - Do not pass children as props. 
- - Do not use Array index in keys
- - 'a_name' is already declared in the upper scope
- - Expected an assignment or function call and instead saw an expression
- - Do not nest ternary expressions
- - Fragments should contain more than one child
-2. b. Additionally, this error has also been ignored:
- - Identifier 'field_name' is not in camel case 
- - - relates to a database field in the API, case cannot be changed for this reason.
-2. c. All instances of errors where a newline has been asked for within an opening & closing set of tags, eg:
- - `<p>{owner} doesn't like the {drink}</p>` should be written as:
-```
-<p>
-  {owner}
-  {' '}
-  doesn't like this
-  {' '}
-  {drink}
-</p>
-```
- - This particular rule does not lend to the readability of the code, & instead hinders it (in my opinion).
-2. d. All `console.log(err);` have been left in place & commented out, as it was suggested that this is also done in real-world scenarios.
-2. e. Added all files affected by the above, unresolved warnings to `.eslintignore`, as well as added the following line to the top of each individual file, `/* eslint-disable */` to allow for a successful deployment on Heroku.
-
-3. The page has an excellent Accessibility rating in Lighthouse:
+2. The page has an excellent Accessibility rating in Lighthouse:
 
 ![Accessibility score](src/assets/images-readme/lighthouse.PNG)
 
-4. Tested the site opens in Brave, Chrome, Safari & on a mobile device without issues.
+3. Tested the site opens in Brave, Chrome, Safari & on a mobile device without issues.
+
+4. Eslint Errors: 
+  I have chosen to ignore the following ESLint errors across several files in the project:
+  
+  Parsing error: 'import' and 'export' may appear only with 'sourceType: module'
+
+  These errors occur due to our project's use of `.module.css` notation for importing CSS files, which is integral to our styling approach. This notation leverages CSS modules, enhancing encapsulation and scoping of styles within components.
 
 ### Unfixed Bugs
 
-- None Found
+- Authentication issues relating to session tokens occur when launching this application in incognito mode on Chrome browsers.
 
 ## Technologies Used
 ### Main Languages Used
@@ -313,10 +332,9 @@ npm start
 ```
 2. Install the following packages using the command `npm install`:
 ```
-react-bootstrap@1.6.3 bootstrap@4.6.0
-react-router-dom@5.3.0
+react-bootstrap@1.6.8
+react-router-dom@5.3.4
 axios
-react-infinite-scroll-component
 msw --save-dev
 jwt-decode
 -g eslint

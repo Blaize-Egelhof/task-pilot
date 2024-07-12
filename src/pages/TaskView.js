@@ -6,6 +6,11 @@ import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../css/TicketDetail.module.css';
 
+/**
+ * Component for displaying detailed view of a task, including its messages.
+ * Users can view task details, leave the task (if part of assigned users), view and send messages.
+ */
+
 function TaskView() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
@@ -46,7 +51,11 @@ function TaskView() {
     getTicketView();
     getTicketMessages();
   }, [id, errors]);
-
+  /**
+   * Handles input change events by updating the state with the new value.
+   * If the input is a checkbox, it toggles the boolean value in the state.
+   * @param {Event} event - The input change event containing the target element.
+   */
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
     const val = type === 'checkbox' ? checked : value;
@@ -55,7 +64,11 @@ function TaskView() {
       [name]: val,
     });
   };
-
+  /**
+   * Handles leaving a task group by making a PUT request to the backend API.
+   * Navigates to the home page upon successful leave and shows a success message.
+   * Sets errors state if there's an error during the API call.
+   */
   const handleLeaveGroup = async () => {
     try {
       await axios.put(`leave-task/${id}`);
@@ -64,6 +77,13 @@ function TaskView() {
       setErrors(err);
     }
   };
+
+  /**
+   * Handles deleting a message by making a POST request to the backend API.
+   * Removes the deleted message from ticketMessageData state upon successful delete.
+   * Closes the delete modal upon successful deletion.
+   * Sets errors state if there's an error during the API call.
+   */
 
   const handleDelete = async () => {
     try {
@@ -75,10 +95,22 @@ function TaskView() {
       setErrors({ ...errors, delete: err.message });
     }
   };
+  /**
+   * Navigates to the user profile page when clicking on a profile image or username in the message.
+   * @param {string} msgId - The ID of the message sender's profile to navigate to.
+   */
 
   const handleProfileClick = (msgId) => {
     history.push(`/user-profile/${msgId}`);
   };
+
+  /**
+   * Handles submitting a new message by making a POST request to the backend API.
+   * Updates ticketMessageData state with the new message upon successful submission.
+   * Resets newMessageData state after submission.
+   * Sets errors state if there's an error during the API call.
+   * @param {Event} e - The form submit event.
+   */
 
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
@@ -101,7 +133,7 @@ function TaskView() {
   }
 
   const isOwner = currentUser && ticketData?.owner === currentUser.username;
-  const isWorthyUser = currentUser && (isOwner || ticketData?.assigned_users.includes(currentUser.pk));
+  const isWorthyUser = currentUser && (ticketData?.assigned_users.includes(currentUser.pk));
   const isPriorityHigh = ticketData?.priority === 'High';
   const currentDate = new Date();
   const dueDate = ticketData ? new Date(ticketData.due_date) : null;
@@ -137,10 +169,16 @@ function TaskView() {
         <Col md={12}>
           <Card className="mb-4">
             <Card.Header className={`text-center ${styles.InputBorder}`}>
-              <h2>{isWorthyUser ? <p className={styles.InputLabel}>User Messages</p> : "You do not have permission to view this Task's chat history"}</h2>
+            <h2>
+        {isWorthyUser || isOwner ? (
+          <p className={styles.InputLabel}>User Messages</p>
+        ) : (
+          "You do not have permission to view this Task's chat history"
+        )}
+      </h2>
             </Card.Header>
             <Card.Body className={styles.CustomBackGround}>
-              {isWorthyUser ? (
+            {isWorthyUser || isOwner ? (
                 <>
                   {ticketMessageData.map((msg, index) => (
                     <Card key={index} className={`mb-2 mt-2 ${styles.CustomUserBackground}`}>

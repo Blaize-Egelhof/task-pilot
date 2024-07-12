@@ -96,14 +96,22 @@ function EditTask() {
 
   // Destructure editTicketData for easier access and manipulation
   const { title, description, due_date, priority, category, assigned_usernames,state } = editTicketData;
-  //Update the events values on each update
+    /**
+   * Handles changes in form input fields.
+   * Updates the state with the new values.
+   * @param {Object} event - The event object triggered by input change.
+   */
   const handleChange = (event) => {
     setEditTicketData({
       ...editTicketData,
       [event.target.name]: event.target.value,
     });
   };
-  // Handle removing users from assignedUsers
+  /**
+   * Handles removal of users from the assignedUsers state.
+   * Sets the users to be removed in the removeUsers state.
+   * @param {Array|Number} selectedIds - An array of user IDs or a single user ID to be removed.
+   */
   const handleRemoveUser = (selectedIds) => {
     // Convert selectedIds to an array if it's not already
     const idsArray = Array.isArray(selectedIds) ? selectedIds : [selectedIds];
@@ -118,7 +126,10 @@ function EditTask() {
     // Update assignedUsers state
     setAssignedUsers(updatedAssignedUsers);
   };
-  // function to handle deleting tasks , first renders a model asking a user if they want to delete in the event of accidental click
+  /**
+   * Handles deletion of the task.
+   * Deletes the task from the database and navigates to the home page on success.
+   */
   const handleDelete = async () => {
     try {
       await axios.delete(`/delete-task/${id}`);
@@ -132,7 +143,11 @@ function EditTask() {
       console.error("Error deleting task:", err);
     }
   };
-  // Handle form submission for updating task details
+   /**
+   * Handles form submission for updating task details.
+   * Updates the task details in the database and navigates to the home page on success.
+   * @param {Object} event - The form submission event.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {

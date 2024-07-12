@@ -5,6 +5,10 @@ import { Form, Button, Col, Row, Container, Spinner, Alert } from "react-bootstr
 import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/CreateEditForm.module.css'
 
+/**
+ * Component for editing user profile details.
+ */
+
 function EditProfile() {
     // Extracts the 'id' from the URL
     const { id } = useParams();
@@ -23,6 +27,11 @@ function EditProfile() {
         image: null,
         bios: "",
     });
+
+    /**
+     * Fetches profile details from the server based on the 'id' parameter.
+     * Updates state with fetched profile data or sets errors if request fails.
+     */
 
     useEffect(() => {
         // Fetches profile details from the server
@@ -48,13 +57,20 @@ function EditProfile() {
         fetchProfileDetails();
     }, [id,]);// Re-runs the effect if 'id' changes
 
+    /**
+     * Handles changes in form input fields.
+     * @param {Object} event - The event object containing the updated input value.
+     */
     const handleChange = (event) => {
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
         });
     };
-    // Handles changes in text inputs as well as files uploaded
+    /**
+     * Handles changes in the profile image upload.
+     * @param {Object} event - The event object containing the uploaded file.
+     */
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setFormData({
@@ -75,7 +91,10 @@ function EditProfile() {
         //read the file as a URL for API updating purposes
         reader.readAsDataURL(file);
     };
-    // Handles form submission
+    /**
+     * Handles form submission for updating the profile.
+     * @param {Object} event - The event object triggered on form submission.
+     */
     const handleSubmit = async (event) => {
         // Prevent the form from losing data upon unsuccesful submit
         event.preventDefault();

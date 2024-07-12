@@ -6,6 +6,10 @@ import axios from 'axios';
 import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+/**
+ * Component for rendering the Sign Up form.
+ */
+
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: '',
@@ -21,12 +25,22 @@ const SignUpForm = () => {
 
   const history = useHistory();
 
+    /**
+   * Handles input change in the form fields.
+   * @param {Object} event - The event object.
+   */
+
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
       [event.target.name]: event.target.value,
     });
   };
+
+    /**
+   * Handles form submission.
+   * @param {Object} event - The event object.
+   */
 
   const handleSubmit = async (event) => {
     event.preventDefault();

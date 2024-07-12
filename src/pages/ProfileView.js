@@ -4,6 +4,12 @@ import { Alert, Button, Col, Container, Image, Row, Spinner } from 'react-bootst
 import { useHistory, useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from '../css/CreateEditForm.module.css'
 
+/**
+ * Component for displaying the profile details of a user.
+ * Fetches and displays user profile information based on the 'id' parameter from URL.
+ * Allows profile owners to edit their profile and shows success alerts upon actions.
+ */
+
 function ProfileView() {
     const location = useLocation();
     const successMessage = location.state?.successMessage;
@@ -20,6 +26,10 @@ function ProfileView() {
     const {bios,created_at,image,is_owner,joined_tasks_count,owner,owned_tasks_count} =profileData
 
     useEffect(() => {
+        /**
+         * Function to fetch profile details from the server.
+         * Updates 'profileData' state with fetched data or sets 'errors' state on failure.
+         */
         const fetchProfileDetails = async () => {
             try {
                const response = await axios.get(`profiles/${id}`)
@@ -43,12 +53,18 @@ function ProfileView() {
         }
 
     }, [id,successMessage]);
-
+    /**
+     * Handler function to dismiss the success alert.
+     * Hides the success alert message.
+     */
     const handleDismiss = () => {
         // Manually dismiss the alert
         setShowSuccessAlert(false);
     };
-    // Handler for editing the profile
+    /**
+     * Handler function to navigate to the edit profile page.
+     * Redirects to the edit profile page using the 'history' object.
+     */
     const handleEditprofile = ()=>{
         // Navigate to the edit profile page
         history.push(`/edit-profile/${id}`)
@@ -73,17 +89,21 @@ function ProfileView() {
                 
         </Container>
         <Container fluid>
-        {/* Display success message if there is one */}
-        {showSuccessAlert && (
-        <Alert className='mt-1 text-center' variant="success" onClose={handleDismiss}>
-            <p>{successMessage}</p>
-            <div className="d-flex justify-content-end">
-            <Button variant="outline-success" onClick={handleDismiss}>
-                Close
-            </Button>
-            </div>
-        </Alert>
-        )}
+        <div className="d-flex justify-content-center align-items-center h-auto">
+                    <div className="w-50">
+                        {showSuccessAlert && (
+                            <Alert className='mt-1 text-center' variant="success" onClose={handleDismiss}>
+                                <p>{successMessage}</p>
+                                <div className="d-flex justify-content-end">
+                                    <Button variant="outline-success" onClick={handleDismiss}>
+                                        Close
+                                    </Button>
+                                </div>
+                            </Alert>
+                        )}
+                    </div>
+                </div>
+        
             <Row className="align-items-center">
                 {/* Renders the user profile pic in circle format */}
                 <Col lg={4} className="text-center">

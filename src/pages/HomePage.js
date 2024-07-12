@@ -4,6 +4,11 @@ import styles from '../css/Home-Page.module.css';
 import TaskList from '../components/TaskList';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
+/**
+ * Component for rendering the Home Page.
+ * Displays task lists based on toggle button selection and handles success or delete messages.
+ */
+
 function HomePage() {
   const location = useLocation();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -12,7 +17,11 @@ function HomePage() {
   const deleteMessage = location.state?.deleteMessage;
   const [value, setValue] = useState(1); // State to manage the selected toggle button value
   const [headerText, setHeaderText] = useState('All Tasks'); // State to manage the header text based on selected value from toggle button
-  // Function to handle change to header depending on selected button as well as passing 'value' state to the tasklist component as a parameter value
+    /**
+   * Handles change to toggle button selection.
+   * Updates the 'value' state and adjusts the header text accordingly.
+   * @param {number} val - The value selected from the toggle button.
+   */
   const handleChange = (val) => {
     setValue(val);
     // Determine header text based on the selected value
@@ -52,7 +61,10 @@ function HomePage() {
       return () => clearTimeout(deleteTimer);
     }
   }, [successMessage, deleteMessage]);
-
+  /**
+   * Handles dismissal of the success or delete alerts.
+   * Hides both success and delete alerts when called.
+   */
   const handleDismiss = () => {
     // Manually dismiss the alert
     setShowSuccessAlert(false);
@@ -93,28 +105,32 @@ function HomePage() {
         </Col>
       </Row>
     </Container>
+    <div className="d-flex justify-content-center align-items-center h-auto">
+  <div className="w-50">
     {/* Display success message if there is one */}
     {showSuccessAlert && (
-        <Alert className='mt-1 text-center' variant="success" onClose={handleDismiss}>
-          <p>{successMessage}</p>
-          <div className="d-flex justify-content-end">
-            <Button variant="outline-success" onClick={handleDismiss}>
-              Close
-            </Button>
-          </div>
-        </Alert>
-      )}
-      {/* Display delete message if there is one */}
-      {showDeleteAlert && (
-        <Alert className='mt-1 text-center' variant="danger" onClose={handleDismiss}>
-          <p>{deleteMessage}</p>
-          <div className="d-flex justify-content-end">
-            <Button variant="outline-danger" onClick={handleDismiss}>
-              Close
-            </Button>
-          </div>
-        </Alert>
-      )}
+      <Alert className="mt-1 text-center" variant="success" onClose={handleDismiss}>
+        <p>{successMessage}</p>
+        <div className="d-flex justify-content-end">
+          <Button variant="outline-success" onClick={handleDismiss}>
+            Close
+          </Button>
+        </div>
+      </Alert>
+    )}
+    {/* Display delete message if there is one */}
+    {showDeleteAlert && (
+      <Alert className="mt-1 text-center" variant="danger" onClose={handleDismiss}>
+        <p>{deleteMessage}</p>
+        <div className="d-flex justify-content-end">
+          <Button variant="outline-danger" onClick={handleDismiss}>
+            Close
+          </Button>
+        </div>
+      </Alert>
+    )}
+  </div>
+</div>
     {/* TaskList component to display tasks based on selected category , parameter value is passed from onChange function*/}
       <TaskList valuefromhomepage={value} />
     </Container>

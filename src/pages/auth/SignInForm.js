@@ -13,6 +13,10 @@ import {useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
+/**
+ * Component for rendering the Sign In form.
+ */
+
 function SignInForm() {
 
   const location = useLocation();
@@ -31,14 +35,20 @@ function SignInForm() {
   const [errors, setErrors] = useState({});
   // Destructured signInData to variables in order to update using Onchange function 
   const { username, password } = signInData;
-   // Function to handle input changes in the form fields
+     /**
+   * Handles input change in the form fields.
+   * @param {Object} event - The event object.
+   */
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
       [event.target.name]: event.target.value,
     });
   };
-  // Function to handle form submission
+    /**
+   * Handles form submission.
+   * @param {Object} event - The event object.
+   */
   const formSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -67,6 +77,9 @@ function SignInForm() {
     }
   }, [successMessage]);
 
+    /**
+   * Handles the dismissal of the success alert.
+   */
   const handleDismiss = () => {
     // Manually dismiss the alert
     setShowAlert(false);

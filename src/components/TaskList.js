@@ -5,6 +5,12 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/Home-Page.module.css';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * TaskList component renders a list of tasks based on user's role and filters.
+ * 
+ * @param {number} valuefromhomepage - Value indicating which tasks to display based on the homepage filter.
+ */
+
 function TaskList({ valuefromhomepage }) {
   const currentUser = useCurrentUser(); // Access current user data from context
   const [tasks, setTasks] = useState([]); // State to store fetched tasks in an array format
@@ -13,7 +19,9 @@ function TaskList({ valuefromhomepage }) {
   useEffect(() => {
     let isMounted = true; // Flag to track if component is mounted
 
-    // Function to fetch tasks based on current user
+    /**
+     * Fetches tasks based on current user and updates state accordingly.
+     */
     const fetchTasks = async () => {
       setIsLoading(true); // Set loading state to true before fetching data
       try {
@@ -37,7 +45,12 @@ function TaskList({ valuefromhomepage }) {
     };
   }, [currentUser, valuefromhomepage]); // Depend on currentUser and valuefromhomepage changes to refetch tasks
 
-  // Function to sort tasks by state, priority, and due date
+    /**
+   * Sorts tasks by state, priority, and due date.
+   * 
+   * @param {array} tasks - Array of tasks to be sorted.
+   * @returns {array} Sorted tasks.
+   */
   const sortByStatePriorityAndDate = (tasks) => {
     return tasks.sort((a, b) => {
       // Check if tasks are overdue
@@ -68,7 +81,11 @@ function TaskList({ valuefromhomepage }) {
     });
   };
 
-  // Function to filter tasks and apply sorting
+    /**
+   * Filters tasks based on homepage filter value and sorts them.
+   * 
+   * @returns {array} Filtered and sorted tasks.
+   */
   const filterAndSortTasks = () => {
     let filteredTasks = [];
 
