@@ -41,8 +41,7 @@
   },
   "devDependencies": {
     "globals": "^15.8.0",
-    "msw": "^0.35.0",
-    "typescript-eslint": "^7.16.0"
+    "msw": "^0.35.0"
   },
   "engines": {
     "node": "16.19.1",
