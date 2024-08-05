@@ -38,6 +38,19 @@ Genetic button class used to ensure buttons use 100% of their parent container
     width:100%;
 }
 
+.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileImageBorder{
+    border: 5px solid white;
+    border-radius: 50%;
+    padding: 5px;
+    display: inline-block;
+}
+
 /* 
 Genetic button class used to ensure buttons have spacing when stacked in column format
 */
@@ -79,9 +92,10 @@ Custom class used for all headers in component pages
     padding-bottom: 1rem;
     color: #0071a6;
     font-weight: bolder;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-top: 3.5rem;
-    text-decoration: underline;
+    font-weight: bolder;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* 
@@ -94,7 +108,6 @@ Custom class used for all sub headers in component pages
     color: #0071a6;
     font-weight: bolder;
     font-size: 1.5rem;
-    text-decoration: underline;
 }
 
 /* 
@@ -128,14 +141,18 @@ Custom container used in ProfileEdit component
 
 .ProfileEditContainer{
     margin-top:6rem;
+    background:grey;
+    margin-left: 6rem;
+    width: auto;
 }
 
 
 /* Media query for screens up to 700px wide */
-@media (max-width: 700px) {
+@media (max-width: 780px) {
     /* Adjusting styles for elements with class .profileRow */
     .profileRow {
         margin-left: 0; /* Resetting left margin */
+
     }
 
     /* Adjusting styles for elements with class .text-right */
@@ -154,9 +171,18 @@ Custom container used in ProfileEdit component
 
     /* Adjusting styles for elements with class .profileRow */
     .profileRow {
-        margin-top: 6rem; /* Adding top margin */
-        margin-left: 3rem; /* Setting left margin */
+        margin-top: 2rem; /* Adding top margin */
+        margin-left: 2rem; /* Setting left margin */
         margin-right: 2rem; /* Setting right margin */
+    }
+}
+
+@media (max-width:740px){
+    .ProfileEditContainer {
+        margin-top: 2rem !important;
+        background: grey;
+        margin-left: 2rem !important;
+        width: auto;
     }
 }
 

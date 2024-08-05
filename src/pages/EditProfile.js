@@ -143,11 +143,11 @@ function EditProfile() {
             <Row className="justify-content-md-center">
                 <Col md={6} className='text-center'>
                     <h2 className={`${styles.Header}`}>Edit Profile</h2>
+                    <p className='fw-bold fs-5'>Profile Image</p>
                     {errors.fetch && <Alert variant="danger">{errors.fetch}</Alert>}
                     <Form onSubmit={handleSubmit} encType="multipart/form-data">
                         <Form.Group controlId="formImage" className="mb-3">
-                            <Form.Label className='fw-bold fs-5'>Profile Image</Form.Label>
-                            <div className="mb-3">
+                            <div className={`mb-3 ${styles.profileImageBorder}`}>
                                 {formData.image && (
                                     <img src={profileData.image} alt="Profile Preview" width={180} height={180} className="rounded-circle" />
                                 )}
@@ -169,7 +169,7 @@ function EditProfile() {
                                 className={`${styles.profileBackGround}`}
                             />
                         </Form.Group>
-                        <Button variant="primary" type="submit">Save Changes</Button>
+                        <Button className='mb-4' variant="primary" type="submit">Save Changes</Button>
                         {errors.submit && <Alert variant="danger" className="mt-3">{errors.submit}</Alert>}
                     </Form>
                 </Col>
