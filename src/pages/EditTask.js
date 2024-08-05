@@ -41,7 +41,7 @@ function EditTask() {
   const [addUsers, setAddUsers] = useState([]); //array used onSubmission to harvest the selected users to be added
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
   const [showDeleteModal, setShowDeleteModal] = useState(false); // State for delete confirmation modal
-  // Fetch task details and available users on component mount
+
   useEffect(() => {
     const fetchTaskDetails = async () => {
       try {
@@ -55,44 +55,42 @@ function EditTask() {
           category: taskData.category,
           owner: taskData.owner,
           assigned_usernames: taskData.assigned_usernames || [],
-          state:taskData.state,
+          state: taskData.state,
         });
-        setAssignedUsers(taskData.assigned_users || []); // assigned_users is set or default to empty array
+        setAssignedUsers(taskData.assigned_users || []);
       } catch (err) {
-        setErrors(err.response?.data); // catch any errors for user feedback
+        setErrors(err.response?.data);
       } finally {
-        setIsLoading(false); // Set loading to false to remove spinner
+        setIsLoading(false);
       }
     };
 
     fetchTaskDetails();
-    // Fetch available users from API
+  }, [id]);
+
+  useEffect(() => {
     const fetchAvailableUsers = async () => {
       try {
         const response = await axios.get(`/users/${id}`);
         const usersData = response.data || [];
-    
-        // Filter out the owner of task from availableUsers array by ID
+
         const filteredUsers = usersData.filter(user => user.username !== editTicketData.owner);
-    
-        // Filter out the current user from availableUsers array by ID
         const filteredAvailableUsers = filteredUsers.filter(user => user.username !== currentUser.username);
-    
-        // Filter out users already in assignedUsers from availableUsers in order to provide a new array of ID's on each form submission
         const finalAvailableUsers = filteredAvailableUsers.filter(user => !assignedUsers.includes(user.id));
-    
+
         setAvailableUsers(finalAvailableUsers);
       } catch (err) {
         console.error("Error fetching available users:", err);
-        //If authentication errors occur , a refresh will be recommended.
         setErrors([
           "An error occurred while fetching available users. Please refresh the Page.",
         ]);
       }
     };
 
-    fetchAvailableUsers();
-  }, [id,assignedUsers,currentUser.username,editTicketData.owner]); // Dependency array ensures useEffect runs when id changes
+    if (!isLoading) {
+      fetchAvailableUsers();
+    }
+  }, [editTicketData.owner, assignedUsers, currentUser.username, isLoading]);
 
   // Destructure editTicketData for easier access and manipulation
   const { title, description, due_date, priority, category, assigned_usernames,state } = editTicketData;
