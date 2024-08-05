@@ -86,6 +86,7 @@ export const CurrentUserProvider = ({ children }) => {
             await axios.post("/dj-rest-auth/token/refresh/");
           } catch (err) {
             // Handle error if token refresh fails
+            console.log('Theres an error refreshing token ')
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
                 // Redirect to sign-in page if user is logged in

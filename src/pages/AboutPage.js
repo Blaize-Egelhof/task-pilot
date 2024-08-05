@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import styles from '../css/AboutPage.module.css'; // Ensure you have some CSS to style the AboutPage
 
+/**
+ * Component for About Page to inform clients of what my app entales.
+ */
 function AboutPage() {
   // Hook for programmatic navigation
   const history = useHistory();
