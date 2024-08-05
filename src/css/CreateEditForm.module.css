@@ -38,19 +38,6 @@ Genetic button class used to ensure buttons use 100% of their parent container
     width:100%;
 }
 
-.text-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.profileImageBorder{
-    border: 5px solid white;
-    border-radius: 50%;
-    padding: 5px;
-    display: inline-block;
-}
-
 .profileRow{
     background:grey;
 }

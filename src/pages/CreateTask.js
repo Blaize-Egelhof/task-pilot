@@ -12,7 +12,6 @@ import { Alert } from "react-bootstrap";
 /**
  * Component for rendering the Create Task form.
  */
-
 function CreateTask() {
   // Using state to save all fields I want my user to be able to update
   const [createTicketData , setCreateTicketData] = useState(

@@ -8,7 +8,6 @@ import styles from '../css/CreateEditForm.module.css'
 /**
  * Component for editing user profile details.
  */
-
 function EditProfile() {
     // Extracts the 'id' from the URL
     const { id } = useParams();
@@ -32,7 +31,6 @@ function EditProfile() {
      * Fetches profile details from the server based on the 'id' parameter.
      * Updates state with fetched profile data or sets errors if request fails.
      */
-
     useEffect(() => {
         // Fetches profile details from the server
         const fetchProfileDetails = async () => {
@@ -147,7 +145,7 @@ function EditProfile() {
                     {errors.fetch && <Alert variant="danger">{errors.fetch}</Alert>}
                     <Form onSubmit={handleSubmit} encType="multipart/form-data">
                         <Form.Group controlId="formImage" className="mb-3">
-                            <div className={`mb-3 ${styles.profileImageBorder}`}>
+                            <div className="mb-3">
                                 {formData.image && (
                                     <img src={profileData.image} alt="Profile Preview" width={180} height={180} className="rounded-circle" />
                                 )}

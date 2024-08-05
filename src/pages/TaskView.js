@@ -10,7 +10,6 @@ import styles from '../css/TicketDetail.module.css';
  * Component for displaying detailed view of a task, including its messages.
  * Users can view task details, leave the task (if part of assigned users), view and send messages.
  */
-
 function TaskView() {
   const currentUser = useCurrentUser();
   const { id } = useParams();
@@ -84,7 +83,6 @@ function TaskView() {
    * Closes the delete modal upon successful deletion.
    * Sets errors state if there's an error during the API call.
    */
-
   const handleDelete = async () => {
     try {
       await axios.post(`task-messages-delete/${messageToDelete}`);

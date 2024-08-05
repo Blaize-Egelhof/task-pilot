@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
  * Component for rendering the Home Page.
  * Displays task lists based on toggle button selection and handles success or delete messages.
  */
-
 function HomePage() {
   const location = useLocation();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);

@@ -9,7 +9,6 @@ import styles from '../css/CreateEditForm.module.css'
  * Fetches and displays user profile information based on the 'id' parameter from URL.
  * Allows profile owners to edit their profile and shows success alerts upon actions.
  */
-
 function ProfileView() {
     const location = useLocation();
     const successMessage = location.state?.successMessage;

@@ -16,7 +16,6 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
  * Fetches task details, allows editing and updating tasks,
  * and handles deletion with confirmation modal.
  */
-
 function EditTask() {
   const history = useHistory(); //Used to push users to home page on succesful form submission
   const currentUser = useCurrentUser(); //Harvest Currently logged in user info 
@@ -42,11 +41,19 @@ function EditTask() {
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
   const [showDeleteModal, setShowDeleteModal] = useState(false); // State for delete confirmation modal
 
+
   useEffect(() => {
+  /**
+   * Fetches task details from the server based on the task 'id' parameter.
+   * Updates state with the fetched task data or sets errors if the request fails.
+   * This effect runs whenever the 'id' changes.
+   */
     const fetchTaskDetails = async () => {
       try {
+        // Sends a GET request to fetch task details
         const response = await axios.get(`/task-view/${id}`);
         const taskData = response.data;
+        // Updates state with the fetched task data
         setEditTicketData({
           title: taskData.title,
           description: taskData.description,
@@ -57,9 +64,12 @@ function EditTask() {
           assigned_usernames: taskData.assigned_usernames || [],
           state: taskData.state,
         });
+        // Updates the assigned users state
         setAssignedUsers(taskData.assigned_users || []);
+        // Sets errors if the request fails
       } catch (err) {
         setErrors(err.response?.data);
+        // Sets loading state to false once the request is complete
       } finally {
         setIsLoading(false);
       }
@@ -69,24 +79,34 @@ function EditTask() {
   }, [id]);
 
   useEffect(() => {
+   /**
+   * Fetches available users from the server based on the task 'id' parameter.
+   * Filters out the task owner, current user, and already assigned users from the available users list.
+   * Updates state with the filtered available users or sets errors if the request fails.
+   * This effect runs whenever the task owner, assigned users, current user's username, or loading state changes.
+   */
     const fetchAvailableUsers = async () => {
+      // Sends a GET request to fetch users
       try {
         const response = await axios.get(`/users/${id}`);
         const usersData = response.data || [];
-
+         // Filters out the task owner
         const filteredUsers = usersData.filter(user => user.username !== editTicketData.owner);
+         // Filters out the current user
         const filteredAvailableUsers = filteredUsers.filter(user => user.username !== currentUser.username);
+         // Filters out the already assigned users
         const finalAvailableUsers = filteredAvailableUsers.filter(user => !assignedUsers.includes(user.id));
-
-        setAvailableUsers(finalAvailableUsers);
+           // Updates state with the filtered available users
+          setAvailableUsers(finalAvailableUsers);
       } catch (err) {
+        // Logs errors and sets an error message if the request fails
         console.error("Error fetching available users:", err);
         setErrors([
           "An error occurred while fetching available users. Please refresh the Page.",
         ]);
       }
     };
-
+    // Fetches available users only if the task details have been loaded
     if (!isLoading) {
       fetchAvailableUsers();
     }

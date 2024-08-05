@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom/cjs/react-router-dom'
  * Component for displaying a custom 404 Not Found page.
  * Provides a message and options for navigating back to safety.
  */
-
 function Four0Four() {
   return (
     <>
