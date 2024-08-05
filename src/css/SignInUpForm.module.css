@@ -6,9 +6,32 @@
 
 /* Applying a custom background color and border to elements */
 .CustomBackGround {
-    background-color: #B2BEB5;
+    background: linear-gradient(to right, rgb(165, 161, 161), #b192da); /* Gradient background */
     border: 0.1cm solid grey;
 }
+
+.CustomBackGround1 {
+    background: linear-gradient(to right, rgb(137, 165, 222), #88a0a3); /* Gradient background */
+    border: 0.1cm solid grey;
+}
+
+.backgroundImage {
+    background-image: url('https://res.cloudinary.com/drdelhvyt/image/upload/v1722858371/kisspng-desktop-wallpaper-line-angle-product-design-5d146ff5a31b82.6058864515616204696681_uw6mqr.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  .backgroundImage1 {
+    background-image: url('https://res.cloudinary.com/drdelhvyt/image/upload/v1722858189/d691c103620a42063a8c17d49fbfddc7_pbhazs.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+  }
 
 /* Setting width to 100% for elements with class .Button */
 .Button {
@@ -34,9 +57,10 @@
 .Header {
     text-align: center;
     padding-bottom: 2rem;
-    color: #0071a6;
+    color: #111111;
     font-weight: bolder;
     text-decoration: solid;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* Adding padding to the top for elements with class .HeaderForSignUp */

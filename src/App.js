@@ -13,6 +13,7 @@ import EditTask from '../src/pages/EditTask';
 import TaskView from '../src/pages/TaskView';
 import ProfileView from '../src/pages/ProfileView';
 import EditProfile from '../src/pages/EditProfile';
+import AboutPage from './pages/AboutPage';
 
 /**
  * Main component that handles routing and authentication logic for the application.
@@ -31,7 +32,7 @@ function App() {
             currentUser ? <Redirect to="/home-page" /> : <SignInForm />
           )} />
           <Route exact path="/" render={() => (
-            currentUser ? <Redirect to="/home-page" /> : <SignInForm />
+            currentUser ? <Redirect to ="sign-in" /> : <AboutPage />
           )} />
           <Route exact path="/user-profile/:id" render={() => (
             currentUser ? <ProfileView /> : <Redirect to="/sign-in" />

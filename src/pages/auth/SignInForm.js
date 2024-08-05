@@ -16,8 +16,17 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 /**
  * Component for rendering the Sign In form.
  */
-
 function SignInForm() {
+
+  useEffect(() => {
+    // Add background class to body
+    document.body.classList.add(styles.backgroundImage);
+  
+    // Clean up the background class on component unmount
+    return () => {
+      document.body.classList.remove(styles.backgroundImage);
+    };
+  }, []);
 
   const location = useLocation();
   const [showAlert, setShowAlert] = useState(false);

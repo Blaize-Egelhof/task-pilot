@@ -1,0 +1,43 @@
+.aboutContainer {
+    margin-top: 10%;
+    padding: 50px 20px;
+    background: linear-gradient(to right, grey, #2575fc); /* Gradient background */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+  
+  .header {
+    font-size: 3rem;
+    padding-bottom: 2rem;
+    color: white;
+    font-weight: bolder;
+  }
+  
+  .description {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: white;
+    font-weight: normal;
+    margin-bottom: 1.5rem;
+  }
+  
+  .button {
+    font-size: 1.5rem;
+    padding: 12px 25px;
+  }
+  
+  .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .backgroundImage {
+    background-image: url('https://res.cloudinary.com/drdelhvyt/image/upload/v1722857383/0dc5f29dc8c15668b5c08237447237dc_wjmdzu.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+  }
+  

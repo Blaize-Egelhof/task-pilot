@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/SignInUpForm.module.css";
 import appStyles from "../../App.module.css";
@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 /**
  * Component for rendering the Sign Up form.
  */
-
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
     username: '',
@@ -29,7 +28,6 @@ const SignUpForm = () => {
    * Handles input change in the form fields.
    * @param {Object} event - The event object.
    */
-
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -41,7 +39,6 @@ const SignUpForm = () => {
    * Handles form submission.
    * @param {Object} event - The event object.
    */
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -52,8 +49,18 @@ const SignUpForm = () => {
     }
   };
 
+  useEffect(() => {
+    // Add background class to body
+    document.body.classList.add(styles.backgroundImage1);
+  
+    // Clean up the background class on component unmount
+    return () => {
+      document.body.classList.remove(styles.backgroundImage1);
+    };
+  }, []);
+
   return (
-    <Row className={`${styles.Row} mt-auto mb-auto ${styles.CustomBackGround}`}>
+    <Row className={`${styles.Row} mt-auto mb-auto ${styles.CustomBackGround1}`}>
       <Col className={styles.FormStyling}>
         <Container className={`p-4`}>
           <h1 className={`${styles.Header} ${styles.HeaderForSignUp}`}>SIGN UP</h1>
