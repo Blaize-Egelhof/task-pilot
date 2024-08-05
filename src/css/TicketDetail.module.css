@@ -9,7 +9,7 @@
   font-size: 2.5rem;
   color: #0071a6;
   font-weight: bolder;
-  text-decoration: underline;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* Controlling text wrapping and width for elements with class .ContainText */

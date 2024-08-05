@@ -185,12 +185,12 @@ function TaskView() {
                       <Card.Body className={`${styles.CustomMessage}`}>
                         <div className={`d-flex align-items-start align-items-sm-center ${styles.CustomMessageLayout}`}>
                           <div className={`me-3 mb-3 mb-sm-0`}>
-                            <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} onClick={() => handleProfileClick(msg.id)} />
+                            <Image src={msg.sender_profile_image_url} roundedCircle width={50} height={50} onClick={() => handleProfileClick(msg.sender)} />
                           </div>
                           <div className={`flex-grow-1 mw-100`}>
                             <div className={`d-flex justify-content-start align-items-center  ${styles.CustomRemoveButton}`}>
                               <div>
-                                <h5 onClick={() => handleProfileClick(msg.id)}>{msg.sender_username}</h5>
+                                <h5 onClick={() => handleProfileClick(msg.sender)}>{msg.sender_username}</h5>
                                 <Badge className={`text-dark  ${styles.hideText}`} bg="secondary">{new Date(msg.timestamp).toLocaleString()}</Badge>
                               </div>
                               {msg.important && <Badge className={`${styles.CustomOverdueBadge} me-2`} bg="warning">Important</Badge>}
