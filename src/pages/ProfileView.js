@@ -116,7 +116,7 @@ function ProfileView() {
                 </Col>
             </Row>
         </Container>
-        <Container fluid className='mt-2'>
+        <Container fluid className='mt-2 mb-2'>
                 <Row className="justify-content-center text-center">
                     {/* Shows the number of tasks the profile owner has joined*/}
                     <Col lg={3}>

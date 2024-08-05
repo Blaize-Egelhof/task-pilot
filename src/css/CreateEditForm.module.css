@@ -51,6 +51,10 @@ Genetic button class used to ensure buttons use 100% of their parent container
     display: inline-block;
 }
 
+.profileRow{
+    background:grey;
+}
+
 /* 
 Genetic button class used to ensure buttons have spacing when stacked in column format
 */
@@ -171,9 +175,28 @@ Custom container used in ProfileEdit component
 
     /* Adjusting styles for elements with class .profileRow */
     .profileRow {
-        margin-top: 2rem; /* Adding top margin */
-        margin-left: 2rem; /* Setting left margin */
-        margin-right: 2rem; /* Setting right margin */
+        margin-top: 6rem; /* Adding top margin */
+        margin-left: 8rem; /* Setting left margin */
+        margin-right: 0rem; /* Setting right margin */
+        width:80%
+    }
+}
+
+@media (max-width:768px){
+    .profileRow {
+        margin-top: 4rem !important; /* Adding top margin */
+        margin-left: 4rem !important; /* Setting left margin */
+        margin-right: 0rem; /* Setting right margin */
+        width:80%
+    }
+}
+
+@media (max-width:400px){
+    .profileRow {
+        margin-top: 0rem !important;
+        margin-left: 1rem !important;
+        margin-right: 0rem;
+        width: 90%;
     }
 }
 
