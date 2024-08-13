@@ -178,6 +178,9 @@ function EditTask() {
         .filter(userId => !removeUserIds.includes(userId)) // Remove users marked for removal
         .concat(addUserIds); // Add newly selected users
 
+      // Check and correct the state value if it is 'Open'
+      const correctedState = state === 'Open' ? 'In Progress' : state;
+
       // Prepared updatedTaskData with the new assigned_users array
       const updatedTaskData = {
         title,
@@ -186,7 +189,7 @@ function EditTask() {
         priority,
         category,
         assigned_users: updatedAssignedUserIds,
-        state,
+        state: correctedState,
       };
 
       // Send request to API update the task
