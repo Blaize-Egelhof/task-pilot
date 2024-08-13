@@ -58,20 +58,27 @@ function SignInForm() {
    * Handles form submission.
    * @param {Object} event - The event object.
    */
-  const formSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      // Send POST request to login endpoint
-      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-      // Set current user in context after successful login
-      setCurrentUser(data.user);
-      history.push("/home-page", {successMessage: `Logged In Succesfully ! , Welcome ${data.user.username}`})
-    } catch (err) {
-      // Set errors from server response if any
-      setErrors(err.response?.data);
-    }
-  };
-
+    const formSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        // Clear any old tokens before attempting login
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+  
+        const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+  
+        // Save tokens in local storage
+        localStorage.setItem('accessToken', data.access_token);
+        localStorage.setItem('refreshToken', data.refresh_token);
+  
+        // Set current user context
+        setCurrentUser(data.user);
+  
+        history.push("/home-page", { successMessage: `Logged In Successfully! Welcome ${data.user.username}` });
+      } catch (err) {
+        setErrors(err.response?.data);
+      }
+    };
   useEffect(() => {
     // If there's a success message, show the alert
     if (successMessage) {

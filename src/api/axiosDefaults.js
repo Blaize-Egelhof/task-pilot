@@ -12,12 +12,19 @@ export const axiosRes = axios.create();
 // Function to refresh token
 const refreshToken = async () => {
   try {
-    const response = await axios.post('/dj-rest-auth/token/refresh/');
+    const refresh = localStorage.getItem('refreshToken');
+    if (!refresh) {
+      throw new Error("No valid refresh token found.");
+    }
+    const response = await axios.post('/dj-rest-auth/token/refresh/', {
+      refresh, // Send the refresh token to get a new access token
+    });
     const newToken = response.data.access; // Adjust key as necessary
     localStorage.setItem('accessToken', newToken);
     return newToken;
   } catch (err) {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     // Optionally redirect to sign-in or handle error
     throw err;
   }
@@ -40,15 +47,16 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const refresh = localStorage.getItem('refreshToken');
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Only attempt to refresh token if a refresh token exists and the error is 401
+    if (refresh && error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         const newToken = await refreshToken();
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axios(originalRequest);
       } catch (err) {
-        // Handle token refresh error, e.g., redirect to login page
         return Promise.reject(err);
       }
     }
