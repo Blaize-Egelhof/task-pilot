@@ -20,7 +20,6 @@ import AboutPage from './pages/AboutPage';
  * Uses react-router-dom for routing and manages user authentication state.
  * Renders different pages/components based on the current route and user authentication status.
  */
-
 function App() {
   const currentUser = useCurrentUser();
   return (

@@ -9,7 +9,11 @@ axios.defaults.withCredentials = true;
 export const axiosReq = axios.create();
 export const axiosRes = axios.create();
 
-// Function to refresh token
+/**
+ * Refreshes the access token using the refresh token stored in localStorage.
+ * @returns {Promise<string>} A promise that resolves with the new access token.
+ * @throws Will throw an error if no refresh token is found or if the refresh request fails.
+ */
 const refreshToken = async () => {
   try {
     const refresh = localStorage.getItem('refreshToken');
@@ -32,6 +36,11 @@ const refreshToken = async () => {
 
 // Request interceptor to add token
 axios.interceptors.request.use(
+  /**
+   * Adds the access token to the request headers if it exists.
+   * @param {Object} config The Axios request configuration.
+   * @returns {Object} The updated Axios request configuration.
+   */
   (config) => {
     const token = localStorage.getItem('accessToken');
     if (token) {
@@ -44,6 +53,11 @@ axios.interceptors.request.use(
 
 // Response interceptor to handle token refresh
 axios.interceptors.response.use(
+  /**
+   * Passes the response through if successful.
+   * @param {Object} response The Axios response object.
+   * @returns {Object} The Axios response object.
+   */
   (response) => response,
   async (error) => {
     const originalRequest = error.config;

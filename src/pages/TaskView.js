@@ -116,7 +116,6 @@ function TaskView() {
    * Sets errors state if there's an error during the API call.
    * @param {Event} e - The form submit event.
    */
-
   const handleSubmitMessage = async (e) => {
     e.preventDefault();
     try {

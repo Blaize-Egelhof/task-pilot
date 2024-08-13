@@ -130,6 +130,14 @@ I've chosen this color palette because the colors complement each other while pr
 
 ### Existing Features:
 
+#### About Page - Desktop:
+
+![aboutpage](src/assets/images-readme/aboutpage.PNG)
+
+#### About Page - Mobile:
+
+![aboutpage](src/assets/images-readme/aboutpage-mobile.PNG)
+
 #### Header/Navigation - Desktop:
 
 ![Header](src/assets/images-readme/header.PNG)
@@ -206,11 +214,11 @@ I've chosen this color palette because the colors complement each other while pr
 
 ##### Login - Desktop:
 
-![Login](src/assets/images-readme/signinform.PNG)
+![Login](src/assets/images-readme/signup-desktop.PNG)
 
 ##### Login - Mobile:
 
-![Login](src/assets/images-readme/signinform-mobile.PNG)
+![Login](src/assets/images-readme/signup-mobile.PNG)
 
 ##### Logout - Desktop:
 
@@ -222,11 +230,11 @@ I've chosen this color palette because the colors complement each other while pr
 
 ##### Sign-up - Desktop:
 
-![Sign-up](src/assets/images-readme/signup-desktop.PNG)
+![Sign-up](src/assets/images-readme/signupform-desktop.PNG)
 
 ##### Sign-up - Mobile:
 
-![Sign-up](src/assets/images-readme/signup-mobile.PNG)
+![Sign-up](src/assets/images-readme/signupform-mobile.PNG)
 
 ### Features Left to Implement:
 - Inbox for each user to be able to recieve task invitations to accept or decline and also for notifications regarding a Task being marked as completed.

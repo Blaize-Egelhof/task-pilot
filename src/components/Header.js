@@ -10,16 +10,16 @@ import axios from 'axios';
  * 
  * Renders navigation, user icons, and handles sign-out functionality.
  */
-
 export default function Header() {
   // State to manage errors (currently unused in this component)
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false); // State to manage modal visibility
   // variable to hold currently signed in user data
-  const currentUser = useCurrentUser();
+  const currentUser = useCurrentUser(); // Corrected to use useCurrentUser
   // variable to modify currentUser variable if a logout succeeds
-  const setCurrentUser = useSetCurrentUser();
-    /**
+  const setCurrentUser = useSetCurrentUser(); // Correctly getting the setter function
+
+  /**
    * Handles the sign-out process.
    * - Sends a POST request to log the user out.
    * - Updates currentUser context to null upon successful sign-out.
@@ -29,6 +29,8 @@ export default function Header() {
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
       // set currentUser variable to null if sign out works
       setCurrentUser(null);
     } catch (err) {
@@ -64,7 +66,8 @@ export default function Header() {
       </div>
     </>
   );
-   /**
+
+  /**
    * JSX for user profile icon and link when user is logged in.
    */
   const userIconLoggedIn = (
@@ -89,7 +92,8 @@ export default function Header() {
   );
 
   const userIconLoggedOut = (''); // Placeholder for logged out user icon
-    /**
+
+  /**
    * Renders the header component.
    * - Conditionally renders different sections based on user sign-in status.
    */

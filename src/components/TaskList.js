@@ -5,19 +5,19 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 import styles from '../css/Home-Page.module.css';
 import { NavLink } from 'react-router-dom';
 
+
 /**
  * TaskList component renders a list of tasks based on user's role and filters.
  * 
  * @param {number} valuefromhomepage - Value indicating which tasks to display based on the homepage filter.
  */
-
 function TaskList({ valuefromhomepage }) {
   const currentUser = useCurrentUser(); // Access current user data from context
   const [tasks, setTasks] = useState([]); // State to store fetched tasks in an array format
   const [isLoading, setIsLoading] = useState(false); // State to track loading state
 
   useEffect(() => {
-    let isMounted = true; // Flag to track if component is mounted
+    let isMounted = true; // Flag to track if component is mounted 
 
     /**
      * Fetches tasks based on current user and updates state accordingly.
@@ -27,25 +27,27 @@ function TaskList({ valuefromhomepage }) {
       try {
         // Fetch tasks related to the current user using their id
         const response = await axios.get(`related-tasks/${currentUser.pk}`);
-        if (isMounted) {
+        if (isMounted) { // CHECK IF COMPONENT IS STILL MOUNTED 
           setTasks(response.data); // Set fetched tasks into state if component is still mounted
         }
       } catch (err) {
         console.error('Error fetching tasks:', err);
       } finally {
-        setIsLoading(false); // Set loading state to false after data fetch (success or failure)
+        if (isMounted) { // CHECK IF COMPONENT IS STILL MOUNTED
+          setIsLoading(false); // Set loading state to false after data fetch (success or failure)
+        }
       }
     };
 
     fetchTasks();
 
-    // Cleanup function to prevent state updates if component unmounts
+    // Cleanup function to prevent state updates if component unmounts (INSERTED)
     return () => {
       isMounted = false; // Update flag to false on unmount
     };
   }, [currentUser, valuefromhomepage]); // Depend on currentUser and valuefromhomepage changes to refetch tasks
 
-    /**
+  /**
    * Sorts tasks by state, priority, and due date.
    * 
    * @param {array} tasks - Array of tasks to be sorted.
@@ -81,7 +83,7 @@ function TaskList({ valuefromhomepage }) {
     });
   };
 
-    /**
+  /**
    * Filters tasks based on homepage filter value and sorts them.
    * 
    * @returns {array} Filtered and sorted tasks.
