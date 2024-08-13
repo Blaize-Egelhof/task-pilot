@@ -50,6 +50,13 @@ function ProfileView() {
             // Clean up timer
             return () => clearTimeout(successTimer);
         }
+        // Add background class to body
+        document.body.classList.add(styles.backgroundImage);
+    
+        // Clean up the background class on component unmount
+        return () => {
+        document.body.classList.remove(styles.backgroundImage);
+        };
 
     }, [id,successMessage]);
     /**

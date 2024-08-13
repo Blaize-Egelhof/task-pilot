@@ -47,7 +47,7 @@ function CreateTask() {
     event.preventDefault();
     try{
       await axios.post("/create-task/", createTicketData);
-      history.push("/home-page",{ successMessage: `Task ${description} created successfully!`});
+      history.push("/home-page",{ successMessage: `Task ${title} created successfully!`});
       //catch any errors to display to users for better UX
     }catch(err){
       setErrors(err.response?.data);

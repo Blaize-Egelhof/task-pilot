@@ -49,6 +49,13 @@ function TaskView() {
 
     getTicketView();
     getTicketMessages();
+    // Add background class to body
+    document.body.classList.add(styles.backgroundImage);
+
+    // Clean up the background class on component unmount
+    return () => {
+    document.body.classList.remove(styles.backgroundImage);
+    };
   }, [id, errors]);
   /**
    * Handles input change events by updating the state with the new value.

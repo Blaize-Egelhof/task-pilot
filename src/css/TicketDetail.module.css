@@ -4,6 +4,18 @@
   margin-left: 3rem;
 }
 
+/*
+Class for setting background image
+*/
+.backgroundImage{
+  background-image: url('https://res.cloudinary.com/drdelhvyt/image/upload/v1723548593/689c2ce22d91ac936aa805d8c096fa17_qijkqw.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+}
+
 /* Styling for input labels with class .InputLabel */
 .InputLabel {
   font-size: 2.5rem;
