@@ -2,110 +2,94 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useHistory } from "react-router";
+import { removeTokenTimestamp, shouldRefreshToken } from "../utils/utils";
 
-/**
- * Context for the current user.
- */
+// Contexts for the current user and setter function
 export const CurrentUserContext = createContext();
-
-/**
- * Context for setting the current user.
- */
 export const SetCurrentUserContext = createContext();
 
-/**
- * Custom hook to access the current user context.
- * @returns {Object} Current user context value.
- */
+// Custom hooks to access the current user and setter function
 export const useCurrentUser = () => useContext(CurrentUserContext);
-
-/**
- * Custom hook to access the function to set the current user.
- * @returns {Function} Function to set the current user.
- */
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
-/**
- * Context Provider for managing the current user state and handling token refresh.
- * @param {Object} props - Props object containing children components.
- */
+// Provider component for managing current user state
 export const CurrentUserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const history = useHistory();
+  const [currentUser, setCurrentUser] = useState(null);// State to hold the current user
+  const history = useHistory();// For navigation
 
-  /**
-   * Function to fetch current user data from API on component mount.
-   */
+  // Function to handle component mount and fetch current user
   const handleMount = async () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      return; // Skip the request if no token is available
+    }
+
     try {
+      // Fetch current user data using the access token
       const { data } = await axiosRes.get("dj-rest-auth/user/");
-      setCurrentUser(data);
+      setCurrentUser(data);// Update state with fetched user data
     } catch (err) {
-      // Handle error if user data fetch fails
+      console.log(err);
     }
   };
-
+  // Fetch current user data when component mounts
   useEffect(() => {
-    // Trigger handleMount function on component mount
     handleMount();
   }, []);
-
-  useMemo(() => {
-    // Set up Axios request interceptor to handle token refresh automatically
+  // Memoized setup for axios interceptors
+  useMemo(() => { 
+    // Request interceptor to handle token refresh
     axiosReq.interceptors.request.use(
       async (config) => {
-        try {
-          await axios.post("/dj-rest-auth/token/refresh/");
-        } catch (err) {
-          // Handle error if token refresh fails
-          setCurrentUser((prevCurrentUser) => {
-            if (prevCurrentUser) {
-              // Redirect to homepage if user is logged in
-              history.push("/");
-            }
-            return null;
-          });
-          return config;
-        }
-        return config;
-      },
-      (err) => {
-        // Handle Axios request error
-        return Promise.reject(err);
-      }
-    );
-
-    // Set up Axios response interceptor to handle token expiration
-    axiosRes.interceptors.response.use(
-      (response) => response,
-      async (err) => {
-        // Check if response status is 401 (Unauthorized)
-        if (err.response?.status === 401) {
+        const tokenExists = shouldRefreshToken();
+        if (tokenExists) {
           try {
-            // Attempt to refresh token
+            // Attempt to refresh the token
             await axios.post("/dj-rest-auth/token/refresh/");
           } catch (err) {
-            // Handle error if token refresh fails
-            console.log('Theres an error refreshing token ')
+            // If refresh fails, handle user sign out and remove token
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
-                // Redirect to sign-in page if user is logged in
-                history.push("/sign-in");
+                history.push("/signin");
               }
               return null;
             });
+            removeTokenTimestamp();// Remove token timestamp
+            return config;
           }
-          // Retry the original Axios request with updated token
-          return axios(err.config);
         }
-        // Reject the promise with the original error if not 401
-        return Promise.reject(err);
+        return config;// Proceed with the request
+      },
+      (err) => Promise.reject(err)
+    );
+    // Response interceptor to handle token refresh on 401 errors
+    axiosRes.interceptors.response.use(
+      (response) => response,// Pass through successful responses
+      async (err) => {
+        if (err.response?.status === 401) {
+          const tokenExists = shouldRefreshToken();
+          if (tokenExists) {
+            try {
+              await axios.post("/dj-rest-auth/token/refresh/");
+            } catch (err) {
+              // If refresh fails, handle user sign out and remove token
+              setCurrentUser((prevCurrentUser) => {
+                if (prevCurrentUser) {
+                  history.push("/signin");
+                }
+                return null;
+              });
+              removeTokenTimestamp();// Remove token timestamp
+            }
+            return axios(err.config);// Retry the request with the refreshed token
+          }
+        }
+        return Promise.reject(err);// Reject if there's an error other than 401
       }
     );
-  }, [history, setCurrentUser]);
-
+  }, [history]);
   return (
-    // Provide current user state and setter functions to child components
+    // Provide the current user and setter function to child components
     <CurrentUserContext.Provider value={currentUser}>
       <SetCurrentUserContext.Provider value={setCurrentUser}>
         {children}

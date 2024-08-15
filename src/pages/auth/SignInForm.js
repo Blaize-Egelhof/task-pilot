@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import {useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { setTokenTimestamp } from "../../utils/utils";
 
 /**
  * Component for rendering the Sign In form.
@@ -62,17 +63,18 @@ function SignInForm() {
       event.preventDefault();
       try {
         // Clear any old tokens before attempting login
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        // localStorage.removeItem('accessToken');
+        // localStorage.removeItem('refreshToken');
   
         const { data } = await axios.post("/dj-rest-auth/login/", signInData);
   
         // Save tokens in local storage
-        localStorage.setItem('accessToken', data.access_token);
-        localStorage.setItem('refreshToken', data.refresh_token);
+        // localStorage.setItem('accessToken', data.access_token);
+        // localStorage.setItem('refreshToken', data.refresh_token);
   
         // Set current user context
         setCurrentUser(data.user);
+        setTokenTimestamp(data)
   
         history.push("/home-page", { successMessage: `Logged In Successfully! Welcome ${data.user.username}` });
       } catch (err) {

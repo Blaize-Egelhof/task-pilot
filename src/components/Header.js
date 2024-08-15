@@ -4,6 +4,7 @@ import styles from '../css/Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import axios from 'axios';
+import { removeTokenTimestamp } from '../utils/utils';
 
 /**
  * Header component for the application.
@@ -29,10 +30,11 @@ export default function Header() {
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
+      // localStorage.removeItem('accessToken');
+      // localStorage.removeItem('refreshToken');
       // set currentUser variable to null if sign out works
       setCurrentUser(null);
+      removeTokenTimestamp();
     } catch (err) {
       // set errors if found 
       setErrors(err.response?.data);

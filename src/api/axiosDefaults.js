@@ -18,18 +18,17 @@ const refreshToken = async () => {
   try {
     const refresh = localStorage.getItem('refreshToken');
     if (!refresh) {
-      throw new Error("No valid refresh token found.");
+      //Do nothing 
     }
     const response = await axios.post('/dj-rest-auth/token/refresh/', {
       refresh, // Send the refresh token to get a new access token
     });
-    const newToken = response.data.access; // Adjust key as necessary
+    const newToken = response.data.access;
     localStorage.setItem('accessToken', newToken);
     return newToken;
   } catch (err) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    // Optionally redirect to sign-in or handle error
     throw err;
   }
 };
