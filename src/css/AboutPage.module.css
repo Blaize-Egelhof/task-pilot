@@ -1,3 +1,4 @@
+/* Container for the About section */
 .aboutContainer {
     margin-top: 10%;
     padding: 50px 20px;
@@ -6,14 +7,14 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     color: white;
   }
-  
+  /* Header styling */
   .header {
     font-size: 3rem;
     padding-bottom: 2rem;
     color: white;
     font-weight: bolder;
   }
-  
+  /* Description text styling */
   .description {
     font-size: 1.3rem;
     line-height: 1.8;
@@ -21,17 +22,17 @@
     font-weight: normal;
     margin-bottom: 1.5rem;
   }
-  
+  /* Button styling */
   .button {
     font-size: 1.5rem;
     padding: 12px 25px;
   }
-  
+  /* Icon styling */
   .icon {
     font-size: 3rem;
     margin-bottom: 1rem;
   }
-
+  /* Background image styling */
   .backgroundImage {
     background-image: url('https://res.cloudinary.com/drdelhvyt/image/upload/v1722857383/0dc5f29dc8c15668b5c08237447237dc_wjmdzu.png');
     background-size: cover;

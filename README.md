@@ -310,6 +310,8 @@ I've chosen this color palette because the colors complement each other while pr
 
 - Authentication issues relating to session tokens occur when launching this application in incognito mode on Chrome browsers.
 
+
+
 ## Technologies Used
 ### Main Languages Used
 - HTML5

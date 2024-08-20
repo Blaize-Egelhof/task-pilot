@@ -13,12 +13,13 @@ import {useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { setTokenTimestamp } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
 
 /**
  * Component for rendering the Sign In form.
  */
 function SignInForm() {
-
+  useRedirect('loggedIn')
   useEffect(() => {
     // Add background class to body
     document.body.classList.add(styles.backgroundImage);
@@ -76,7 +77,7 @@ function SignInForm() {
         setCurrentUser(data.user);
         setTokenTimestamp(data)
   
-        history.push("/home-page", { successMessage: `Logged In Successfully! Welcome ${data.user.username}` });
+        history.push("/home-page", { successMessage: `Logged In Successfully! Welcome ${data?.user.username}` });
       } catch (err) {
         setErrors(err.response?.data);
       }

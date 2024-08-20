@@ -80,7 +80,8 @@ function TaskView() {
       await axios.put(`leave-task/${id}`);
       history.push('/home-page', { deleteMessage: `Left Task: ${ticketData.title} successfully.` }); 
     } catch (err) {
-      setErrors(err);
+      console.error("Error leaving task:", err); // Log the error
+      setErrors("An error occurred while leaving the task. Please try again.");
     }
   };
 
