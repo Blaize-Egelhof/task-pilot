@@ -10,6 +10,13 @@ export const SetCurrentUserContext = createContext();
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
+/**
+ * Provider component that manages the current user's state and authentication logic.
+ * Sets up interceptors to handle token refreshing and manages the current user state.
+ * @param {Object} props - The component's props.
+ * @param {React.ReactNode} props.children - The child components to be rendered within this provider.
+ * @returns {JSX.Element} The provider component that wraps around its children.
+ */
 export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const history = useHistory();
