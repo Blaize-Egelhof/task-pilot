@@ -63,20 +63,11 @@ function SignInForm() {
     const formSubmit = async (event) => {
       event.preventDefault();
       try {
-        // Clear any old tokens before attempting login
-        // localStorage.removeItem('accessToken');
-        // localStorage.removeItem('refreshToken');
-  
         const { data } = await axios.post("/dj-rest-auth/login/", signInData);
-  
-        // Save tokens in local storage
-        // localStorage.setItem('accessToken', data.access_token);
-        // localStorage.setItem('refreshToken', data.refresh_token);
-  
         // Set current user context
         setCurrentUser(data.user);
+        // Grab the expiration time for access token
         setTokenTimestamp(data)
-  
         history.push("/home-page", { successMessage: `Logged In Successfully! Welcome ${data?.user.username}` });
       } catch (err) {
         setErrors(err.response?.data);
