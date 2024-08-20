@@ -24,12 +24,14 @@ The live link for "Task Pilot" can be found [HERE](https://task-pilot-e84398da75
   + [Colour Scheme](#colour-scheme "Colour Scheme")
   + [Typography](#typography "Typography")
   + [Imagery](#imagery "Imagery")
+  + [Notification Imagery](#Notification-Imagery "Imagery")
 + [Features](#features "Features")
   + [Existing Features](#existing-features "Existing Features")
   + [C.R.U.D](#crud "C.R.U.D")
 + [Testing](#testing "Testing")
   + [Validator Testing](#validator-testing "Validator Testing")
   + [Unfixed Bugs](#unfixed-bugs "Unfixed Bugs")
+  + [Fixed Bugs](#fixed-bugs "Fixed Bugs")
 + [Technologies Used](#technologies-used "Technologies Used")
   + [Main Languages Used](#main-languages-used "Main Languages Used")
   + [Frameworks, Libraries & Programs Used](#frameworks-libraries-programs-used "Frameworks, Libraries & Programs Used")
@@ -236,6 +238,21 @@ I've chosen this color palette because the colors complement each other while pr
 
 ![Sign-up](src/assets/images-readme/signupform-mobile.PNG)
 
+### Notification Imagery: 
+![Account-Creation-Notification](src/assets/images-readme/account-creation-notification.PNG)
+
+![Logged-In-Notification](src/assets/images-readme/logged-in-notification.PNG)
+
+![Task-Creation-Notification](src/assets/images-readme/task-creation-notification.PNG)
+
+![Delete-Task-Message-Notification](src/assets/images-readme/delete-message-notification.PNG)
+
+![Task-Update-Notification](src/assets/images-readme/task-update-notification.PNG)
+
+![Task-Delete-Notification](src/assets/images-readme/task-delete-notification.PNG)
+
+![Profile-Update-Notification](src/assets/images-readme/profile-update-notification.PNG)
+
 ### Features Left to Implement:
 - Inbox for each user to be able to recieve task invitations to accept or decline and also for notifications regarding a Task being marked as completed.
 - Ability to display all public tasks created and joined via a list when viewing a profile.
@@ -310,7 +327,10 @@ I've chosen this color palette because the colors complement each other while pr
 
 - Authentication issues relating to session tokens occur when launching this application in incognito mode on Chrome browsers.
 
+### Fixed Bugs
 
+- Fixed issues Editing Task Details
+- Fixed issues automatically refreshing access tokens for users logged in. 
 
 ## Technologies Used
 ### Main Languages Used
