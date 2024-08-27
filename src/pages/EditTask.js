@@ -166,21 +166,21 @@ function EditTask() {
    * Updates the task details in the database and navigates to the home page on success.
    * @param {Object} event - The form submission event.
    */
-  const handleSubmit = async (event) => {
+   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Extract user IDs from removeUsers and addUsers
       const removeUserIds = removeUsers.map(user => user);
       const addUserIds = addUsers;
-
+  
       // Create updated assignedUsers array
       const updatedAssignedUserIds = assignedUsers
         .filter(userId => !removeUserIds.includes(userId)) // Remove users marked for removal
         .concat(addUserIds); // Add newly selected users
-
+  
       // Check and correct the state value if it is 'Open'
       const correctedState = state === 'Open' ? 'In Progress' : state;
-
+  
       // Prepared updatedTaskData with the new assigned_users array
       const updatedTaskData = {
         title,
@@ -191,16 +191,22 @@ function EditTask() {
         assigned_users: updatedAssignedUserIds,
         state: correctedState,
       };
-
+        // Check if title or description is blank
+      if (!title.trim()) {
+        setErrors({ title: 'Title cannot be empty.' });
+        return;
+      }
+      
+      if (!description.trim()) {
+        setErrors({ description: 'Description cannot be empty.' });
+        return;
+      }
+  
       // Send request to API update the task
       await axios.put(`/update-task/${id}`, updatedTaskData);
-      history.push("/home-page" , {successMessage:`Task ${title} updated succesfully!`});
+      history.push("/home-page", { successMessage: `Task ${title} updated successfully!` });
     } catch (err) {
-      console.error("Error updating task:", err);
-      //Setting errors in order to provide direct feedback to users if a field controlID specific error is given
-      setErrors(
-        err.response?.data,
-      );
+      setErrors(err)
     }
   };
 
